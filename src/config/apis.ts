@@ -1,5 +1,5 @@
 const apis = {
-  ads: '/ads/list'
+  ads: 'ads/list'
 }
 
 export {

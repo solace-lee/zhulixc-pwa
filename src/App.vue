@@ -9,6 +9,7 @@
 </template>
 
 <style lang="less">
+@import "/node_modules/normalize.css/normalize.css";
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -25,5 +26,12 @@
       color: #42b983;
     }
   }
+}
+.icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
 }
 </style>

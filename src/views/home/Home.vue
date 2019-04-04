@@ -1,7 +1,6 @@
 <template>
   <div class="home">
-    <show-address></show-address>
-    主页
+    <headers></headers>
   </div>
 </template>
 
@@ -9,32 +8,33 @@
 import { Component, Vue } from 'vue-property-decorator'
 import http from '@/config/http.ts'
 import { apis } from '@/config/apis.ts'
-import showAddress from '@/components/home/showAddress.vue'
+import { gateway } from '@/config/config.ts'
+import headers from '@/components/public/header.vue'
 
 @Component({
   components: {
-    showAddress
+    headers
   }
 })
-
 export default class Home extends Vue {
   name: string = 'Home'
   created () {
     this.getdata()
   }
 
-  getdata (): void {
-    http.get(apis.ads).then(res => {
-      console.log(123)
+  private getdata () {
+    http.get(gateway.SEARCH + apis.ads).then(res => {
+      // const toast = this.$createToast({
+      //   txt: 'Loading...',
+      //   mask: true
+      // });
+      // toast.show();
     })
   }
 }
 </script>
 <style lang="less" scoped>
-.home{
-  font-size: 40px;
-  height: 50px;
-  width: 100px;
+.home {
   background: #eee;
 }
 </style>
