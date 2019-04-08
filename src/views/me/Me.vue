@@ -6,7 +6,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop} from 'vue-property-decorator'
+import { Component, Vue, Prop } from 'vue-property-decorator'
 
 @Component({
   components: {
@@ -18,7 +18,7 @@ export default class me extends Vue {
   }
 
   private getdata () {
-    console.log("me")
+    console.log('me')
   }
 }
 </script>

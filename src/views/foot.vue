@@ -1,6 +1,7 @@
 <!--脚部总组件 -->
 <template>
   <div class="foot">
+    <!-- 4大组件 -->
     <div class="tab-slide-container">
         <cube-slide
           ref="slide"
@@ -29,6 +30,8 @@
           </cube-slide-item>
         </cube-slide>
       </div>
+
+      <!-- 脚部导航栏 -->
       <div class="foot_bar">
         <cube-tab-bar
           v-model="index"
@@ -80,45 +83,52 @@ import me from './me/Me.vue'
 
 export default class foot extends Vue {
   // 变量
-   index: string = 'home'
-   openInfo= {}
-      subjectInfo= []
-      selectList= []
-      selectExamList= []
-      examNumber= []
-      show= false
-      subjectShow= false
-      studentListShow= false
-      initialIndex:Number= 0
-      slideOptions= {
-        listenScroll: true,
-        probeType: 4,
-        directionLockThreshold: 0
-      }
+  // 导航高亮
+  index: string = 'home'
+  // 导航组件跳转
+  initialIndex: Number = 0
+  // 组件是否滑动
+  slideOptions = {
+    listenScroll: true,
+    probeType: 4,
+    directionLockThreshold: 0
+  }
+  // 监听滑动转换-对象
+  tabs= [{
+    label: 'home'
+  }, {
+    label: 'classify'
+  }, {
+    label: 'car'
+  }, {
+    label: 'me'
+  }]
 
-  // 方法
-  clickHandler (label:string) : void {
+  // 钩子函数
+  clickHandler (label: string) : void {
     console.log(label)
-    
   }
-  private changeHandler (label:string) {
+  private changeHandler (label: string) {
     //  监听导航栏改变事件
-      switch (label) {
-        case 'home':
-          this.initialIndex = 0
-          break
-        case 'classify':
-          this.initialIndex = 1
-          break
-        case 'car':
-          this.initialIndex = 2
-          break
-        case 'me':
-          this.initialIndex = 3
-          break
-      }
+    switch (label) {
+      case 'home':
+        this.initialIndex = 0
+        break
+      case 'classify':
+        this.initialIndex = 1
+        break
+      case 'car':
+        this.initialIndex = 2
+        break
+      case 'me':
+        this.initialIndex = 3
+        break
+    }
   }
-  private changePage () {
+  private changePage (current: any) {
+  //  监听到导航栏改变时激活的方法，将派发导航栏索引
+    this.initialIndex = current * 1
+    this.index = this.tabs[current].label
   }
 }
 </script>
