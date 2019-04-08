@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import './cube-ui'
+import Cube from 'cube-ui'
 // import axios from 'axios'
 import App from './App.vue'
 import AMap from 'vue-amap';
@@ -9,6 +9,7 @@ import './registerServiceWorker'
 
 Vue.config.productionTip = false
 
+Vue.use(Cube);
 Vue.use(AMap);
 AMap.initAMapApiLoader({
   key: 'deff2dcf2e3baae4659fa43854600c62',
