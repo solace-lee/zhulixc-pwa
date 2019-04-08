@@ -8,14 +8,12 @@
           <use xlink:href="#icon-icon_GPS"></use>
         </svg>
         <show-address></show-address>
-        <div class="search_box" @click.stop="goSearch">
+        <div class="search_box" @click="goSearch">
           <cube-input v-model="value" disabled placeholder="更多好货助力"></cube-input>
         </div>
-        <div class="icons">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-icon_dmail"></use>
-          </svg>
-        </div>
+        <svg class="icon" aria-hidden="true" @click="goMsg">
+          <use xlink:href="#icon-icon_dmail"></use>
+        </svg>
       </div>
     </div>
 
@@ -29,7 +27,7 @@
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-icon_collect"></use>
         </svg>
-        <svg class="icon" aria-hidden="true">
+        <svg class="icon" aria-hidden="true" @click="goMsg">
           <use xlink:href="#icon-icon_dmail"></use>
         </svg>
       </div>
@@ -77,11 +75,9 @@ export default class headers extends Vue {
     display: flex;
     align-items: center;
     color: #fff;
-    .icons {
+    .icon {
       flex: 1;
-      .icon {
-        font-size: 1.8rem;
-      }
+      font-size: 1.8rem;
     }
     .search_box {
       flex: 6;
