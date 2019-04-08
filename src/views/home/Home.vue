@@ -1,34 +1,34 @@
 <template>
   <div class="home">
     <headers></headers>
+    <swipe :swipeList="swipeList"></swipe>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import http from '@/config/http.ts'
-import { apis } from '@/config/apis.ts'
-import { gateway } from '@/config/config.ts'
+import { getRequest } from '@/config/request.ts'
 import headers from '@/components/public/header.vue'
+import swipe from '@/components/home/swipe.vue'
 
 @Component({
   components: {
-    headers
+    headers,
+    swipe
   }
 })
 export default class Home extends Vue {
-  name: string = 'Home'
+  name: String = 'Home'
+  swipeList: Array<Object> = []
   created () {
     this.getdata()
   }
 
   private getdata () {
-    http.get(gateway.SEARCH + apis.ads).then(res => {
-      // const toast = this.$createToast({
-      //   txt: 'Loading...',
-      //   mask: true
-      // });
-      // toast.show();
+    const GetRequest = new getRequest()
+    GetRequest.getAds((res: any) => {
+      console.log(res.data)
+      this.swipeList = res.data.data.f1
     })
   }
 }

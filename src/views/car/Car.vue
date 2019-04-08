@@ -19,7 +19,7 @@ export default class car extends Vue {
   }
 
   private getdata () {
-    console.log('car')
+    // console.log('car')
   }
 }
 </script>

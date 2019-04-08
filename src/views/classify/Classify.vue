@@ -18,7 +18,7 @@ export default class classify extends Vue {
   }
 
   private getdata () {
-    console.log('classify')
+    // console.log('classify')
   }
 }
 </script>
