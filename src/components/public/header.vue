@@ -1,5 +1,5 @@
 <template>
-  <div class="header">
+  <div class="header" ref="header">
 
     <!-- 搜索型样式 -->
     <div class="header_search" v-if="isSearch">
@@ -19,12 +19,12 @@
 
     <!-- 标题型样式 -->
     <div class="header_title" v-if="!isSearch">
-      <svg class="icon" aria-hidden="true">
+      <svg class="icon" aria-hidden="true" @click="goBack">
         <use xlink:href="#icon-icon_left"></use>
       </svg>
       <div class="title_area">{{title}}</div>
       <div class="right">
-        <svg class="icon" aria-hidden="true">
+        <svg class="icon" aria-hidden="true" @click="goCar">
           <use xlink:href="#icon-icon_collect"></use>
         </svg>
         <svg class="icon" aria-hidden="true" @click="goMsg">
@@ -45,9 +45,21 @@ import showAddress from '@/components/home/showAddress.vue'
   }
 })
 export default class headers extends Vue {
-  @Prop({ default: true }) private isSearch!: boolean;
-  @Prop({ default: '标题' }) private title!: string;
+  @Prop({ default: true }) private isSearch!: boolean
+  @Prop({ default: '标题' }) private title!: string
+  @Prop({ default: '#00ae87' }) private bgColor!: string
   private value = null
+
+  mounted () {
+    // 根据传入值修改背景颜色
+    this.changeBgColor()
+  }
+
+  // 根据传入值修改背景颜色
+  private changeBgColor () {
+    let el:any = this.$refs.header
+    el.style.background = this.bgColor
+  }
 
   private goSearch () {
     console.log('去搜索页')
@@ -56,12 +68,21 @@ export default class headers extends Vue {
   private goMsg () {
     console.log('去消息页')
   }
+
+  private goCar () {
+    console.log('去购物车')
+  }
+
+  //回退到上一页
+  private goBack () {
+    this.$router.go(-1)
+  }
 }
 </script>
 <style lang="less" scoped>
 .header {
   width: 100%;
-  background: #00ae87;
+  // background: #00ae87;
   height: 4.8rem;
 }
 
