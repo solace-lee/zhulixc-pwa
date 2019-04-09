@@ -1,33 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title>vue-pwa</title>
-    <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.8&key=deff2dcf2e3baae4659fa43854600c62&plugin=AMap.CitySearch"></script>
-    <script type="text/javascript">
-      (function (doc, win) {
-        var docEl = doc.documentElement,
-          resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
-          recalc = function () {
-            var clientWidth = docEl.clientWidth;
-            if (!clientWidth) return;
-            docEl.style.fontSize = 10 * (clientWidth / 375) + 'px';//其中“10”根据你设置的html的font-size属性值做适当的变化
-          };
-        if (!doc.addEventListener) return;
-        win.addEventListener(resizeEvt, recalc, false);
-        doc.addEventListener('DOMContentLoaded', recalc, false);
-      })(document, window);
-    </script>
-    <script src="./iconfont/iconfont.js"></script>
-  </head>
-  <body>
-    <noscript>
-      <strong>We're sorry but vue-pwa doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+<html lang="zh">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+  <title>助力乡村</title>
+  <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.14&key=deff2dcf2e3baae4659fa43854600c62">
+  </script>
+  <script type="text/javascript">
+    (function (doc, win) {
+      var docEl = doc.documentElement,
+        resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+        recalc = function () {
+          var clientWidth = docEl.clientWidth;
+          if (!clientWidth) return;
+          docEl.style.fontSize = 10 * (clientWidth / 375) + 'px'; //其中“10”根据你设置的html的font-size属性值做适当的变化
+        };
+      if (!doc.addEventListener) return;
+      win.addEventListener(resizeEvt, recalc, false);
+      doc.addEventListener('DOMContentLoaded', recalc, false);
+    })(document, window);
+  </script>
+  <script src="./iconfont/iconfont.js"></script>
+</head>
+
+<body>
+  <noscript>
+    <strong>We're sorry but vue-pwa doesn't work properly without JavaScript enabled. Please enable it to
+      continue.</strong>
+  </noscript>
+  <div id="app"></div>
+  <!-- built files will be auto injected -->
+</body>
+
 </html>

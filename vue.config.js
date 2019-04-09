@@ -12,10 +12,16 @@ module.exports = {
       }
     }
   },
+
   pluginOptions: {
     'cube-ui': {
       postCompile: true,
       theme: false
     }
+  },
+
+  pwa: {
+    name: '助力乡村',
+    themeColor: '#00ae87'
   }
 }

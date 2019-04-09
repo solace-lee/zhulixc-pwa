@@ -33,7 +33,6 @@ export default class headers extends Vue {
       path: url
     })
   }
-
 }
 </script>
 <style lang="less" scoped>

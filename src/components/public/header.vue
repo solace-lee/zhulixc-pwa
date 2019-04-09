@@ -1,6 +1,5 @@
 <template>
   <div class="header" ref="header">
-
     <!-- 搜索型样式 -->
     <div class="header_search" v-if="isSearch">
       <div class="search_area">
@@ -9,7 +8,11 @@
         </svg>
         <show-address></show-address>
         <div class="search_box" @click="goSearch">
-          <cube-input v-model="value" disabled placeholder="更多好货助力"></cube-input>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-icon_search"></use>
+          </svg>
+          <input type="text" class="gosearch" disabled placeholder="更多好货助力">
+          <!-- <cube-input v-model="value" disabled placeholder="更多好货助力"></cube-input> -->
         </div>
         <svg class="icon" aria-hidden="true" @click="goMsg">
           <use xlink:href="#icon-icon_dmail"></use>
@@ -32,12 +35,11 @@
         </svg>
       </div>
     </div>
-
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator'
-import showAddress from '@/components/home/showAddress.vue'
+import { Vue, Component, Prop } from 'vue-property-decorator';
+import showAddress from '@/components/home/showAddress.vue';
 
 @Component({
   components: {
@@ -52,12 +54,12 @@ export default class headers extends Vue {
 
   mounted () {
     // 根据传入值修改背景颜色
-    this.changeBgColor()
+    this.changeBgColor();
   }
 
   // 根据传入值修改背景颜色
   private changeBgColor () {
-    let el:any = this.$refs.header
+    let el: any = this.$refs.header
     el.style.background = this.bgColor
   }
 
@@ -73,7 +75,7 @@ export default class headers extends Vue {
     console.log('去购物车')
   }
 
-  //回退到上一页
+  // 回退到上一页
   private goBack () {
     this.$router.go(-1)
   }
@@ -86,7 +88,7 @@ export default class headers extends Vue {
   height: 4.8rem;
 }
 
-//搜索型样式
+// 搜索型样式
 .header_search {
   width: 100%;
   height: 100%;
@@ -109,19 +111,28 @@ export default class headers extends Vue {
       border-radius: 1.7rem;
       overflow: hidden;
       background: #fff;
-      .cube-input {
+      display: flex;
+      align-items: center;
+      .icon {
+        color: #ccc;
+        font-size: 1.6rem;
+        flex: none;
+        width: 3rem;
+      }
+      input {
         height: 100%;
+        background: #fff;
+      }
+      .gosearch::placeholder {
+        color: #ccc;
         font-size: 1.2rem;
         line-height: 3.4rem;
-        .cube-input-field::placeholder {
-          font-size: 1.2rem;
-        }
       }
     }
   }
 }
 
-//标题型样式
+// 标题型样式
 .header_title {
   width: 100%;
   height: 100%;

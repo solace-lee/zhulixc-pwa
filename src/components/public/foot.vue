@@ -1,40 +1,11 @@
 <!--脚部总组件 -->
 <template>
   <div class="foot">
-    <!-- 4大组件 -->
-    <div class="tab-slide-container">
-        <cube-slide
-          ref="slide"
-          :loop=false
-          :initial-index="initialIndex"
-          :auto-play=false
-          :show-dots=false
-          :options="slideOptions"
-          @change="changePage"
-        >
-          <!-- 首页 -->
-          <cube-slide-item>
-            <home></home>
-          </cube-slide-item>
-          <!-- 分类 -->
-          <cube-slide-item>
-            <classify></classify>
-          </cube-slide-item>
-          <!-- 购物车 -->
-          <cube-slide-item>
-            <car></car>
-          </cube-slide-item>
-          <!-- 我的 -->
-          <cube-slide-item>
-            <me></me>
-          </cube-slide-item>
-        </cube-slide>
-      </div>
-
       <!-- 脚部导航栏 -->
       <div class="foot_bar">
         <cube-tab-bar
           v-model="index"
+          :data="tabs"
           @click="clickHandler"
           @change="changeHandler">
           <cube-tab label="home">
@@ -67,32 +38,13 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
-import home from './home/Home.vue'
-import car from './car/Car.vue'
-import classify from './classify/Classify.vue'
-import me from './me/Me.vue'
 
-@Component({
-  components: {
-    home,
-    classify,
-    car,
-    me
-  }
-})
-
+@Component
 export default class foot extends Vue {
+  @Prop({default: ''}) private foot!: string
   // 变量
   // 导航高亮
-  index: string = 'home'
-  // 导航组件跳转
-  initialIndex: Number = 0
-  // 组件是否滑动
-  slideOptions = {
-    listenScroll: true,
-    probeType: 4,
-    directionLockThreshold: 0
-  }
+  index: string = ''
   // 监听滑动转换-对象
   tabs= [{
     label: 'home'
@@ -104,31 +56,37 @@ export default class foot extends Vue {
     label: 'me'
   }]
 
-  // 钩子函数
-  clickHandler (label: string) : void {
-    console.log(label)
+  created () {
+    this.index = this.foot
   }
+
+  // 钩子函数
+  clickHandler (label: string) : void {}
+
   private changeHandler (label: string) {
     //  监听导航栏改变事件
     switch (label) {
       case 'home':
-        this.initialIndex = 0
+        this.$router.replace({
+          path: '/'
+        })
         break
       case 'classify':
-        this.initialIndex = 1
+        this.$router.replace({
+          path: '/classify'
+        })
         break
       case 'car':
-        this.initialIndex = 2
+        this.$router.replace({
+          path: '/car'
+        })
         break
       case 'me':
-        this.initialIndex = 3
+        this.$router.replace({
+          path: '/me'
+        })
         break
     }
-  }
-  private changePage (current: any) {
-  //  监听到导航栏改变时激活的方法，将派发导航栏索引
-    this.initialIndex = current * 1
-    this.index = this.tabs[current].label
   }
 }
 </script>

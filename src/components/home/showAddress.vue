@@ -29,20 +29,24 @@ export default class showAddress extends Vue {
 
   private async getAddress () {
     const getInfo = new GetLocation()
-    let info = await getInfo.location('ok').catch((err) => {
+    let info
+    try {
+      info = await getInfo.location('ok')
+      if (info === 'ok') {
+        this.showInfo()
+      } else {
+        const toast = this.$createToast({
+          txt: '定位失败请稍后再试',
+          type: 'error',
+          mask: false,
+          time: 1000
+        })
+        toast.show()
+      }
+    }
+    catch(err) {
       const toast = this.$createToast({
         txt: '定位超时请稍后再试',
-        type: 'error',
-        mask: false,
-        time: 1000
-      })
-      toast.show()
-    })
-    if (info === 'ok') {
-      this.showInfo()
-    } else {
-      const toast = this.$createToast({
-        txt: '定位失败请稍后再试',
         type: 'error',
         mask: false,
         time: 1000
