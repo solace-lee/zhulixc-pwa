@@ -1,8 +1,10 @@
 <!-- 购物车 -->
 <template>
   <div class="car">
-    <headers :title="headerList.title" :status="headerList.status" ></headers>
-    购物车
+    <div>
+      <headers :title="headerList.title" :status="headerList.status" ></headers>
+    </div>
+    <something></something>
     <!-- 脚部 -->
     <foot :foot="foot"></foot>
   </div>
@@ -12,11 +14,13 @@
 import { Component, Vue, Prop } from 'vue-property-decorator'
 import foot from '@/components/public/foot.vue'
 import headers from '@/components/public/header.vue'
+import something from '@/components/car/something.vue'
 
 @Component({
   components: {
     foot,
-    headers
+    headers,
+    something
   }
 })
 export default class car extends Vue {
