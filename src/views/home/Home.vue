@@ -141,6 +141,5 @@ export default class Home extends Vue {
       margin-left: 1.5rem;
     }
   }
-  
 }
 </style>

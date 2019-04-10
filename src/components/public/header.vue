@@ -22,14 +22,15 @@
 
     <!-- 标题型样式 -->
     <div class="header_title" v-if="!isSearch">
-      <svg class="icon" aria-hidden="true" @click="goBack">
+      <svg class="icon" aria-hidden="true" @click="goBack" v-if="hasBack">
         <use xlink:href="#icon-icon_left"></use>
       </svg>
       <div class="title_area">{{title}}</div>
       <div class="right">
-        <svg class="icon" aria-hidden="true" @click="goCar">
+        <svg class="icon" aria-hidden="true" @click="goCar" v-if="!manage">
           <use xlink:href="#icon-icon_collect"></use>
         </svg>
+        <div class="manage" v-if="manage">管理</div>
         <svg class="icon" aria-hidden="true" @click="goMsg">
           <use xlink:href="#icon-icon_dmail"></use>
         </svg>
@@ -38,8 +39,8 @@
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator';
-import showAddress from '@/components/home/showAddress.vue';
+import { Vue, Component, Prop } from 'vue-property-decorator'
+import showAddress from '@/components/home/showAddress.vue'
 
 @Component({
   components: {
@@ -47,14 +48,18 @@ import showAddress from '@/components/home/showAddress.vue';
   }
 })
 export default class headers extends Vue {
-  @Prop({ default: true }) private isSearch!: boolean
   @Prop({ default: '标题' }) private title!: string
   @Prop({ default: '#00ae87' }) private bgColor!: string
+  @Prop({ default: '' }) private status!: string
   private value = null
-
+  // t
+  private hasBack: boolean = true // 控制显示返回按钮
+  private manage: boolean = false // 控制显示管理按钮
+  private isSearch: boolean = false // 控制显示搜索
   mounted () {
     // 根据传入值修改背景颜色
-    this.changeBgColor();
+    this.changeBgColor()
+    this.changeStatus()
   }
 
   // 根据传入值修改背景颜色
@@ -74,7 +79,19 @@ export default class headers extends Vue {
   private goCar () {
     console.log('去购物车')
   }
-
+  // t
+  private changeStatus () {
+    switch (this.status) {
+      case 'isCar':
+        this.manage = true
+        break
+      case 'isSearch':
+        this.isSearch = true
+        break
+      default:
+        break
+    }
+  }
   // 回退到上一页
   private goBack () {
     this.$router.go(-1)
@@ -151,12 +168,19 @@ export default class headers extends Vue {
     height: 100%;
     width: 100%;
     line-height: 4.8rem;
+    text-align: center;
   }
   .right {
     display: flex;
     align-items: center;
     .icon {
       font-size: 1.8rem;
+      margin-left: 0;
+      margin-right: 1.2rem;
+    }
+    // t
+    .manage{
+      font-size: 1.4rem;
       margin-left: 0;
       margin-right: 1.2rem;
     }

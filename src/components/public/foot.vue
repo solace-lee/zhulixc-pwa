@@ -41,7 +41,7 @@ import { Vue, Component, Prop } from 'vue-property-decorator'
 
 @Component
 export default class foot extends Vue {
-  @Prop({default: ''}) private foot!: string
+  @Prop({ default: '' }) private foot!: string
   // 变量
   // 导航高亮
   index: string = ''
