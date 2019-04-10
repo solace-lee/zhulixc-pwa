@@ -4,6 +4,7 @@ declare global {
   // 声明全局变量，方法
   var $: any
   var AMap: any
+  var Toast: any
 
   interface Window {
     webkit: any

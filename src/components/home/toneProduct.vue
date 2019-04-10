@@ -20,7 +20,7 @@
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator';
+import { Vue, Component, Prop } from 'vue-property-decorator'
 
 // 新品推荐
 @Component
@@ -30,7 +30,7 @@ export default class toneProduct extends Vue {
   private value = null
 
   mounted () {
-    console.log(this.toneProduct);
+    // console.log(this.toneProduct)
   }
 
   // 去商品详情页
@@ -109,6 +109,6 @@ export default class toneProduct extends Vue {
 
 // b
 .a_right {
-  
+
 }
 </style>

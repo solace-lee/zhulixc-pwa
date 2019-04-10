@@ -1,36 +1,25 @@
 <template>
-  <div class="item" @click="goDetail(toneProduct.commodityId)">
-    <div class="item_a" v-if="index === 0">
+  <div class="item" @click="goDetail(brandProduct.commodityId)">
+    <div class="item_a" v-if="index < 2">
       <div class="item_a_area">
-        <div class="a_left">
-          <div class="a_titel">{{toneProduct.name}}</div>
-          <div class="a_name">{{toneProduct.title}}</div>
-          <div class="a_info">
-            <div class="a_now_price">￥{{toneProduct.discountPrice}}</div>
-            <s class="a_old_price">￥{{toneProduct.originalPrice}}</s>
-            <div class="a_buy_now">立即购买</div>
-          </div>
-        </div>
-        <div class="a_right">
-          <img :src="toneProduct.titleImg" alt="">
-        </div>
+        <img :src="brandProduct.titleImg" alt="">
       </div>
     </div>
     <div class="item_b" v-else></div>
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator';
+import { Vue, Component, Prop } from 'vue-property-decorator'
 
 // 新品推荐
 @Component
 export default class brandProduct extends Vue {
-  @Prop({ default: {} }) private toneProduct!: Object
+  @Prop({ default: {} }) private brandProduct!: Object
   @Prop({ default: 0 }) private index!: Number
   private value = null
 
   mounted () {
-    console.log(this.toneProduct);
+    console.log(this.brandProduct);
   }
 
   // 去商品详情页
@@ -49,7 +38,7 @@ export default class brandProduct extends Vue {
 
 // a
 .item_a {
-  width: 100%;
+  width: 45%;
   height: 12.3rem;
   padding: 1.5rem;
   .item_a_area {
@@ -58,57 +47,13 @@ export default class brandProduct extends Vue {
     display: flex;
     border-radius: 6px;
     overflow: hidden;
-    .a_left {
-      width: 50%;
+    img {
       height: 100%;
-      background: #f2f2f2;
-      padding: 1rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-between;
-      .a_titel {
-        font-size: 1.5rem;
-      }
-      .a_name {
-        font-size: 1rem;
-        color: #333;
-      }
-      .a_info {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-end;
-        width: 100%;
-        .a_now_price {
-          font-size: 1.8rem;
-          color: #00ae87;
-        }
-        .a_old_price {
-          font-size: 0.9rem;
-          color: #666;
-        }
-        .a_buy_now {
-          font-size: .8rem;
-          color: #fff;
-          padding: .4rem .8rem;
-          background: #00ae3a;
-          border-radius: 2rem;
-        }
-      }
-    }
-    .a_right {
-      width: 50%;
-      height: 100%;
-      img {
-        width: 100%;
-        height: 100%;
-      }
+      width: 100%;
     }
   }
 }
 
 // b
-.a_right {
-  
-}
+
 </style>
