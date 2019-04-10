@@ -27,7 +27,7 @@
       </svg>
       <div class="title_area">{{title}}</div>
       <div class="right">
-        <svg class="icon" aria-hidden="true" @click="goCar" v-if="!manage">
+        <svg class="icon" aria-hidden="true" @click="goCar" v-if="goCarBtn">
           <use xlink:href="#icon-icon_collect"></use>
         </svg>
         <div class="manage" v-if="manage">管理</div>
@@ -50,18 +50,32 @@ import showAddress from '@/components/home/showAddress.vue'
 export default class headers extends Vue {
   @Prop({ default: '标题' }) private title!: string
   @Prop({ default: '#00ae87' }) private bgColor!: string
-  @Prop({ default: '' }) private status!: string
-  private value = null
+  @Prop({ default: '' }) private status!: string //显示方式
   // t
   private hasBack: boolean = true // 控制显示返回按钮
   private manage: boolean = false // 控制显示管理按钮
   private isSearch: boolean = false // 控制显示搜索
+  private goCarBtn: boolean = true // 控制显示购物车按钮
+
   mounted () {
-    // 根据传入值修改背景颜色
-    this.changeBgColor()
-    this.changeStatus()
+    this.changeBgColor() // 根据传入值修改背景颜色
+    this.changeStatus() // 根据传入值修改显示方式
   }
 
+    // t 根据传入值修改显示方式
+  private changeStatus () {
+    switch (this.status) {
+      case 'isCar':
+        this.manage = true
+        this.goCarBtn = false
+        break
+      case 'isSearch':
+        this.isSearch = true
+        break
+      default:
+        break
+    }
+  }
   // 根据传入值修改背景颜色
   private changeBgColor () {
     let el: any = this.$refs.header
@@ -79,19 +93,7 @@ export default class headers extends Vue {
   private goCar () {
     console.log('去购物车')
   }
-  // t
-  private changeStatus () {
-    switch (this.status) {
-      case 'isCar':
-        this.manage = true
-        break
-      case 'isSearch':
-        this.isSearch = true
-        break
-      default:
-        break
-    }
-  }
+
   // 回退到上一页
   private goBack () {
     this.$router.go(-1)
@@ -103,6 +105,10 @@ export default class headers extends Vue {
   width: 100%;
   // background: #00ae87;
   height: 4.8rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
 }
 
 // 搜索型样式

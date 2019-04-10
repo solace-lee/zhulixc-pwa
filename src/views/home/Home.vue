@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <!-- 头部 -->
-    <headers></headers>
+    <headers :status="headerStatus"></headers>
 
     <!-- 轮播图 -->
     <swipe :swipeList="swipeList"></swipe>
@@ -40,6 +40,17 @@
       </div>
     </div>
 
+    <!-- 标题 -->
+    <div class="part_title">
+      <div class="title_area">
+        <div class="title_img"></div>
+        <div class="title_txt">品牌推荐</div>
+      </div>
+    </div>
+
+    <!-- 分割线 -->
+    <div style="height:5rem;"></div>
+
     <!-- 脚部 -->
     <foot :foot="foot"></foot>
   </div>
@@ -65,6 +76,7 @@ import toneProduct from '@/components/home/toneProduct.vue'
 })
 export default class Home extends Vue {
   foot: String = 'home'
+  headerStatus: string = 'isSearch' // header的显示方式
   swipeList: Array<Object> = [] // 轮播数据
   newProduct: Array<Object> = [] // 新品推荐数据
   toneProduct: Array<Object> = [] // 品质推荐数据
@@ -95,6 +107,10 @@ export default class Home extends Vue {
   // background: #eee;
   width: 100VW;
   overflow: hidden;
+}
+
+.swipe{
+  margin-top: 4.8rem;
 }
 
 // 标题

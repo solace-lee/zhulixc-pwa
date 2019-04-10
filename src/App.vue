@@ -15,6 +15,9 @@
   -moz-osx-font-smoothing: grayscale;
   // text-align: center;
 }
+* {
+  box-sizing: border-box;
+}
 .icon {
   width: 1em;
   height: 1em;
