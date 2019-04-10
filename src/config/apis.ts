@@ -1,5 +1,6 @@
 const apis = {
-  ads: 'ads/list'
+  ads: 'ads/list',
+  car: 'inside/cart/findCartByuserId'
 }
 
 export {
