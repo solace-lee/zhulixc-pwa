@@ -1,7 +1,6 @@
 <!-- 购物车-列表 -->
 <template>
   <div class="something">
-    <div class="header_title"></div>
     <div class="goods" v-for="(item,index) in goodslist" :key="index">
       <div class="goods_merchants">
         <van-checkbox
@@ -78,19 +77,18 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator'
-
+import { Component, Vue, Prop, Emit } from 'vue-property-decorator'
 @Component({
   components: {
   }
 })
 export default class something extends Vue {
-  
+  @Prop({ default: [] }) private goodslist!: Array<object>
   created () {
     this.getdata()
   }
   // 变量
-  private goodslist: Array<object> =[]
+  // private goodslist: Array<object> =[]
   // 方法
   private getdata () {
     // console.log('car')
@@ -103,24 +101,15 @@ export default class something extends Vue {
 </script>
 <style lang="less" scoped>
 .something {
-  // 标题型样式
-  .header_title {
-    width: 100%;
-    height: 8.4rem;
-    background-color: #00ae87;
-    position: absolute;
-    z-index: -1;
-  }
-
   .goods {
       margin: 0rem 1.2rem 1.6rem 1.2rem;
       background-color: #fff;
       border-radius: 1rem;
       box-shadow: 0.1rem 0.4rem 0.6rem #e8e8e8;
-
       /* 商家 */
       .goods_merchants {
         display: flex;
+        align-items: center;
         padding-top: 1rem;
         margin-bottom: 1rem;
         padding-left: 2rem;

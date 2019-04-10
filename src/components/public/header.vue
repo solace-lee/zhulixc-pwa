@@ -30,7 +30,8 @@
         <svg class="icon" aria-hidden="true" @click="goCar" v-if="goCarBtn">
           <use xlink:href="#icon-icon_collect"></use>
         </svg>
-        <div class="manage" v-if="manage">管理</div>
+        <div class="manage" v-if="!manage" @click="goEdit()">管理</div>
+        <div class="manage" v-if="complete">完成</div>
         <svg class="icon" aria-hidden="true" @click="goMsg">
           <use xlink:href="#icon-icon_dmail"></use>
         </svg>
@@ -50,23 +51,21 @@ import showAddress from '@/components/home/showAddress.vue'
 export default class headers extends Vue {
   @Prop({ default: '标题' }) private title!: string
   @Prop({ default: '#00ae87' }) private bgColor!: string
-  @Prop({ default: '' }) private status!: string //显示方式
+  @Prop({ default: '' }) private status!: string // 显示方式
+  @Prop({ default: false }) private manage!: boolean // 显示管理
   // t
   private hasBack: boolean = true // 控制显示返回按钮
-  private manage: boolean = false // 控制显示管理按钮
   private isSearch: boolean = false // 控制显示搜索
   private goCarBtn: boolean = true // 控制显示购物车按钮
-
+  private complete: boolean = false // 控制显示完成按钮
   mounted () {
     this.changeBgColor() // 根据传入值修改背景颜色
     this.changeStatus() // 根据传入值修改显示方式
   }
-
-    // t 根据传入值修改显示方式
+  // t 根据传入值修改显示方式
   private changeStatus () {
     switch (this.status) {
       case 'isCar':
-        this.manage = true
         this.goCarBtn = false
         break
       case 'isSearch':
@@ -92,6 +91,10 @@ export default class headers extends Vue {
 
   private goCar () {
     console.log('去购物车')
+  }
+
+  private goEdit () {
+    this.complete = !this.complete
   }
 
   // 回退到上一页

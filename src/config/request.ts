@@ -8,6 +8,12 @@ class GetRequest {
       callback(res)
     })
   }
+  // 购物车列表
+  getCar (callback: any) {
+    http.get(gateway.ORDER + apis.car).then(res => {
+      callback(res)
+    })
+  }
 }
 
 export {
