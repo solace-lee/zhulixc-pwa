@@ -34,7 +34,7 @@
     <!-- 品质推荐 -->
     <div class="tone_product">
       <div class="tone_area">
-        <div class="tone_product_area" v-for="(i, index) in toneProduct" :key="index" @click="goDetail(toneProduct.commodityId)" v-show="index === 0">
+        <div class="tone_product_a" v-for="(i, index) in toneProduct" :key="index" @click="goDetail(i.commodityId)" v-show="index === 0">
           <div class="a_left">
             <div class="a_titel">{{i.name}}</div>
             <div class="a_name">{{i.title}}</div>
@@ -46,6 +46,21 @@
           </div>
           <div class="a_right">
             <img loading="lazy" :src="i.titleImg" alt="">
+          </div>
+        </div>
+      </div>
+      <div class="tone_area">
+        <div class="tone_product_b" v-for="(i, index) in toneProduct" :key="index" @click="goDetail(i.commodityId)" v-show="index == 0">
+          <div class="b_img">
+            <img :src="i.titleImg" alt="">
+          </div>
+          <div class="b_name">{{i.name}}</div>
+          <div class="b_info">
+            <div class="b_now_price">￥{{i.discountPrice}}</div>
+            <s class="b_old_price">￥{{i.originalPrice}}</s>
+          </div>
+          <div class="b_buy_now">
+            <span>立即购买</span>
           </div>
         </div>
       </div>
@@ -62,11 +77,13 @@
     <!-- 品牌推荐 -->
     <div class="brand_product">
       <div class="brand_area">
-        <div class="brand_top" v-for="(i, index) in brandProduct" :key="index" v-show="index < 2">
+        <div class="brand_top" v-for="(i,index) in brandProduct" :key="index" v-show="index < 2" @click="goDetail(i.commodityId)">
           <img loading="lazy" :src="i.titleImg" alt="">
         </div>
-        <div class="brand_bottom" v-for="(j, index) in brandProduct" :key="index" v-show="index > 1">
-          <img loading="lazy" :src="j.titleImg" alt="">
+      </div>
+      <div class="brand_area">
+        <div class="brand_bottom" v-for="(i, index) in brandProduct" :key="index" v-show="index > 1" @click="goDetail(i.commodityId)">
+          <img loading="lazy" :src="i.titleImg" alt="">
         </div>
       </div>
     </div>
@@ -125,6 +142,13 @@ export default class Home extends Vue {
       } else {
         this.Toast('数据获取失败请稍后再试', 'error')
       }
+    })
+  }
+
+  // 去商品详情页
+  private goDetail (id: Number) {
+    this.$router.push({
+      path: '/detail?id=' + id
     })
   }
 }
@@ -188,11 +212,17 @@ export default class Home extends Vue {
 
 // 品质推荐
 .tone_product {
+  width: 100%;
+  height: auto;
+  padding: 0 1.5rem;
   .tone_area {
-    .tone_product_area {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    .tone_product_a {
       width: 100%;
-      height: 12.3rem;
-      padding: 1.5rem;
+      height: 9.3rem;
       display: flex;
       border-radius: 6px;
       overflow: hidden;
@@ -241,6 +271,60 @@ export default class Home extends Vue {
           width: 100%;
           height: 100%;
         }
+      }
+    }
+    .tone_product_b {
+      height: 19.6rem;
+      width: 11rem;
+      margin-top: 1rem;
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: #f2f2f2;
+      .b_img {
+        width: 11rem;
+        height: 10.4rem;
+        img {
+          height: 100%;
+          width: 100%;
+        }
+      }
+      .b_name {
+        padding: .6rem;
+        font-size: 1.3rem;
+        color: #333;
+        /*超过两行省略号*/
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        /*超过两行省略号*/
+        -webkit-box-orient: vertical;
+        /*超过两行省略号*/
+      }
+      .b_info {
+        display: flex;
+        align-items: flex-end;
+        .b_now_price {
+          font-size: 1.8rem;
+          color: #00ae87;
+        }
+        .b_old_price {
+          font-size: .9rem;
+          color: #999;
+        }
+      }
+      .b_buy_now {
+        width: 4.8rem;
+        font-size: .8rem;
+        color: #fff;
+        padding: .4rem .8rem;
+        background: #00ae3a;
+        border-radius: 2rem;
+        margin-bottom: .6rem;
+        display: flex;
+        align-items: flex-end;
       }
     }
   }
