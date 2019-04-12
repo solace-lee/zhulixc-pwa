@@ -8,6 +8,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import { GetLocation } from '@/config/getLocation.ts'
+import { Toast } from '../../config/Toast';
 
 @Component
 export default class showAddress extends Vue {
@@ -35,23 +36,11 @@ export default class showAddress extends Vue {
       if (info === 'ok') {
         this.showInfo()
       } else {
-        const toast = this.$createToast({
-          txt: '定位失败请稍后再试',
-          type: 'error',
-          mask: false,
-          time: 1000
-        })
-        toast.show()
+        this.Toast('定位失败请稍后再试', 'error')
       }
     }
     catch(err) {
-      const toast = this.$createToast({
-        txt: '定位超时请稍后再试',
-        type: 'error',
-        mask: false,
-        time: 1000
-      })
-      toast.show()
+      this.Toast('定位超时请稍后再试', 'error')
     }
   }
 }

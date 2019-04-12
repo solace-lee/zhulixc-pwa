@@ -1,6 +1,6 @@
 // 封装一个提示弹框的方法
 
-function Toast (content:string, type:string, time:number, mask:boolean) {
+function Toast (this: any, content:string, type:string, time:number, mask:boolean) {
   if (!type) {
     type = "text"
   }

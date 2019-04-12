@@ -28,7 +28,7 @@ declare global {
 // 给VUE对象添加自定义方法
 declare module 'vue/types/vue' {
   interface Vue {
-  Toast: any
-  getRequest: any
-}
+    Toast: any
+    getRequest: any
+  }
 }
