@@ -4,7 +4,6 @@ declare global {
   // 声明全局变量，方法
   var $: any
   var AMap: any
-  var $Toast: any
 
   interface Window {
     webkit: any
@@ -24,4 +23,12 @@ declare global {
       [elem: string]: any
     }
   }
+}
+
+// 给VUE对象添加自定义方法
+declare module 'vue/types/vue' {
+  interface Vue {
+  Toast: any
+  getRequest: any
+}
 }

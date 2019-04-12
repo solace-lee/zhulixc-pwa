@@ -15,7 +15,7 @@ Vue.config.productionTip = false
 
 Vue.use(Cube)
 Vue.use(AMap)
-Vue.prototype.$Toast = Toast
+Vue.prototype.Toast = Toast
 Vue.prototype.getRequest = new GetRequest()
 fastClick.attach(document.body)
 AMap.initAMapApiLoader({

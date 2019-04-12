@@ -115,7 +115,6 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-// import { GetRequest } from '@/config/request.ts'
 import headers from '@/components/public/header.vue'
 import foot from '@/components/public/foot.vue'
 import swipe from '@/components/home/swipe.vue'
@@ -145,7 +144,6 @@ export default class Home extends Vue {
   }
 
   private getdata () {
-    // const getRequest = new GetRequest()
     this.getRequest.getAds((res: any) => {
       if (res.data.status === 200) {
         console.log(res.data)
@@ -158,7 +156,7 @@ export default class Home extends Vue {
         // 品牌推荐数据
         this.brandProduct = res.data.data.f4
       } else {
-        this.$Toast('数据获取失败请稍后再试', 'error')
+        this.Toast('数据获取失败请稍后再试', 'error')
       }
     })
   }
