@@ -1,5 +1,5 @@
 const configApi = {
-  local: 'http://192.168.1.107:80',
+  local: 'http://192.168.1.107:8888/admin',
   home: 'http://192.168.1.107:9100'
 }
 

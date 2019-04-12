@@ -12,7 +12,7 @@
       <!-- 轮播内容 -->
       <cube-slide-item v-for='(i, index) in swipeList' :key='index'>
         <div @click="goDetail(i.url)">
-          <img :src="i.titleImg" alt="">
+          <img loading="lazy" :src="i.titleImg" alt="">
         </div>
       </cube-slide-item>
     </cube-slide>
