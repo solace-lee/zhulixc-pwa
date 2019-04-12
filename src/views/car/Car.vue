@@ -2,7 +2,7 @@
 <template>
   <div class="car">
     <div>
-      <headers :title="headerList.title" :status="headerList.status" ></headers>
+      <headers :title="headerList.title" :status="headerList.status" :manage="!changeNothing"></headers>
     </div>
     <div class="header_title" v-if="changeNothing"></div>
 

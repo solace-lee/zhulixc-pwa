@@ -30,8 +30,8 @@
         <svg class="icon" aria-hidden="true" @click="goCar" v-if="goCarBtn">
           <use xlink:href="#icon-icon_collect"></use>
         </svg>
-        <div class="manage" v-if="!manage" @click="goEdit()">管理</div>
-        <div class="manage" v-if="complete">完成</div>
+        <div class="manage" v-if="!manage" @click="goEdit">管理</div>
+        <div class="manage" v-if="complete"  @click="goEdit">完成</div>
         <svg class="icon" aria-hidden="true" @click="goMsg">
           <use xlink:href="#icon-icon_dmail"></use>
         </svg>
@@ -92,11 +92,11 @@ export default class headers extends Vue {
   private goCar () {
     console.log('去购物车')
   }
-
+  //完成及编辑切换
   private goEdit () {
     this.complete = !this.complete
+    this.manage = !this.manage
   }
-
   // 回退到上一页
   private goBack () {
     this.$router.go(-1)
@@ -170,6 +170,7 @@ export default class headers extends Vue {
   .icon {
     font-size: 1.6rem;
     margin-left: 0.8rem;
+    z-index: 10;
   }
   .title_area {
     font-size: 1.8rem;
@@ -191,6 +192,7 @@ export default class headers extends Vue {
     .manage{
       font-size: 1.4rem;
       margin-left: 0;
+      z-index: 10;
       margin-right: 1.2rem;
     }
   }

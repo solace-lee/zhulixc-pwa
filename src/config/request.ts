@@ -14,6 +14,12 @@ class GetRequest {
       callback(res)
     })
   }
+  // 登录
+  getLogin (form: any, callback: any) {
+    http.post(gateway.AUTH + apis.login, form).then(res => {
+      callback(res)
+    })
+  }
 }
 
 export {

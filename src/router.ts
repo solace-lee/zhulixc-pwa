@@ -25,6 +25,17 @@ export default new Router({
       path: '/me', // 用户中心
       name: 'me',
       component: () => import('./views/me/Me.vue')
+    },
+    // twh
+    {
+      path: '/newUser', // 注册
+      name: 'newUser',
+      component: () => import('./views/me/newUser/newUser.vue')
+    },
+    {
+      path: '/login', // 注册
+      name: 'login',
+      component: () => import('./views/me/login/login.vue')
     }
   ]
 })

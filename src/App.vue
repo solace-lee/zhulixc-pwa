@@ -18,6 +18,19 @@
 * {
   box-sizing: border-box;
 }
+//注册页-修改checkBox
+.newUser{
+  .cube-checkbox_checked{
+    >.cube-checkbox-wrap{
+      >.cube-checkbox-ui {
+        >i{
+          color:#00ae87
+        }
+      }
+    }
+  }
+}
+  
 .icon {
   width: 1em;
   height: 1em;
