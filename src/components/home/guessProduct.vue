@@ -24,9 +24,8 @@ import { Vue, Component, Prop } from 'vue-property-decorator'
 
 // 新品推荐
 @Component
-export default class toneProduct extends Vue {
-  @Prop({ default: {} }) private toneProduct!: Object
-  @Prop({ default: 0 }) private index!: Number
+export default class guessProduct extends Vue {
+  @Prop({ default: {} }) private guessProduct!: Object
   private value = null
 
   mounted () {

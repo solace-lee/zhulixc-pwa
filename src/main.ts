@@ -7,6 +7,7 @@ import router from './router'
 import store from './store'
 import fastClick from 'fastclick'
 import { Toast } from './config/Toast'
+import { GetRequest } from '@/config/request.ts'
 import 'normalize.css'
 import './registerServiceWorker'
 
@@ -14,7 +15,8 @@ Vue.config.productionTip = false
 
 Vue.use(Cube)
 Vue.use(AMap)
-Vue.prototype.Toast = Toast
+Vue.prototype.$Toast = Toast
+Vue.prototype.getRequest = new GetRequest()
 fastClick.attach(document.body)
 AMap.initAMapApiLoader({
   key: 'deff2dcf2e3baae4659fa43854600c62',

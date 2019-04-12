@@ -52,7 +52,7 @@
       <div class="tone_area">
         <div class="tone_product_b" v-for="(i, index) in toneProduct" :key="index" @click="goDetail(i.commodityId)" v-show="index == 0">
           <div class="b_img">
-            <img :src="i.titleImg" alt="">
+            <img loading="lazy" :src="i.titleImg" alt="">
           </div>
           <div class="b_name">{{i.name}}</div>
           <div class="b_info">
@@ -88,6 +88,23 @@
       </div>
     </div>
 
+    <!-- 标题 -->
+    <div class="part_title white_title">
+      <div class="title_area">
+        <div class="title_img"></div>
+        <div class="title_txt">猜你喜欢</div>
+      </div>
+    </div>
+
+    <!-- 猜你喜欢 -->
+    <div class="guess_product">
+      <div class="product_area">
+        <div class="guess_product_area" v-for="(i, index) in guessProduct" :key="index">
+          <guess-product :guessProduct="i"></guess-product>
+        </div>
+      </div>
+    </div>
+
     <!-- 分割线 -->
     <div style="height:5rem;"></div>
 
@@ -98,12 +115,12 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import { GetRequest } from '@/config/request.ts'
+// import { GetRequest } from '@/config/request.ts'
 import headers from '@/components/public/header.vue'
 import foot from '@/components/public/foot.vue'
 import swipe from '@/components/home/swipe.vue'
 import newProduct from '@/components/home/newProduct.vue'
-import toneProduct from '@/components/home/toneProduct.vue'
+import guessProduct from '@/components/home/guessProduct.vue'
 
 @Component({
   components: {
@@ -111,7 +128,7 @@ import toneProduct from '@/components/home/toneProduct.vue'
     foot,
     swipe,
     newProduct,
-    toneProduct,
+    guessProduct,
   }
 })
 export default class Home extends Vue {
@@ -121,14 +138,15 @@ export default class Home extends Vue {
   newProduct: Array<Object> = [] // 新品推荐数据
   toneProduct: Array<Object> = [] // 品质推荐数据
   brandProduct: Array<Object> = [] // 品牌推荐数据
+  guessProduct: Array<Object> = [] // 猜你喜欢数据
 
   created () {
     this.getdata()
   }
 
   private getdata () {
-    const getRequest = new GetRequest()
-    getRequest.getAds((res: any) => {
+    // const getRequest = new GetRequest()
+    this.getRequest.getAds((res: any) => {
       if (res.data.status === 200) {
         console.log(res.data)
         // 轮播数据
@@ -140,7 +158,7 @@ export default class Home extends Vue {
         // 品牌推荐数据
         this.brandProduct = res.data.data.f4
       } else {
-        this.Toast('数据获取失败请稍后再试', 'error')
+        this.$Toast('数据获取失败请稍后再试', 'error')
       }
     })
   }
@@ -226,6 +244,7 @@ export default class Home extends Vue {
       display: flex;
       border-radius: 6px;
       overflow: hidden;
+      margin-bottom: 1rem;
       .a_left {
         width: 50%;
         height: 100%;
@@ -276,7 +295,7 @@ export default class Home extends Vue {
     .tone_product_b {
       height: 19.6rem;
       width: 11rem;
-      margin-top: 1rem;
+      margin-bottom: 1rem;
       border-radius: 6px;
       display: flex;
       flex-direction: column;
@@ -306,6 +325,7 @@ export default class Home extends Vue {
       .b_info {
         display: flex;
         align-items: flex-end;
+        margin: 0 .6rem;
         .b_now_price {
           font-size: 1.8rem;
           color: #00ae87;
@@ -316,15 +336,20 @@ export default class Home extends Vue {
         }
       }
       .b_buy_now {
-        width: 4.8rem;
-        font-size: .8rem;
-        color: #fff;
-        padding: .4rem .8rem;
-        background: #00ae3a;
-        border-radius: 2rem;
+        // width: 100%;
         margin-bottom: .6rem;
+        margin-right: .6rem;
         display: flex;
+        justify-content: flex-end;
         align-items: flex-end;
+        span {
+          width: 4.8rem;
+          font-size: .8rem;
+          color: #fff;
+          padding: .4rem .8rem;
+          background: #00ae3a;
+          border-radius: 2rem;
+        }
       }
     }
   }
@@ -360,4 +385,7 @@ export default class Home extends Vue {
     }
   }
 }
+
+// 猜你喜欢
+
 </style>
