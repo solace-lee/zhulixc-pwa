@@ -1,5 +1,5 @@
 <template>
-  <div class="item" @click="goDetail(guessProduct.commodityId)">
+  <div class="item" @click="goDetail(guessProduct.id)">
     <div class="item_img">
       <img :src="guessProduct.imgUrl" alt="">
       <div class="brand_name">{{guessProduct.brandName}}</div>
@@ -8,7 +8,7 @@
       <p>{{guessProduct.name}}</p>
     </div>
     <div class="item_info">
-      <div class="now_price">￥{{guessProduct.discountPrice}}</div>
+      <div class="now_price"><span>￥</span>{{guessProduct.discountPrice.toFixed(2)}}</div>
       <div class="hot_num">{{guessProduct.salesVolume}}人付款</div>
     </div>
   </div>
@@ -41,6 +41,7 @@ export default class guessProduct extends Vue {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background: #f2f2f2;
   .item_img {
     height: 15.4rem;
     width: 100%;
@@ -62,7 +63,41 @@ export default class guessProduct extends Vue {
     }
   }
   .item_title {
-    
+    width: 100%;
+      height: 2.8rem;
+      margin-top: 1rem;
+      padding: 0 1rem;
+    p {
+      font-size: 1.3rem;
+      color: #333;
+      /*超过两行省略号*/
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      /*超过两行省略号*/
+      -webkit-box-orient: vertical;
+      /*超过两行省略号*/
+    }
+  }
+  .item_info {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 0 1rem;
+    margin-bottom: .6rem;
+    .now_price {
+      color: #00ae87;
+      font-size: 2rem;
+      font-weight: bold;
+      span {
+        font-size: 1.2rem;
+      }
+    }
+    .hot_num {
+      font-size: 1rem;
+      color: #333;
+    }
   }
 }
 </style>

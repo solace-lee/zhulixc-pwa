@@ -6,6 +6,11 @@
     <!-- 轮播图 -->
     <swipe :swipeList="swipeList"></swipe>
 
+    <!-- 聚合区 -->
+    <div class="special_area">
+      <div class="special"></div>
+    </div>
+
     <!-- 标题 -->
     <div class="part_title">
       <div class="title_area">
@@ -39,7 +44,7 @@
             <div class="a_titel">{{i.name}}</div>
             <div class="a_name">{{i.title}}</div>
             <div class="a_info">
-              <div class="a_now_price">￥{{i.discountPrice}}</div>
+              <div class="a_now_price"><span>￥</span>{{i.discountPrice}}</div>
               <s class="a_old_price">￥{{i.originalPrice}}</s>
               <div class="a_buy_now">立即购买</div>
             </div>
@@ -126,8 +131,8 @@ import guessProduct from '@/components/home/guessProduct.vue'
     headers,
     foot,
     swipe,
-    newProduct,
-    guessProduct,
+    newProduct, // 新品推荐
+    guessProduct, // 猜你喜欢
   }
 })
 export default class Home extends Vue {
@@ -144,17 +149,17 @@ export default class Home extends Vue {
   }
 
   private getdata () {
+    // 获取广告代码
     this.getRequest.getAds((res: any) => {
       if (res.data.status === 200) {
-        // console.log(res.data)
         // 轮播数据
         this.swipeList = res.data.data.f1
         // 新品推荐数据
-        this.newProduct = res.data.data.f2
+        this.newProduct = res.data.data.f6
         // 品质推荐数据
-        this.toneProduct = res.data.data.f3
+        this.toneProduct = res.data.data.f7
         // 品牌推荐数据
-        this.brandProduct = res.data.data.f4
+        this.brandProduct = res.data.data.f8
       } else {
         this.Toast('数据获取失败请稍后再试', 'error')
       }
@@ -275,6 +280,10 @@ export default class Home extends Vue {
           .a_now_price {
             font-size: 1.8rem;
             color: #00ae87;
+            font-weight: bold;
+            span {
+              font-size: 1.2rem;
+            }
           }
           .a_old_price {
             font-size: 0.9rem;

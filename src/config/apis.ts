@@ -1,5 +1,5 @@
 const apis = {
-  ads: 'ads/list',
+  ads: 'ads/findAdsList',
   car: 'inside/cart/findCartByuserId',
   login: 'login',
   favorite: 'commodity/indexlike'
