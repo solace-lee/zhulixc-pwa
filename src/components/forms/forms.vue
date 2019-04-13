@@ -335,7 +335,7 @@ export default class forms extends Vue {
       border-bottom: solid 1px #fff;
       font-size: 1.6rem;
       color: #fff;
-      margin-bottom: 10px;
+      margin-bottom: 3rem;
       display: flex;
       align-items: center;
       .icon {
