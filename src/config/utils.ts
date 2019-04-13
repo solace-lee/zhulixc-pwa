@@ -6,7 +6,7 @@ import CryptoJS from 'crypto-js'
 
 export default {
   //加密
-  encrypt (word:string, keyStr:string) {
+  encrypt (word:string, keyStr?:string) {
     keyStr = keyStr ? keyStr : 'ab*d5678abc-896.'
     let key = CryptoJS.enc.Utf8.parse(keyStr)
     let srcs = CryptoJS.enc.Utf8.parse(word)

@@ -12,12 +12,19 @@
           <svg class="icon" aria-hidden="true">
             <use :xlink:href="item.icons"></use>
           </svg>
-          <input
+          <cube-input
+            v-if="item.name==='用户名/手机号'"
+            v-model="ReginForm.userPhone"
+            :placeholder="item.name"
+            :type="item.type"
+            :clearable="clearable"
+          ></cube-input>
+          <!-- <input
             v-if="item.name==='用户名/手机号'"
             :type="item.type"
             v-model.number="ReginForm.userPhone"
             :placeholder="item.name"
-          >
+          > -->
           <input
             v-if="item.name==='请输入密码' || item.name==='确认密码'"
             :type="item.type"
@@ -105,66 +112,31 @@
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator'
 import { GetRequest } from '@/config/request.ts'
+import utils from '@/config/utils.ts'
 
 @Component({
   components: {}
 })
 export default class forms extends Vue {
-  @Prop({ default: '' }) private name!: string
-  private ReginForm: any = {
-    // userPhone: "",
-    // userPwd: "",
-    // referralCode: "",
-    // code: "",
-    // provinceId: -1,
-    // cityId: -1,
-    // districtId: -1
-  }
-   
-     private provinceList: Array<object> = []
-     private cityList: Array<object> = []
-     private districtLite: Array<object> = []
-  private siYuan: any = [
-    // {
-    //   icons: "#icon-icon_signal",
-    //   name: "用户名/手机号",
-    //   type: "text"
-    // },
-
-    // {
-    //   icons: "#icon-icon_likegood",
-    //   name: "请输入短信验证码",
-    //   type: "number"
-    // },
-    // {
-    //   icons: "#icon-icon_collect",
-    //   name: "请输入密码",
-    //   type: "password"
-    // },
-    // {
-    //   icons: "#icon-icon_discovery",
-    //   name: "请输入推荐码(选填)",
-    //   type: "text"
-    // }
-    // {
-    //   class: "iconfont icon-mima1",
-    //   name: "新密码",
-    //   type: "password"
-    // },
-    // {
-    //   class: "iconfont icon-mima1",
-    //   name: "确认密码",
-    //   type: "password"
-    // },
-  ]
-  private isActive: Number = -1  // 控制样式变绿
+  @Prop({ default: '' }) private name!: string // 父传过来的值
+  private ReginForm: any = {} // 提交列表
+  private siYuan: any = [] // form列表
+  private provinceList: Array<object> = [] // 省份列表
+  private cityList: Array<object> = [] // 城市列表
+  private districtLite: Array<object> = [] // 地区列表
+  private isActive: Number = -1 // 控制样式变绿
   private sendAuthCode: boolean = true // 发送验证码倒计时转换
   private auth_time: any = 0 // 倒计时
   private checkBox: boolean = false //是否同意
+  private clearable:object = {
+    visible: true,
+    blurHidden: true
+  }
   created () {
     this.getDate()
   }
   // 方法
+  // 初始化列表-按需导入不同表单
   private getDate () {
     switch (this.name ) {
       case 'login':
@@ -184,7 +156,7 @@ export default class forms extends Vue {
         type: "password"
       },
       ]
-        break;
+        break
       case 'news':
       this.ReginForm = {
         userPhone: "",
@@ -223,7 +195,7 @@ export default class forms extends Vue {
           type: "password"
         }
       ]
-        break;
+        break
       case 'passWord':
       this.ReginForm = {
         userPhone: "",
@@ -233,54 +205,54 @@ export default class forms extends Vue {
       },
       this.siYuan = [
         {
-          class: "iconfont icon-geren11",
+          icons: "#icon-icon_signal",
           name: "用户名/手机号",
           type: "text"
         },
         {
-          class: "iconfont icon-mima1",
+          icons: "#icon-icon_collect",
           name: "新密码",
           type: "password"
         },
         {
-          class: "iconfont icon-mima1",
+          icons: "#icon-icon_collect",
           name: "确认密码",
           type: "password"
         },
         {
-          class: "iconfont icon-yanzhengma2",
+          icons: "#icon-icon_likegood",
           name: "请输入短信验证码",
           type: "text"
         }
       ]
-        break;
+        break
       default:
-        break;
+        break
     }
   }
   // input高亮
   private changeValue(index: Number) {
-    this.isActive = index;
+    this.isActive = index
   }
   //  验证
   private getAuthCode() {
     if (
       !/^((1[3,5,8][0-9])|(14[5,7])|(17[0,6,7,8])|(19[7]))\d{8}$/.test(this.ReginForm.userPhone)) {
-        alert('ccc')
-      return;
+        this.Toast("请输入正确手机号", 'text', 1000, true)
+        return
     } else {
-      this.getCode(this.ReginForm.userPhone);
+      this.getCode(this.ReginForm.userPhone)
     }
   }
   // 
-  getCode (tel: string) {
-    this.sendAuthCode = false;
-    this.auth_time = 60;
+  private getCode (tel: string) {
+    this.sendAuthCode = false
+    this.auth_time = 60
     var auth_timetimer = setInterval(() => {
       this.auth_time--
       if (this.auth_time <= 0) {
-        this.sendAuthCode = true;
-        clearInterval(auth_timetimer);
+        this.sendAuthCode = true
+        clearInterval(auth_timetimer)
       }
     }, 1000);
   }
@@ -290,30 +262,56 @@ export default class forms extends Vue {
     }
     // 获取城市
     private getCity() {
-      this.ReginForm.cityId = -1;
-      this.ReginForm.districtId = -1;
-      this.cityList = [];
-      this.districtLite = [];
+      this.ReginForm.cityId = -1
+      this.ReginForm.districtId = -1
+      this.cityList = []
+      this.districtLite = []
       console.log(123)
     }
     // 获取地区
     private getDistrict() {
-      this.ReginForm.districtId = -1;
-      this.districtLite = [];
+      this.ReginForm.districtId = -1
+      this.districtLite = []
       console.log(123)
 
     }
 
   private submit() {
-    const getRequest = new GetRequest()
-    if(this.name == 'login') {
-      let form = {
-        userName : this.ReginForm.userPhone,
-        passWord : this.ReginForm.userPwd
+    if (this.ReginForm.userPhone == "") {
+        this.Toast("请输入手机号", 'text', 1000, true)
+        return
+      } else if (this.ReginForm.userPwd < 6 || this.ReginForm.userPwd.length > 16) {
+        this.Toast("请填写6-16位密码", 'text', 1000, true)
+        return
       }
-      getRequest.getLogin(form,(res: any) => {
-        console.log(res.data)
-    })
+    if(this.name == 'login') {
+      let phont = utils.encrypt(this.ReginForm.userPhone)
+      let psw = utils.encrypt(this.ReginForm.userPwd)
+      let form = {
+        userName : phont,
+        passWord : psw
+      }
+      this.getRequest.getLogin(form,(res: any) => {
+        if (res.data) {
+          if (res.data.status == 200) {
+            localStorage.setItem("token", res.data.data)
+            localStorage.setItem("Account", this.ReginForm.userPhone)
+            const detailId = sessionStorage.getItem('detailId') || false
+            if (detailId) {
+              sessionStorage.removeItem('detailId')
+              this.$router.replace({
+                path: 'detail?id=' + detailId
+              })
+            } else {
+              this.$router.replace({
+              path: "/me"
+            });
+            }
+          } else {
+            this.Toast(res.data.msg,'text', 1000, true);
+          }
+        }
+      })
     }
     
   }
@@ -331,21 +329,33 @@ export default class forms extends Vue {
     padding: 0rem 3.6rem;
     .li {
       width: 100%;
-      height: 4rem;
       margin-top: 1rem;
       padding-left: 1rem;
-      position: relative;
       line-height: 3.5rem;
-      border: solid 1px #adadad;
-      border-radius: 7px;
+      border-bottom: solid 1px #fff;
       font-size: 1.6rem;
-      color: #999;
-      white-space: nowrap;
+      color: #fff;
       margin-bottom: 10px;
-      i {
+      display: flex;
+      align-items: center;
+      .icon {
         vertical-align: middle;
         font-size: 2rem;
-        width: 50%;
+        margin-right: 1rem;
+      }
+      .cube-input::after{
+          border:none;
+        }
+      .cube-input{
+        display: inline-block;
+        background: none;
+        width: 100%;
+        >.cube-input-field {
+          color: #fff;
+        }
+      }
+      .cube-inpu_active{
+        border:none;
       }
       input {
         width: 80%;
@@ -353,8 +363,8 @@ export default class forms extends Vue {
         vertical-align: middle;
         border: none;
         font-size: 1.6rem;
-        color: #343434;
-        opacity: 0.5;
+        color: #fff;
+        // opacity: 0.5;
         background: none;
         border:none;
         outline: none; // 去除选中状态边框
@@ -381,17 +391,17 @@ export default class forms extends Vue {
         font-size: 1.6rem;
         }
       }
-      .active {
-        border: solid 1px #0bb794;
-        color: #0bb794;
-        .getCode {
-          width: 6%;
-          height: 2rem;
-          display: inline-block;
-          // background-image: url(../../../img/index/newuser/drawable-xhdpi/推荐码点击.png);
-          background-size: 100% 100%;
-        }
-      }
+      // .active {
+      //   border: solid 1px #0bb794;
+      //   color: #0bb794;
+      //   .getCode {
+      //     width: 6%;
+      //     height: 2rem;
+      //     display: inline-block;
+      //     // background-image: url(../../../img/index/newuser/drawable-xhdpi/推荐码点击.png);
+      //     background-size: 100% 100%;
+      //   }
+      // }
       select {
         width: 27%;
         height: 2.2rem;
