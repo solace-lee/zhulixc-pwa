@@ -1,4 +1,4 @@
-<!-- 注册 -->
+<!-- 登录 -->
 <template>
   <div class="login">
     <div class="bg_img">
@@ -13,6 +13,10 @@
       </div>
     </div>
     <forms :name="name"></forms>
+    <div class="login_foot">
+      <div>立即支付</div>
+      <div>忘记密码</div>
+    </div>
   </div>
 </template>
 
@@ -69,6 +73,9 @@ export default class login extends Vue {
   }
   .forms{
     margin-top: 6rem;
+  }
+  .login_foot{
+    width 100%;
   }
 }
 </style>
