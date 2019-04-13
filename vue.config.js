@@ -3,7 +3,9 @@ module.exports = {
     loaderOptions: {
       stylus: {
         'resolve url': true,
-        'import': []
+        'import': [
+          './src/theme'
+        ]
       },
       postcss: {
         plugins: [
@@ -16,7 +18,7 @@ module.exports = {
   pluginOptions: {
     'cube-ui': {
       postCompile: true,
-      theme: false
+      theme: true
     }
   },
 

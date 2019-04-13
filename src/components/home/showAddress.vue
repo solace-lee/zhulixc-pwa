@@ -45,7 +45,7 @@ export default class showAddress extends Vue {
   }
 }
 </script>
-<style lang="less" scoped>
+<style lang="stylus" scoped>
 .show_address {
   display: flex;
   align-items: center;

@@ -39,7 +39,7 @@ export default class newUser extends Vue {
   
 }
 </script>
-<style lang="less" scoped>
+<style lang="stylus" scoped>
 .newUser {
   width: 100%;
   height: 100%;

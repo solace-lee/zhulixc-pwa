@@ -103,7 +103,7 @@ export default class headers extends Vue {
   }
 }
 </script>
-<style lang="less" scoped>
+<style lang="stylus" scoped>
 .header {
   width: 100%;
   // background: #00ae87;

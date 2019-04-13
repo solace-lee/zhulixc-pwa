@@ -99,7 +99,7 @@ export default class something extends Vue {
   }
 }
 </script>
-<style lang="less" scoped>
+<style lang="stylus" scoped>
 .something {
   .goods {
       margin: 0rem 1.2rem 1.6rem 1.2rem;

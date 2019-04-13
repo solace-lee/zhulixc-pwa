@@ -40,7 +40,7 @@ export default class login extends Vue {
   created () {}
 }
 </script>
-<style lang="less" scoped>
+<style lang="stylus" scoped>
 .login {
   width: 100%;
   height: 100%;

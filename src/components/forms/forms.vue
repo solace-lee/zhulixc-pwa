@@ -317,7 +317,7 @@ export default class forms extends Vue {
   }
 }
 </script>
-<style lang="less" scoped>
+<style lang="stylus" scoped>
 .forms {
   width: 100%;
   height: 100%;
@@ -343,28 +343,33 @@ export default class forms extends Vue {
         font-size: 2rem;
         margin-right: 1rem;
       }
-      .cube-input::after{
-          border:none;
-          color: #fff;
-        }
-      .cube-input{
-        display: inline-block;
-        background: none;
-        width: 100%;
-      }
-      input {
-        width: 80%;
-        height: 95%;
-        vertical-align: middle;
-        border: none;
-        font-size: 1.6rem;
-        color: #fff;
-        // opacity: 0.5;
-        background: none;
-        border:none;
-        outline: none; // 去除选中状态边框
-        /* width: 4rem; */
-      }
+      // .cube-input::after{
+      //     border:none;
+      //   }
+      // .cube-input{
+      //   display: inline-block;
+      //   background: none;
+      //   width: 100%;
+      //   >.cube-input-field {
+      //     color: #fff;
+      //   }
+      // }
+      // .cube-inpu_active{
+      //   border:none;
+      // }
+      // input {
+      //   width: 80%;
+      //   height: 95%;
+      //   vertical-align: middle;
+      //   border: none;
+      //   font-size: 1.6rem;
+      //   color: #fff;
+      //   // opacity: 0.5;
+      //   background: none;
+      //   border:none;
+      //   outline: none; // 去除选中状态边框
+      //   /* width: 4rem; */
+      // }
       .getCode {
         width: 6%;
         height: 2rem;
