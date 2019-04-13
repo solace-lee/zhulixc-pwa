@@ -11,14 +11,12 @@
       <div class="special"></div>
     </div>
 
-     <form class="speak" action="http://www.google.com/search">
-      <input type="search" name="q" speech required onspeechchange="startSearch">
-    </form>
-
     <!-- 标题 -->
     <div class="part_title">
       <div class="title_area">
-        <div class="title_img"></div>
+        <div class="title_img">
+          <img src="" alt="">
+        </div>
         <div class="title_txt">新品推荐</div>
       </div>
     </div>
@@ -425,8 +423,4 @@ export default class Home extends Vue {
   }
 }
 
-.speak
-  height 4rem
-  width 80%
-  background #999
 </style>
