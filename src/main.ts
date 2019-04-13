@@ -1,4 +1,6 @@
 import Vue from 'vue'
+import './cube-ui'
+import './cube-ui'
 import Cube from 'cube-ui'
 // import axios from 'axios'
 import App from './App.vue'

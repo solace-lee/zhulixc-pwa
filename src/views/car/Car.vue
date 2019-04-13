@@ -79,7 +79,7 @@ export default class car extends Vue {
   }
 }
 </script>
-<style lang="less" scoped>
+<style lang="stylus" scoped>
 .car {
   width: 100%;
   height: 100%;

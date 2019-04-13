@@ -29,7 +29,7 @@ export default class newProduct extends Vue {
   }
 }
 </script>
-<style lang="less" scoped>
+<style lang="stylus" scoped>
 .item {
   width: 12rem;
   height: 16rem;

@@ -34,7 +34,7 @@ export default class guessProduct extends Vue {
   }
 }
 </script>
-<style lang="less" scoped>
+<style lang="stylus" scoped>
 .item {
   width: 100%;
   height: 100%;

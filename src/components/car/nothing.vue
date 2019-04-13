@@ -32,7 +32,7 @@ export default class nothing extends Vue {
   }
 }
 </script>
-<style lang="less" scoped>
+<style lang="stylus" scoped>
 .nothing {
     width: 100%;
     text-align: center;

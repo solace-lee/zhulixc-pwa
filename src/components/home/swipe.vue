@@ -35,7 +35,7 @@ export default class headers extends Vue {
   }
 }
 </script>
-<style lang="less" scoped>
+<style lang="stylus" scoped>
 .swipe {
   height: 50vw;
   width: 100%;

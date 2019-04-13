@@ -11,6 +11,10 @@
       <div class="special"></div>
     </div>
 
+     <form class="speak" action="http://www.google.com/search">
+      <input type="search" name="q" speech required onspeechchange="startSearch">
+    </form>
+
     <!-- 标题 -->
     <div class="part_title">
       <div class="title_area">
@@ -182,7 +186,7 @@ export default class Home extends Vue {
   }
 }
 </script>
-<style lang="less" scoped>
+<style lang="stylus" scoped>
 .home {
   // background: #eee;
   width: 100VW;
@@ -420,4 +424,9 @@ export default class Home extends Vue {
     }
   }
 }
+
+.speak
+  height 4rem
+  width 80%
+  background #999
 </style>

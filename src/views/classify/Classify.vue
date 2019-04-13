@@ -27,7 +27,7 @@ export default class classify extends Vue {
   }
 }
 </script>
-<style lang="less" scoped>
+<style lang="stylus" scoped>
 .classify {
   background: #eee;
 }
