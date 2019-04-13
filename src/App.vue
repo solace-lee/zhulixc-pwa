@@ -30,24 +30,9 @@
     }
   }
 }
-  // .form{
-  //   .cube-input-field{
-  //       background: none;
-  //       input {
-  //       width: 80%;
-  //       height: 95%;
-  //       vertical-align: middle;
-  //       border: none;
-  //       font-size: 1.6rem;
-  //       color: #fff;
-  //       opacity: 0.5;
-  //       background: none;
-  //       border:none;
-  //       outline: none; // 去除选中状态边框
-  //       /* width: 4rem; */
-  //     }
-  //   }
-  // }
+ .cube-input-field {
+   color: #fff;
+  }
 .icon {
   width: 1em;
   height: 1em;

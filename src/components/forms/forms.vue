@@ -335,7 +335,7 @@ export default class forms extends Vue {
       border-bottom: solid 1px #fff;
       font-size: 1.6rem;
       color: #fff;
-      margin-bottom: 10px;
+      margin-bottom: 3rem;
       display: flex;
       align-items: center;
       .icon {
@@ -345,17 +345,12 @@ export default class forms extends Vue {
       }
       .cube-input::after{
           border:none;
+          color: #fff;
         }
       .cube-input{
         display: inline-block;
         background: none;
         width: 100%;
-        >.cube-input-field {
-          color: #fff;
-        }
-      }
-      .cube-inpu_active{
-        border:none;
       }
       input {
         width: 80%;
