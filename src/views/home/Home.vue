@@ -146,7 +146,7 @@ export default class Home extends Vue {
   private getdata () {
     this.getRequest.getAds((res: any) => {
       if (res.data.status === 200) {
-        console.log(res.data)
+        // console.log(res.data)
         // 轮播数据
         this.swipeList = res.data.data.f1
         // 新品推荐数据
@@ -158,6 +158,14 @@ export default class Home extends Vue {
       } else {
         this.Toast('数据获取失败请稍后再试', 'error')
       }
+    })
+
+    // 获取猜你喜欢数据
+    this.getRequest.getFavorite ((res: any) => {
+      if (res.data.status === 200) {
+        this.guessProduct = res.data.data
+      }
+      console.log(res.data.data);
     })
   }
 
@@ -385,5 +393,22 @@ export default class Home extends Vue {
 }
 
 // 猜你喜欢
-
+.guess_product {
+  height: auto;
+  width: 100%;
+  padding: 0 1.5rem 1.5rem 1.5rem;
+  .product_area {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+    .guess_product_area {
+      width: 49%;
+      height: 23.7rem;
+      margin-bottom: 1rem;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+  }
+}
 </style>
