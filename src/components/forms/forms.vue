@@ -19,13 +19,35 @@
             :type="item.type"
             :clearable="clearable"
           ></cube-input>
-          <!-- <input
-            v-if="item.name==='用户名/手机号'"
-            :type="item.type"
-            v-model.number="ReginForm.userPhone"
+          <cube-input
+            v-if="item.name==='请输入密码' || item.name==='确认密码'"
+            v-model="ReginForm.userPwd"
             :placeholder="item.name"
-          > -->
-          <input
+            :type="item.type"
+            :clearable="clearable"
+          ></cube-input>
+          <cube-input
+            v-if="item.name==='新密码'"
+            v-model="ReginForm.userPwd1"
+            :placeholder="item.name"
+            :type="item.type"
+            :clearable="clearable"
+          ></cube-input>
+          <cube-input
+            v-if="item.name==='请输入短信验证码'"
+            v-model="ReginForm.code"
+            :placeholder="item.name"
+            :type="item.type"
+            :clearable="clearable"
+          ></cube-input>
+          <cube-input
+            v-if="item.name==='请输入推荐码(选填)'"
+            v-model="ReginForm.referralCode"
+            :placeholder="item.name"
+            :type="item.type"
+            :clearable="clearable"
+          ></cube-input>
+          <!-- <input
             v-if="item.name==='请输入密码' || item.name==='确认密码'"
             :type="item.type"
             v-model="ReginForm.userPwd"
@@ -49,7 +71,7 @@
             :type="item.type"
             v-model="ReginForm.referralCode"
             :placeholder="item.name"
-          >
+          > -->
           <span v-if="item.name==='请输入短信验证码' ">
             <span class="time" v-show="sendAuthCode" @click="getAuthCode">获取验证码</span>
             <span class="time" v-show="!sendAuthCode">
@@ -57,7 +79,7 @@
             </span>
           </span>
         </div>
-        <div class="city"  v-if="name == 'news'">
+        <div class="city"  v-if="name == 'newUser'">
           <div class="c_text">
             <span>区域信息</span>
           </div>
@@ -95,9 +117,9 @@
           </div>
         </div>
         <cube-button class="btn" @click="submit" v-if="name == 'login'" >登录</cube-button>
-        <cube-button class="btn" @click="submit" :disabled="!checkBox" v-if="name == 'news'">立即注册</cube-button>
+        <cube-button class="btn" @click="submit" :disabled="!checkBox" v-if="name == 'newUser'">立即注册</cube-button>
         <cube-button class="btn" @click="submit" v-if="name == 'passWord'">找回密码</cube-button>
-        <div class="nu_agreement"  v-if="name == 'news'"> 
+        <div class="nu_agreement"  v-if="name == 'newUser'"> 
           <cube-checkbox v-model="checkBox" shape="square" class="nu_agreement_checkBox" label=' '></cube-checkbox>
            <div class="nu_a_text">
               <span>已阅读并同意一下协议</span>
@@ -157,7 +179,7 @@ export default class forms extends Vue {
       },
       ]
         break
-      case 'news':
+      case 'newUser':
       this.ReginForm = {
         userPhone: "",
         userPwd: "",
@@ -188,11 +210,6 @@ export default class forms extends Vue {
           icons: "#icon-icon_discovery",
           name: "请输入推荐码(选填)",
           type: "text"
-        },
-        {
-          class: "iconfont icon-mima1",
-          name: "确认密码",
-          type: "password"
         }
       ]
         break
@@ -343,20 +360,20 @@ export default class forms extends Vue {
         font-size: 2rem;
         margin-right: 1rem;
       }
-      // .cube-input::after{
-      //     border:none;
-      //   }
-      // .cube-input{
-      //   display: inline-block;
-      //   background: none;
-      //   width: 100%;
-      //   >.cube-input-field {
-      //     color: #fff;
-      //   }
-      // }
-      // .cube-inpu_active{
-      //   border:none;
-      // }
+      .cube-input::after{
+          border:none;
+        }
+      .cube-input{
+        width :100%
+        background: none;
+        font-size: 1.6rem;
+        >.cube-input-field {
+          color: #fff;
+        }
+      }
+      .cube-inpu_active{
+        border:none;
+      }
       // input {
       //   width: 80%;
       //   height: 95%;
