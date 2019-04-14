@@ -12,6 +12,11 @@ export default new Router({
       component: Home
     },
     {
+      path: '/partA', // partA
+      name: 'partA',
+      component: () => import('./views/home/partA.vue')
+    },
+    {
       path: '/classify', // 分类页
       name: 'classify',
       component: () => import('./views/classify/Classify.vue')
@@ -28,9 +33,9 @@ export default new Router({
     },
     // twh
     {
-      path: '/newUser', // 注册
-      name: 'newUser',
-      component: () => import('./views/me/newUser/newUser.vue')
+      path: '/register', // 注册
+      name: 'register',
+      component: () => import('./views/me/register/register.vue')
     },
     {
       path: '/login', // 注册

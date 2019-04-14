@@ -1,8 +1,9 @@
 const apis = {
-  ads: 'ads/findAdsList',
-  car: 'inside/cart/findCartByuserId',
-  login: 'login',
-  favorite: 'commodity/indexlike'
+  ads: 'ads/findAdsList', // 首页广告列表
+  car: 'inside/cart/findCartByuserId', // 购物车
+  login: 'login', // 登录
+  favorite: 'commodity/indexlike', // 猜你喜欢
+  greenlife: 'commodity/findByClassifyCode', // 绿色生活数据（生态市场）
 }
 
 export {
