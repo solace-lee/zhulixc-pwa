@@ -1,7 +1,7 @@
 <template>
   <div class="item" @click="goDetail(newProduct.commodityId)">
     <div class="item_img">
-      <img :src="newProduct.imgUrl" alt="">
+      <img :src="newProduct.titleImg" alt="">
     </div>
     <div class="name">{{newProduct.name}}</div>
     <div class="info">
