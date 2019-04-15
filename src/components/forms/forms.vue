@@ -25,6 +25,7 @@
             :placeholder="item.name"
             :type="item.type"
             :clearable="clearable"
+            :eye="eye"
           ></cube-input>
           <cube-input
             v-if="item.name==='新密码'"
@@ -32,6 +33,7 @@
             :placeholder="item.name"
             :type="item.type"
             :clearable="clearable"
+            :eye="eye"
           ></cube-input>
           <cube-input
             v-if="item.name==='请输入短信验证码'"
@@ -154,6 +156,7 @@ export default class forms extends Vue {
     visible: true,
     blurHidden: true
   }
+  private eye: boolean = true
   created () {
     this.getDate()
   }

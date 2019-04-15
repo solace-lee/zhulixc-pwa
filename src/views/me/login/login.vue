@@ -14,8 +14,8 @@
     </div>
     <forms :name="name"></forms>
     <div class="login_foot">
-      <div>立即支付</div>
-      <div>忘记密码</div>
+      <div @clikc="go('/newUser')">立即注册</div>
+      <div @clikc="go('/passWord')">忘记密码</div>
     </div>
   </div>
 </template>
@@ -41,6 +41,13 @@ export default class login extends Vue {
     status: 'isCar'
   }
   private changeNothing: boolean = false//控制显示
+
+  // 方法
+  private go (val:string) {
+    this.$router.push({
+      path:val
+    })
+  }
   created () {}
 }
 </script>
@@ -76,6 +83,14 @@ export default class login extends Vue {
   }
   .login_foot{
     width 100%;
+    display flex;
+    margin-top:2rem
+    div{
+      flex:1;
+      text-align:center;
+      font-size: 1.4rem
+      color: #fff
+    }
   }
 }
 </style>
