@@ -3,10 +3,17 @@
     <!-- 搜索型样式 -->
     <div class="header_search" v-if="isSearch">
       <div class="search_area">
-        <svg class="icon" aria-hidden="true">
+        <!-- 定位图标 -->
+        <svg class="icon" aria-hidden="true" v-if="hasGetLocation">
           <use xlink:href="#icon-icon_GPS"></use>
         </svg>
-        <show-address></show-address>
+        <!-- 返回图标 -->
+        <svg class="icon" aria-hidden="true" @click="goBack" v-if="hasBack">
+          <use xlink:href="#icon-icon_left"></use>
+        </svg>
+        <!-- 地点显示 -->
+        <show-address v-if="hasGetLocation"></show-address>
+        <!-- 搜索框 -->
         <div class="search_box" @click="goSearch">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-icon_search"></use>
@@ -14,6 +21,7 @@
           <input type="text" class="gosearch" disabled placeholder="更多好货助力">
           <!-- <cube-input v-model="value" disabled placeholder="更多好货助力"></cube-input> -->
         </div>
+        <!-- 消息图标 -->
         <svg class="icon" aria-hidden="true" @click="goMsg">
           <use xlink:href="#icon-icon_dmail"></use>
         </svg>
@@ -22,16 +30,22 @@
 
     <!-- 标题型样式 -->
     <div class="header_title" v-if="!isSearch">
+      <!-- 返回图标 -->
       <svg class="icon" aria-hidden="true" @click="goBack" v-if="hasBack">
         <use xlink:href="#icon-icon_left"></use>
       </svg>
+      <!-- 标题 -->
       <div class="title_area">{{title}}</div>
       <div class="right">
+        <!-- 购物车图标 -->
         <svg class="icon" aria-hidden="true" @click="goCar" v-if="goCarBtn">
           <use xlink:href="#icon-icon_collect"></use>
         </svg>
+        <!-- 管理按钮 -->
         <div class="manage" v-if="!manage" @click="goEdit">管理</div>
+        <!-- 完成按钮 -->
         <div class="manage" v-if="complete"  @click="goEdit">完成</div>
+        <!-- 消息图标 -->
         <svg class="icon" aria-hidden="true" @click="goMsg">
           <use xlink:href="#icon-icon_dmail"></use>
         </svg>
@@ -53,24 +67,34 @@ export default class headers extends Vue {
   @Prop({ default: '#00ae87' }) private bgColor!: string
   @Prop({ default: '' }) private status!: string // 显示方式
   @Prop({ default: false }) private manage!: boolean // 显示管理
-  // t
-  private hasBack: boolean = true // 控制显示返回按钮
-  private isSearch: boolean = false // 控制显示搜索
-  private goCarBtn: boolean = true // 控制显示购物车按钮
-  private complete: boolean = false // 控制显示完成按钮
+  @Prop({ default: '' }) private backUrl!: string // 返回地址
+
+  private isSearch: boolean = false // 控制显示搜索1
+  private hasBack: boolean = true // 控制显示返回按钮12
+  private goCarBtn: boolean = true // 控制显示购物车按钮2
+  private complete: boolean = false // 控制显示完成按钮2
+  private hasGetLocation: boolean = true // 控制显示定位按钮1
+
   mounted () {
     this.changeBgColor() // 根据传入值修改背景颜色
     this.changeStatus() // 根据传入值修改显示方式
   }
+
   // t 根据传入值修改显示方式
   private changeStatus () {
     switch (this.status) {
-      case 'isCar':
+      case 'isCar': // 购物车类型
         this.goCarBtn = false
         break
-      case 'isSearch':
+      case 'isSearch': // 首页类型
         this.isSearch = true
+        this.hasBack = false
         break
+      case 'BackSearch': // 带搜索带返回按钮类型
+        this.isSearch = true
+        this.hasGetLocation = false
+        break
+
       default:
         break
     }
@@ -92,14 +116,23 @@ export default class headers extends Vue {
   private goCar () {
     console.log('去购物车')
   }
+  
   //完成及编辑切换
   private goEdit () {
     this.complete = !this.complete
     this.manage = !this.manage
   }
+
   // 回退到上一页
   private goBack () {
-    this.$router.go(-1)
+    // 如果父组件有传返回路径则使用
+    if (this.backUrl) {
+      this.$router.replace({
+        path: this.backUrl
+      })
+    } else {
+      this.$router.go(-1)
+    }
   }
 }
 </script>

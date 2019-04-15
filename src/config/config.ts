@@ -1,6 +1,6 @@
 const configApi = {
   local: 'http://192.168.1.107:8888/admin',
-  home: 'http://192.168.1.107:9100'
+  home: 'http://192.168.1.114:9100'
 }
 
 const gateway = {

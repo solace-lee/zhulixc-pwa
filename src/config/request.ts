@@ -28,6 +28,19 @@ class GetRequest {
     })
   }
 
+  // 生态市场数据
+  getGreenlife (callback: any) {
+    const config: object = {
+      params: {
+        classifyCode: 10000,
+        commodityArea: 1
+      }
+    }
+    http.get(gateway.SEARCH + apis.greenlife, config).then(res => {
+      callback(res)
+    })
+  }
+
   // 购物车列表
   getCar (callback: any) {
     http.get(gateway.ORDER + apis.car).then(res => {

@@ -1,7 +1,7 @@
 <template>
   <div class="part_a">
     <!-- 头部 -->
-    <headers :status="headerStatus"></headers>
+    <headers :status="headerStatus" :backUrl="backUrl"></headers>
 
     <!-- 广告轮播图 -->
     <swipe :swipeList="swipeList"></swipe>
@@ -56,7 +56,7 @@
     </div>
 
     <!-- 标题 -->
-    <div class="part_title">
+    <div class="part_title white_title">
       <div class="title_area">
         <div class="title_img"></div>
         <div class="title_txt">绿色生活</div>
@@ -64,16 +64,32 @@
       </div>
     </div>
 
-    <!-- 绿色生活 -->
-    <div class="brand_product">
-      <div class="brand_area">
-        <div class="brand_top" v-for="(i,index) in brandProduct" :key="index" v-show="index < 2" @click="goDetail(i.commodityId)">
-          <img loading="lazy" :src="i.titleImg" alt="">
-        </div>
+    <!-- 大标题展示区 -->
+    <div class="all-content" v-for="(i, count) in greenlife" :key="count">
+      <div class="banner-title">
+        <img :src="i.classifyImgUrl">
       </div>
-      <div class="brand_area">
-        <div class="brand_bottom" v-for="(i, index) in brandProduct" :key="index" v-show="index > 1" @click="goDetail(i.commodityId)">
-          <img loading="lazy" :src="i.titleImg" alt="">
+      <!-- 产品展示区 -->
+      <div class="product-container">
+        <div
+          class="product-item"
+          v-for="(j, index) in i.commodityList"
+          :key="index"
+          v-show="index<3"
+          @click="godetail(j.id)"
+        >
+          <div class="itemImg">
+            <img :src="j.imgUrl">
+          </div>
+          <div class="itemTitle">{{j.name}}</div>
+          <div class="itemPrice">
+            <div class="price">
+              <div class="nowPrice">
+                ￥
+                <span>{{j.discountPrice}}</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -92,14 +108,16 @@ import guessProduct from '@/components/home/guessProduct.vue'
   components: {
     headers,
     swipe,
-    newProduct, // 新品推荐
+    newProduct, // 今日特价
     guessProduct, // 猜你喜欢
   }
 })
 export default class partA extends Vue {
-  headerStatus: string = 'isSearch' // header的显示方式
+  headerStatus: string = 'BackSearch' // header的显示方式
   swipeList: Array<Object> = [] // 轮播数据
   newProduct: Array<Object> = [] // 新品推荐数据
+  greenlife: Array<Object> = [] // 绿色生活数据
+  backUrl: string = '/' // 返回路径
   ad1: Object = [] // 广告
   ad2: Object = [] // 市场热卖数据1
   ad3: Object = [] // 市场热卖数据2
@@ -121,15 +139,17 @@ export default class partA extends Vue {
         this.ad2 = res.data.data.f3[0]
         this.ad3 = res.data.data.f3[1]
         this.ad4 = res.data.data.f3[2]
-        this.newProduct = res.data.data.f6
+        // 今日特价数据
+        this.newProduct = res.data.data.f4
       } else {
         this.Toast('数据获取失败请稍后再试', 'error')
       }
     }, code)
 
     // 获取猜你喜欢数据
-    this.getRequest.getFavorite ((res: any) => {
+    this.getRequest.getGreenlife ((res: any) => {
       if (res.data.status === 200) {
+        this.greenlife = res.data.data
       }
     })
   }
@@ -224,8 +244,8 @@ export default class partA extends Vue {
           width: 100%
 
 
-// 新品推荐
-.new_product {
+// 今日特价
+.sale_product {
   height: 17.5rem;
   width: 100%;
   background: #f2f2f2;
@@ -234,7 +254,7 @@ export default class partA extends Vue {
     // height: 16rem;
     display: flex;
     overflow-x: scroll;
-    .new_product_area {
+    .sale_product_area {
       width: 12rem;
       height: 16rem;
       margin-left: 1.5rem;
@@ -242,54 +262,17 @@ export default class partA extends Vue {
   }
 }
 
-// 品牌推荐
-.brand_product {
-  background: #f2f2f2;
-  height: auto;
+// 绿色生活
+// 大标题展示区样式集中
+.banner-title {
   width: 100%;
-  padding: 0 1.5rem 1.5rem 1.5rem;
-  .brand_area {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+  height: 22.6vw;
+  overflow: hidden;
+  position: relative;
+  justify-content: center;
+  img {
     width: 100%;
-    .brand_top {
-      width: 49%;
-      height: 10.3rem;
-      img {
-        height: 100%;
-        width: 100%;
-      }
-    }
-    .brand_bottom {
-      width: 24%;
-      height: 12rem;
-      margin-top: .6rem;
-      img {
-        height: 100%;
-        width: 100%;
-      }
-    }
-  }
-}
-
-// 猜你喜欢
-.guess_product {
-  height: auto;
-  width: 100%;
-  padding: 0 1.5rem 1.5rem 1.5rem;
-  .product_area {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    width: 100%;
-    .guess_product_area {
-      width: 49%;
-      height: 23.7rem;
-      margin-bottom: 1rem;
-      border-radius: 6px;
-      overflow: hidden;
-    }
+    height: 100%;
   }
 }
 
