@@ -42,6 +42,12 @@ class GetRequest {
     })
   }
 
+  // 注册
+  getRegister (form: any,callback: any ) {
+      http.post(gateway.USER + "register", form).then(res => {
+        callback(res)
+      });
+    }
 }
 
 export {

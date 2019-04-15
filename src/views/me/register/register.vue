@@ -1,6 +1,6 @@
-<!-- 注册 -->
+<!-- 注册，找回密码 -->
 <template>
-  <div class="newUser">
+  <div class="register">
     <div class="bg_img">
       <img src="../../../assets/index/loginBg.png" alt="">
     </div>
@@ -9,7 +9,7 @@
     <!-- 头像 -->
     <div class="avater">
       <div style="color:red;">
-        <!-- <img src="../../../img/index/newuser/logo.png" alt> -->
+        <!-- <img src="../../../img/index/register/logo.png" alt> -->
       </div>
     </div>
     <forms :name="name"></forms>
@@ -27,9 +27,9 @@ import forms from '@/components/me/forms/forms.vue'
     forms,
   }
 })
-export default class newUser extends Vue {
+export default class register extends Vue {
   // 变量
-  name ='newUser'
+  name ='register'
   headerList: object = {
     isSearch: false,
     title: '注册',
@@ -38,17 +38,21 @@ export default class newUser extends Vue {
   }
   private changeNothing: boolean = false//控制显示
   created () {}
+
+  private getData () {
+    let router = this.$route.query.type
+  }
 }
 </script>
 <style lang="stylus" scoped>
-.newUser {
+.register {
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding-top: 15rem;
+  padding-top: 5rem;
   .bg_img {
     position: fixed;
     z-index: -1;
