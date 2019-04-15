@@ -35,5 +35,12 @@ module.exports = {
         changeOrigin: true
       }
     }
-  }
+  },
+
+  publicPath: './',
+  outputDir: undefined,
+  assetsDir: undefined,
+  runtimeCompiler: undefined,
+  productionSourceMap: undefined,
+  parallel: undefined
 }

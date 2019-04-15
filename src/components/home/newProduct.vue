@@ -5,7 +5,7 @@
     </div>
     <div class="name">{{newProduct.name}}</div>
     <div class="info">
-      <div class="now_price">￥{{newProduct.discountPrice}}</div>
+      <div class="now_price"><span>￥</span>{{newProduct.discountPrice}}</div>
       <s class="old_price">￥{{newProduct.originalPrice}}</s>
     </div>
   </div>
@@ -50,6 +50,7 @@ export default class newProduct extends Vue {
   }
   .name {
     font-size: 1.3rem;
+    padding: 0 .6rem;
     color: #333;
     /*超过两行省略号*/
     overflow: hidden;
@@ -68,6 +69,9 @@ export default class newProduct extends Vue {
       font-size: 1.8rem;
       color: #00ae87;
       font-weight: bold;
+      span {
+        font-size: 1.2rem;
+      }
     }
     .old_price {
       font-size: .9rem;

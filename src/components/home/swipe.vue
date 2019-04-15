@@ -37,7 +37,7 @@ export default class headers extends Vue {
 </script>
 <style lang="stylus" scoped>
 .swipe {
-  height: 50vw;
+  height: 100%;
   width: 100%;
   background: #eee;
   .cube-slide {

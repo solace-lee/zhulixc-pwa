@@ -8,7 +8,34 @@
 
     <!-- 聚合区 -->
     <div class="special_area">
-      <div class="special"></div>
+      <!-- partA -->
+      <div class="special" @click="goPartArea(1)">
+        <div class="special_img">
+          <img loading="lazy" :src="partA.titleImg" alt="">
+        </div>
+        <div class="special_title">{{partA.title}}</div>
+      </div>
+      <!-- partB -->
+      <div class="special" @click="goPartArea(2)">
+        <div class="special_img">
+          <img loading="lazy" :src="partB.titleImg" alt="">
+        </div>
+        <div class="special_title">{{partB.title}}</div>
+      </div>
+      <!-- partC -->
+      <div class="special" @click="goPartArea(3)">
+        <div class="special_img">
+          <img loading="lazy" :src="partC.titleImg" alt="">
+        </div>
+        <div class="special_title">{{partC.title}}</div>
+      </div>
+      <!-- partD -->
+      <div class="special" @click="goPartArea(4)">
+        <div class="special_img">
+          <img loading="lazy" :src="partD.titleImg" alt="">
+        </div>
+        <div class="special_title">{{partD.title}}</div>
+      </div>
     </div>
 
     <!-- 标题 -->
@@ -139,6 +166,10 @@ import guessProduct from '@/components/home/guessProduct.vue'
 })
 export default class Home extends Vue {
   foot: String = 'home'
+  partA: Object = []
+  partB: Object = []
+  partC: Object = []
+  partD: Object = []
   headerStatus: string = 'isSearch' // header的显示方式
   swipeList: Array<Object> = [] // 轮播数据
   newProduct: Array<Object> = [] // 新品推荐数据
@@ -162,6 +193,15 @@ export default class Home extends Vue {
         this.toneProduct = res.data.data.f7
         // 品牌推荐数据
         this.brandProduct = res.data.data.f8
+        // 保存聚合区的code和图像
+        this.partA = res.data.data.f2[0]
+        sessionStorage.setItem('codeA', res.data.data.f2[0].typeCode)
+        this.partB = res.data.data.f3[0]
+        sessionStorage.setItem('codeB', res.data.data.f3[0].typeCode)
+        this.partC = res.data.data.f4[0]
+        sessionStorage.setItem('codeC', res.data.data.f4[0].typeCode)
+        this.partD = res.data.data.f5[0]
+        sessionStorage.setItem('codeD', res.data.data.f5[0].typeCode)
       } else {
         this.Toast('数据获取失败请稍后再试', 'error')
       }
@@ -172,8 +212,37 @@ export default class Home extends Vue {
       if (res.data.status === 200) {
         this.guessProduct = res.data.data
       }
-      console.log(res.data.data);
     })
+  }
+
+  // 去聚合区
+  private goPartArea (id: number) {
+    switch (id) {
+      case 1:
+      this.$router.replace({
+        path: '/partA'
+      })
+      break
+      case 2:
+      this.$router.replace({
+        path: '/partB'
+      })
+      break
+      case 3:
+      this.$router.replace({
+        path: '/partC'
+      })
+      break
+      case 4:
+      this.$router.replace({
+        path: '/partD'
+      })
+      break
+    
+      default:
+        break
+    }
+    
   }
 
   // 去商品详情页
@@ -191,9 +260,37 @@ export default class Home extends Vue {
   overflow: hidden;
 }
 
+// 轮播图
 .swipe{
   margin-top: 4.8rem;
+  width 100%;
+  height 50vw;
 }
+
+// 聚合区
+.special_area
+  width 100%
+  height 9.6rem
+  // overflow hidden
+  // padding 0 1.5rem
+  display flex
+  justify-content space-around
+  align-items center
+  .special
+    display flex
+    flex-direction column
+    justify-content space-between
+    align-items center
+    .special_img
+      height 4.6rem
+      width 4.6rem
+      img
+        width 100%
+        height 100%
+    .special_title
+      margin-top 1rem
+      font-size 1.6rem
+      color #666
 
 // 标题
 .part_title {

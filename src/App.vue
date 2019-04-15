@@ -15,9 +15,9 @@
   -moz-osx-font-smoothing: grayscale;
   // text-align: center;
 }
-* {
-  box-sizing: border-box;
-}
+*
+  box-sizing: border-box
+
 //注册页-修改checkBox
 .newUser{
   .cube-checkbox_checked{

@@ -4,12 +4,12 @@ import { apis } from '@/config/apis.ts'
 
 class GetRequest {
   // 首页广告数据
-  getAds (callback: any) {
+  getAds (callback: any, code?: string | number) {
     const districtId = sessionStorage.getItem("districtId") || "0"
     const config: object = {
       params: {
         districtId: districtId,
-        code: 12345
+        code: code || 12345
       }
     }
     http.get(gateway.SEARCH + apis.ads, config).then(res => {

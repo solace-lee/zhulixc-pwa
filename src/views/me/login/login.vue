@@ -23,7 +23,7 @@
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator'
 import headers from '@/components/public/header.vue'
-import forms from '@/components/forms/forms.vue'
+import forms from '@/components/me/forms/forms.vue'
 
 @Component({
   components: {

@@ -3,23 +3,23 @@ import { configApi } from '@/config/config.ts'
 // import store from '@/vuex/store.js'
 import router from '../router'
 
-const http = axios.create()
+let http = axios.create()
 http.defaults.baseURL = configApi.home
 http.defaults.timeout = 5000
 http.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8'
 // http.defaults.headers.post['X-Requested-With'] = 'XMLHttpRequest'
 
 // 请求拦截
-http.interceptors.request.use(function (config: { headers: { ZLXC_TOKEN: string; }; }) {
+http.interceptors.request.use((config: { headers?: any }) => {
   // 如果有token,添加到请求报文 后台会根据该报文返回status
-  const token:string | null = window.localStorage.getItem('token')
+  const token:string | boolean = window.localStorage.getItem('token') || false
   if (token) {
     config.headers.ZLXC_TOKEN = token
   }
   return config
 },
 
-function (error: { response: { status: string; }; }) {
+(error: { response: { status: string; }; }) => {
   // 对请求错误做些什么
   const toast = '网络错误,请稍后再试(' + error.response.status + ')'
   // store.commit('SET_LOADING', toast);
