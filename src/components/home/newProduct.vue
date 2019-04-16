@@ -40,10 +40,10 @@ export default class newProduct extends Vue {
   background #fff
   border-radius 6px
   overflow hidden
-  .item_img 
+  .item_img
     width 100%
     height 10.6rem
-    img 
+    img
       height 100%
       width 100%
   .name

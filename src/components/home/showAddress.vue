@@ -47,11 +47,11 @@ export default class showAddress extends Vue {
 </script>
 <style lang="stylus" scoped>
 .show_address
-  display: flex
-  align-items: center
-  font-size: 1.2rem
+  display flex
+  align-items center
+  font-size 1.2rem
   .line
-    border-left: 1px solid
-    margin: 0 .4rem
-    height: 1rem
+    border-left 1px solid
+    margin 0 .4rem
+    height 1rem
 </style>
