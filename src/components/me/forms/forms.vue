@@ -53,7 +53,7 @@
           <div v-if="item.name==='请输入短信验证码' " class="time">
             <span  v-show="sendAuthCode" @click="getAuthCode">获取验证码</span>
             <span  v-show="!sendAuthCode">
-              <span>剩余{{auth_time}}</span> 秒
+              <span>剩余{{authTime}}</span> 秒
             </span>
           </div>
         </div>
@@ -97,7 +97,7 @@
         <cube-button class="btn" @click="submit" v-if="name == 'login'" >登录</cube-button>
         <cube-button class="btn" @click="submit" v-if="name == 'register'">立即注册</cube-button>
         <cube-button class="btn" @click="submit" v-if="name == 'passWord'">找回密码</cube-button>
-        <div class="nu_agreement"  v-if="name == 'register'"> 
+        <div class="nu_agreement"  v-if="name == 'register'">
           <cube-checkbox v-model="checkBox" shape="square" class="nu_agreement_checkBox" label=' '></cube-checkbox>
            <div class="nu_a_text">
               <span>已阅读并同意一下协议</span>
@@ -126,9 +126,9 @@ export default class forms extends Vue {
   private districtLite: Array<object> = [] // 地区列表
   private isActive: Number = -1 // 控制样式变绿
   private sendAuthCode: boolean = true // 发送验证码倒计时转换
-  private auth_time: any = 0 // 倒计时
-  private checkBox: boolean = false //是否同意
-  private clearable:object = {
+  private authTime: any = 0 // 倒计时
+  private checkBox: boolean = false // 是否同意
+  private clearable:object = { // 密码框显示
     visible: true,
     blurHidden: true
   }
@@ -142,159 +142,166 @@ export default class forms extends Vue {
   // 方法
   // 初始化列表-按需导入不同表单
   private getDate () {
-    switch (this.name ) {
+    switch (this.name) {
       case 'login':
-      this.ReginForm = {
-        userPhone:'' ,
-        userPwd:''
-      },
-      this.siYuan = [
-      {
-        icons: "#icon-icon_signal",
-        name: "用户名/手机号",
-        type: "text"
-      },
-      {
-        icons: "#icon-icon_collect",
-        name: "请输入密码",
-        type: "password"
-      },
-      ]
+        this.ReginForm = {
+          userPhone: '',
+          userPwd: ''
+        }
+        this.siYuan = [
+          {
+            icons: '#icon-icon_signal',
+            name: '用户名/手机号',
+            type: 'text'
+          },
+          {
+            icons: '#icon-icon_collect',
+            name: '请输入密码',
+            type: 'password'
+          }
+        ]
         break
       case 'register':
-      this.ReginForm = {
-        userPhone: "",
-        userPwd: "",
-        referralCode: "",
-        code: "",
-        provinceId: -1,
-        cityId: -1,
-        districtId: -1
-      },
-      this.siYuan = [
-        {
-          icons: "#icon-icon_signal",
-          name: "用户名/手机号",
-          type: "text"
-        },
-
-        {
-          icons: "#icon-icon_likegood",
-          name: "请输入短信验证码",
-          type: "number"
-        },
-        {
-          icons: "#icon-icon_collect",
-          name: "请输入密码",
-          type: "password"
-        },
-        {
-          icons: "#icon-icon_discovery",
-          name: "请输入推荐码(选填)",
-          type: "text"
+        this.ReginForm = {
+          userPhone: '',
+          userPwd: '',
+          referralCode: '',
+          code: '',
+          provinceId: -1,
+          cityId: -1,
+          districtId: -1
         }
-      ]
+        this.siYuan = [
+          {
+            icons: '#icon-icon_signal',
+            name: '用户名/手机号',
+            type: 'text'
+          },
+
+          {
+            icons: '#icon-icon_likegood',
+            name: '请输入短信验证码',
+            type: 'number'
+          },
+          {
+            icons: '#icon-icon_collect',
+            name: '请输入密码',
+            type: 'password'
+          },
+          {
+            icons: '#icon-icon_discovery',
+            name: '请输入推荐码(选填)',
+            type: 'text'
+          }
+        ]
         break
       case 'passWord':
-      this.ReginForm = {
-        userPhone: "",
-        userPwd1: "",
-        userPwd: "",
-        code: ""
-      },
-      this.siYuan = [
-        {
-          icons: "#icon-icon_signal",
-          name: "用户名/手机号",
-          type: "text"
-        },
-        {
-          icons: "#icon-icon_collect",
-          name: "新密码",
-          type: "password"
-        },
-        {
-          icons: "#icon-icon_collect",
-          name: "确认密码",
-          type: "password"
-        },
-        {
-          icons: "#icon-icon_likegood",
-          name: "请输入短信验证码",
-          type: "text"
+        this.ReginForm = {
+          userPhone: '',
+          userPwd1: '',
+          userPwd: '',
+          code: ''
         }
-      ]
+        this.siYuan = [
+          {
+            icons: '#icon-icon_signal',
+            name: '用户名/手机号',
+            type: 'text'
+          },
+          {
+            icons: '#icon-icon_collect',
+            name: '新密码',
+            type: 'password'
+          },
+          {
+            icons: '#icon-icon_collect',
+            name: '确认密码',
+            type: 'password'
+          },
+          {
+            icons: '#icon-icon_likegood',
+            name: '请输入短信验证码',
+            type: 'text'
+          }
+        ]
         break
       default:
         break
     }
   }
   // input高亮
-  private changeValue(index: Number) {
+  private changeValue (index: Number) {
     this.isActive = index
   }
   //  验证
-  private getAuthCode() {
-    if (
-      !/^((1[3,5,8][0-9])|(14[5,7])|(17[0,6,7,8])|(19[7]))\d{8}$/.test(this.ReginForm.userPhone)) {
-        this.Toast("请输入正确手机号", 'text', 1000, true)
-        return
+  private getAuthCode () {
+    if (!/^((1[3,5,8][0-9])|(14[5,7])|(17[0,6,7,8])|(19[7]))\d{8}$/.test(this.ReginForm.userPhone)) {
+      return this.Toast('请输入正确手机号', 'text', 1000, true)
     } else {
-      this.getCode(this.ReginForm.userPhone)
+      let pws = utils.encrypt(this.ReginForm.userPwd)
+      this.getRequest.getCode(pws, (res: any) => {
+        if (res.status === 200) {
+          if (res.data.status === 200) {
+            this.Toast('验证码已发送', 'text', 1000, true)
+            this.timeOut()
+          } else {
+            this.Toast(res.data.msg, 'text', 1000, true)
+          }
+        } else {
+          this.Toast(res.data.msg, 'text', 1000, true)
+        }
+      })
     }
   }
-  // 
-  private getCode (tel: string) {
+  // 设置倒计时秒
+  private timeOut () {
     this.sendAuthCode = false
-    this.auth_time = 60
-    var auth_timetimer = setInterval(() => {
-      this.auth_time--
-      if (this.auth_time <= 0) {
+    this.authTime = 60
+    var authTimetimer = setInterval(() => {
+      this.authTime--
+      if (this.authTime <= 0) {
         this.sendAuthCode = true
-        clearInterval(auth_timetimer)
+        clearInterval(authTimetimer)
       }
-    }, 1000);
+    }, 1000)
   }
   // 获取省份
-    private getProvince() {
-      console.log(123)
-    }
-    // 获取城市
-    private getCity() {
-      this.ReginForm.cityId = -1
-      this.ReginForm.districtId = -1
-      this.cityList = []
-      this.districtLite = []
-      console.log(123)
-    }
-    // 获取地区
-    private getDistrict() {
-      this.ReginForm.districtId = -1
-      this.districtLite = []
-      console.log(123)
+  private getProvince () {
+    console.log(123)
+  }
+  // 获取城市
+  private getCity () {
+    this.ReginForm.cityId = -1
+    this.ReginForm.districtId = -1
+    this.cityList = []
+    this.districtLite = []
+    console.log(123)
+  }
+  // 获取地区
+  private getDistrict () {
+    this.ReginForm.districtId = -1
+    this.districtLite = []
+    console.log(123)
+  }
 
-    }
-
-  private submit() {
-    if (this.ReginForm.userPhone == "") {
-      this.Toast("请输入手机号", 'text', 1000, true)
-      return
+  private submit () {
+    if (this.ReginForm.userPhone === '') {
+      return this.Toast('请输入手机号', 'text', 1000, true)
     } else if (this.ReginForm.userPwd < 6 || this.ReginForm.userPwd.length > 16) {
-      this.Toast("请填写6-16位密码", 'text', 1000, true)
-      return
+      return this.Toast('请填写6-16位密码', 'text', 1000, true)
     }
-    if(this.name == 'login') {
+    if (this.name === 'login') {
       let phont = utils.encrypt(this.ReginForm.userPhone)
       let psw = utils.encrypt(this.ReginForm.userPwd)
       let form = {
-        userName : phont,
-        passWord : psw
+        userName: phont,
+        passWord: psw
       }
-      this.getRequest.getLogin(form,(res: any) => {
+      this.getRequest.getLogin(form, (res: any) => {
         if (res.data) {
-          if (res.data.status == 200) {
-            localStorage.setItem("token", res.data.data)
-            localStorage.setItem("Account", this.ReginForm.userPhone)
+          if (res.data.status === 200) {
+            localStorage.setItem('token', res.data.data)
+            localStorage.setItem('Account', this.ReginForm.userPhone)
             const detailId = sessionStorage.getItem('detailId') || false
             if (detailId) {
               sessionStorage.removeItem('detailId')
@@ -303,44 +310,51 @@ export default class forms extends Vue {
               })
             } else {
               this.$router.replace({
-              path: "/me"
-            });
+                path: '/me'
+              })
             }
           } else {
-            this.Toast(res.data.msg,'text', 1000, true);
+            this.Toast(res.data.msg, 'text', 1000, true)
           }
         }
       })
     }
-    if (this.name == 'register') {
-      if (this.ReginForm.code == "" ) {
-        this.Toast("请输出验证码", 'text', 1000, true);
-        return;
+    if (this.name === 'register') {
+      if (this.ReginForm.code === '') {
+        return this.Toast('请输出验证码', 'text', 1000, true)
+      } else if (this.ReginForm.provinceId === -1) {
+        return this.Toast('请选择省份', 'text', 1000, true)
+      } else if (this.ReginForm.cityId === -1) {
+        return this.Toast('请选择城市', 'text', 1000, true)
+      } else if (this.ReginForm.districtId === -1) {
+        return this.Toast('请选择地区', 'text', 1000, true)
+      } else if (this.checkBox) {
+        return this.Toast('是否同意注册等协议', 'text', 1000, true)
+      } else {
+        let obj = {
+          userPhone: utils.encrypt(this.ReginForm.userPhone),
+          userPwd: utils.encrypt(this.ReginForm.userPwd),
+          referralCode: this.ReginForm.referralCode,
+          code: this.ReginForm.code,
+          provinceId: this.ReginForm.provinceId,
+          cityId: this.ReginForm.cityId,
+          districtId: this.ReginForm.districtId
+        }
       }
-      let obj = {
-        userPhone : utils.encrypt(this.ReginForm.userPhone),
-        userPwd : utils.encrypt(this.ReginForm.userPwd),
-        referralCode : this.ReginForm.referralCode,
-        code : this.ReginForm.code,
-        provinceId : this.ReginForm.provinceId,
-        cityId : this.ReginForm.cityId,
-        districtId : this.ReginForm.districtId,
-      }
-      console.log(obj)
     }
   }
 }
 </script>
 <style lang="stylus" scoped>
-.forms 
+.forms
   width: 100%
   height: 100%
-  input 
+  input
     width: 100%
-  .data 
+  .data
     width: 100%
     padding: 0rem 3.6rem
-    .li 
+    .li
       width: 100%
       margin-top: 1rem
       padding-left: 1rem
@@ -351,7 +365,7 @@ export default class forms extends Vue {
       margin-bottom: 3rem
       display: flex
       align-items: center
-      .icon 
+      .icon
         vertical-align: middle
         font-size: 2rem
         margin-right: 1rem
@@ -361,21 +375,17 @@ export default class forms extends Vue {
         width :100%
         background: none
         font-size: 1.6rem
-        >.cube-input-field 
+        >.cube-input-field
           color: #fff
-        
-      
       .cube-inpu_active
         border:none
-      
-      .getCode 
+      .getCode
         width: 6%
         height: 2rem
         display: inline-block
         // background-image: url(../../../img/index/register/drawable-xhdpi/推荐码未点击.png)
         background-size: 100% 100%
-      
-      .auth_input 
+      .auth_input
         width: 50%
         border-right: 1px solid #ccc
         border-radius: 0px
@@ -385,7 +395,7 @@ export default class forms extends Vue {
         text-align:center
         vertical-align: middle
         color: #00ae87
-    .select 
+    .select
       width: 30%
       height: 2.2rem
       line-height: 2.2rem
@@ -393,19 +403,19 @@ export default class forms extends Vue {
       color: #fff
       font-size: 1.3rem
       text-align: center
-    .city 
+    .city
       font-size: 1.6rem
       margin-bottom: 1.5rem
-      .c_text 
+      .c_text
         color: #00ae87
         margin-bottom: 0.4rem
-      .c_span 
+      .c_span
         display: inline-block
         width: 1.2rem
         height: 0.1rem
         background-color: #999
         vertical-align: middle
-    .autoLogin 
+    .autoLogin
       display: flex
       justify-content: space-between
       color: #c3c3c3
@@ -413,11 +423,9 @@ export default class forms extends Vue {
       font-weight: normal
       font-family: SourceHanSansCN-Regular
       margin-top: 12px
-      button 
+      button
         background: #fff
-      
-    
-    .btn 
+    .btn
       width: 100%
       text-align: center
       background-color: #0bb794
@@ -425,8 +433,7 @@ export default class forms extends Vue {
       font-size: 1.5rem
       border-radius: 5px
       margin-top:2.5rem
-    
-    .operation 
+    .operation
       position: absolute
       right: 47px
       top: 281px
@@ -434,18 +441,16 @@ export default class forms extends Vue {
       background-color: transparent
       color: #c3c3c3
       font-size: 1.2rem
-    
     .nu_agreement
       width: 100%
       margin-top:1rem
       display: flex
       justify-content: flex-start
       align-items: center
-      .nu_agreement_checkBox 
+      .nu_agreement_checkBox
         padding:0
-        font-size:1.4rem 
-      
-      .nu_a_text 
+        font-size:1.4rem
+      .nu_a_text
         color: #999
         font-size: 1.3rem
         span

@@ -24,7 +24,7 @@ import forms from '@/components/me/forms/forms.vue'
 @Component({
   components: {
     headers,
-    forms,
+    forms
   }
 })
 export default class register extends Vue {
@@ -36,7 +36,7 @@ export default class register extends Vue {
     bgColor: '#00000000',
     status: 'isCar'
   }
-  private changeNothing: boolean = false//控制显示
+  private changeNothing: boolean = false // 控制显示
   created () {}
 
   private getData () {
@@ -45,34 +45,29 @@ export default class register extends Vue {
 }
 </script>
 <style lang="stylus" scoped>
-.register {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 5rem;
-  .bg_img {
-    position: fixed;
-    z-index: -1;
-    left: 0;
-    width: 100%;
-    top: 0;
-    bottom: 0;
-    img {
-      height: 100%;
-      width: 100%;
-    }
-  }
-  .avater {
-    height: 8rem;
-    width: 8rem;
-    background: #999;
-    border-radius: 50%;
-  }
-  .forms{
-    margin-top: 6rem;
-  }
-}
+.register
+  width: 100%
+  height: 100%
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+  align-items: center
+  padding-top: 5rem
+  .bg_img
+    position: fixed
+    z-index: -1
+    left: 0
+    width: 100%
+    top: 0
+    bottom: 0
+    img
+      height: 100%
+      width: 100%
+  .avater
+    height: 8rem
+    width: 8rem
+    background: #999
+    border-radius: 50%
+  .forms
+    margin-top: 6rem
 </style>
