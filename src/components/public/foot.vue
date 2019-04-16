@@ -91,24 +91,19 @@ export default class foot extends Vue {
 }
 </script>
 <style lang="stylus" scoped>
-.foot {
-  width: 100%;
-  height: 100%;
-  .foot_bar {
-    width: 100%;
-    height: 4.8rem;
-    position: fixed;
-    bottom:0;
-    font-size:1.2rem;
-    background-color: #eee;
-    .icon{
-    font-size:1.8rem;
-    margin-bottom:0.6rem;
-    }
-    .cube-tab_active{
-      color:#00ae87;
-    }
-  }
-}
-
+.foot
+  width 100%
+  height 100%
+  .foot_bar
+    width 100%
+    height 4.8rem
+    position fixed
+    bottom 0
+    font-size 1.2rem
+    background-color #eee
+    .icon
+    font-size 1.8rem
+    margin-bottom 0.6rem
+    .cube-tab_active
+      color #00ae87
 </style>

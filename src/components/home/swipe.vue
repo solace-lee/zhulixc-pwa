@@ -36,22 +36,17 @@ export default class headers extends Vue {
 }
 </script>
 <style lang="stylus" scoped>
-.swipe {
-  height: 100%;
-  width: 100%;
-  background: #eee;
-  .cube-slide {
-    height: 100%;
-    width: 100%;
-    .cube-slide-item {
-      height: 100%;
-      width: 100%;
-      img {
-        height: 100%;
-        width: 100%;
-      }
-    }
-  }
-}
-
+.swipe
+  height 100%
+  width 100%
+  background #eee
+  .cube-slide
+    height 100%
+    width 100%
+    .cube-slide-item
+      height 100%
+      width 100%
+      img
+        height 100%
+        width 100%
 </style>

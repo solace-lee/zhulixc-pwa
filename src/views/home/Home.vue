@@ -254,18 +254,16 @@ export default class Home extends Vue {
 }
 </script>
 <style lang="stylus" scoped>
-.home {
-  // background: #eee;
-  width: 100VW;
-  overflow: hidden;
-}
+.home
+  // background #eee
+  width 100VW
+  overflow hidden
 
 // 轮播图
-.swipe{
-  margin-top: 4.8rem;
-  width 100%;
-  height 50vw;
-}
+.swipe
+  margin-top 4.8rem
+  width 100%
+  height 50vw
 
 // 聚合区
 .special_area
@@ -293,231 +291,193 @@ export default class Home extends Vue {
       color #666
 
 // 标题
-.part_title {
-  width: 100%;
-  height: 4.5rem;
-  padding: 0 1.5rem;
-  background: #f2f2f2;
-  .title_area {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    .title_img {
-      height: 2rem;
-      width: 0.6rem;
-      background: #00ae87;
-      border-radius: 0.3rem;
-      margin-right: 1rem;
-    }
-    .title_txt {
-      font-size: 2rem;
-      color: #666;
-    }
-  }
-}
-.white_title {
-  background: #fff;
-}
+.part_title
+  width 100%
+  height 4.5rem
+  padding 0 1.5rem
+  background #f2f2f2
+  .title_area
+    width 100%
+    height 100%
+    display flex
+    align-items center
+    .title_img
+      height 2rem
+      width 0.6rem
+      background #00ae87
+      border-radius 0.3rem
+      margin-right 1rem
+    .title_txt
+      font-size 2rem
+      color #666
+.white_title
+  background #fff
+
 
 // 新品推荐
-.new_product {
-  height: 17.5rem;
-  width: 100%;
-  background: #f2f2f2;
-  overflow: hidden;
-  .product_area {
-    // height: 16rem;
-    display: flex;
-    overflow-x: scroll;
-    .new_product_area {
-      width: 12rem;
-      height: 16rem;
-      margin-left: 1.5rem;
-    }
-  }
-}
+.new_product
+  height 17.5rem
+  width 100%
+  background #f2f2f2
+  overflow hidden
+  .product_area 
+    // height 16rem
+    display flex
+    overflow-x scroll
+    .new_product_area 
+      width 12rem
+      height 16rem
+      margin-left 1.5rem
 
 // 品质推荐
-.tone_product {
-  width: 100%;
-  height: auto;
-  padding: 0 1.5rem;
-  .tone_area {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    .tone_product_a {
-      width: 100%;
-      height: 9.3rem;
-      display: flex;
-      border-radius: 6px;
-      overflow: hidden;
-      margin-bottom: 1rem;
-      .a_left {
-        width: 50%;
-        height: 100%;
-        background: #f2f2f2;
-        padding: 1rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-between;
-        .a_titel {
-          font-size: 1.5rem;
-        }
-        .a_name {
-          font-size: 1rem;
-          color: #333;
-        }
-        .a_info {
-          display: flex;
-          justify-content: space-between;
-          align-items: flex-end;
-          width: 100%;
-          .a_now_price {
-            font-size: 1.8rem;
-            color: #00ae87;
-            font-weight: bold;
-            span {
-              font-size: 1.2rem;
-            }
-          }
-          .a_old_price {
-            font-size: 0.9rem;
-            color: #666;
-          }
-          .a_buy_now {
-            font-size: .8rem;
-            color: #fff;
-            padding: .4rem .8rem;
-            background: #00ae3a;
-            border-radius: 2rem;
-          }
-        }
-      }
-      .a_right {
-        width: 50%;
-        height: 100%;
-        img {
-          width: 100%;
-          height: 100%;
-        }
-      }
-    }
-    .tone_product_b {
-      height: 19.6rem;
-      width: 11rem;
-      margin-bottom: 1rem;
-      border-radius: 6px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      background: #f2f2f2;
-      .b_img {
-        width: 11rem;
-        height: 10.4rem;
-        img {
-          height: 100%;
-          width: 100%;
-        }
-      }
-      .b_name {
-        padding: .6rem;
-        font-size: 1.3rem;
-        color: #333;
+.tone_product
+  width 100%
+  height auto
+  padding 0 1.5rem
+  .tone_area
+    width 100%
+    height 100%
+    display flex
+    flex-wrap wrap
+    .tone_product_a
+      width 100%
+      height 9.3rem
+      display flex
+      border-radius 6px
+      overflow hidden
+      margin-bottom 1rem
+      .a_left
+        width 50%
+        height 100%
+        background #f2f2f2
+        padding 1rem
+        display flex
+        flex-direction column
+        align-items center
+        justify-content space-between
+        .a_titel
+          font-size 1.5rem
+        .a_name
+          font-size 1rem
+          color #333
+        .a_info
+          display flex
+          justify-content space-between
+          align-items flex-end
+          width 100%
+          .a_now_price
+            font-size 1.8rem
+            color #00ae87
+            font-weight bold
+            span 
+              font-size 1.2rem
+          .a_old_price
+            font-size 0.9rem
+            color #666
+          .a_buy_now
+            font-size .8rem
+            color #fff
+            padding .4rem .8rem
+            background #00ae3a
+            border-radius 2rem
+      .a_right
+        width 50%
+        height 100%
+        img 
+          width 100%
+          height 100%
+    .tone_product_b
+      height 19.6rem
+      width 11rem
+      margin-bottom 1rem
+      border-radius 6px
+      display flex
+      flex-direction column
+      justify-content space-between
+      background #f2f2f2
+      .b_img
+        width 11rem
+        height 10.4rem
+        img
+          height 100%
+          width 100%
+      .b_name
+        padding .6rem
+        font-size 1.3rem
+        color #333
         /*超过两行省略号*/
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
+        overflow hidden
+        text-overflow ellipsis
+        display -webkit-box
+        -webkit-line-clamp 2
         /*超过两行省略号*/
-        -webkit-box-orient: vertical;
+        -webkit-box-orient vertical
         /*超过两行省略号*/
-      }
-      .b_info {
-        display: flex;
-        align-items: flex-end;
-        margin: 0 .6rem;
-        .b_now_price {
-          font-size: 1.8rem;
-          color: #00ae87;
-        }
-        .b_old_price {
-          font-size: .9rem;
-          color: #999;
-        }
-      }
-      .b_buy_now {
-        // width: 100%;
-        margin-bottom: .6rem;
-        margin-right: .6rem;
-        display: flex;
-        justify-content: flex-end;
-        align-items: flex-end;
-        span {
-          width: 4.8rem;
-          font-size: .8rem;
-          color: #fff;
-          padding: .4rem .8rem;
-          background: #00ae3a;
-          border-radius: 2rem;
-        }
-      }
-    }
-  }
-}
+      .b_info
+        display flex
+        align-items flex-end
+        margin 0 .6rem
+        .b_now_price
+          font-size 1.8rem
+          color #00ae87
+        .b_old_price
+          font-size .9rem
+          color #999
+      .b_buy_now
+        // width 100%
+        margin-bottom .6rem
+        margin-right .6rem
+        display flex
+        justify-content flex-end
+        align-items flex-end
+        span
+          width 4.8rem
+          font-size .8rem
+          color #fff
+          padding .4rem .8rem
+          background #00ae3a
+          border-radius 2rem
 
 // 品牌推荐
-.brand_product {
-  background: #f2f2f2;
-  height: auto;
-  width: 100%;
-  padding: 0 1.5rem 1.5rem 1.5rem;
-  .brand_area {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    width: 100%;
-    .brand_top {
-      width: 49%;
-      height: 10.3rem;
-      img {
-        height: 100%;
-        width: 100%;
-      }
-    }
-    .brand_bottom {
-      width: 24%;
-      height: 12rem;
-      margin-top: .6rem;
-      img {
-        height: 100%;
-        width: 100%;
-      }
-    }
-  }
-}
+.brand_product
+  background #f2f2f2
+  height auto
+  width 100%
+  padding 0 1.5rem 1.5rem 1.5rem
+  .brand_area
+    display flex
+    justify-content space-between
+    flex-wrap wrap
+    width 100%
+    .brand_top
+      width 49%
+      height 10.3rem
+      img
+        height 100%
+        width 100%
+    .brand_bottom
+      width 24%
+      height 12rem
+      margin-top .6rem
+      img
+        height 100%
+        width 100%
 
 // 猜你喜欢
-.guess_product {
-  height: auto;
-  width: 100%;
-  padding: 0 1.5rem 1.5rem 1.5rem;
-  .product_area {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    width: 100%;
-    .guess_product_area {
-      width: 49%;
-      height: 23.7rem;
-      margin-bottom: 1rem;
-      border-radius: 6px;
-      overflow: hidden;
-    }
-  }
-}
+.guess_product
+  height auto
+  width 100%
+  padding 0 1.5rem 1.5rem 1.5rem
+  .product_area
+    display flex
+    justify-content space-between
+    flex-wrap wrap
+    width 100%
+    .guess_product_area
+      width 49%
+      height 23.7rem
+      margin-bottom 1rem
+      border-radius 6px
+      overflow hidden
 
 </style>

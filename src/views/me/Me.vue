@@ -28,7 +28,6 @@ export default class me extends Vue {
 }
 </script>
 <style lang="stylus" scoped>
-.me {
-  background: #eee;
-}
+.me
+  background #eee
 </style>

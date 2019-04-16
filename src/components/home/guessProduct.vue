@@ -35,69 +35,59 @@ export default class guessProduct extends Vue {
 }
 </script>
 <style lang="stylus" scoped>
-.item {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background: #f2f2f2;
-  .item_img {
-    height: 15.4rem;
-    width: 100%;
-    position: relative;
-    img {
-      width: 100%;
-      height: 100%;
-    }
-    .brand_name {
-      position: absolute;
-      bottom: -0.8rem;
-      left: 1rem;
-      height: 1.9rem;
-      font-size: 1.2rem;
-      background: #ba9078;
-      line-height: 2rem;
-      color: #fff;
-      padding: 0 0.6rem;
-    }
-  }
-  .item_title {
-    width: 100%;
-      height: 2.8rem;
-      margin-top: 1rem;
-      padding: 0 1rem;
-    p {
-      font-size: 1.3rem;
-      color: #333;
+.item
+  width 100%
+  height 100%
+  display flex
+  flex-direction column
+  justify-content space-between
+  background #f2f2f2
+  .item_img
+    height 15.4rem
+    width 100%
+    position relative
+    img
+      width 100%
+      height 100%
+    .brand_name
+      position absolute
+      bottom -0.8rem
+      left 1rem
+      height 1.9rem
+      font-size 1.2rem
+      background #ba9078
+      line-height 2rem
+      color #fff
+      padding 0 0.6rem
+  .item_title
+    width 100%
+      height 2.8rem
+      margin-top 1rem
+      padding 0 1rem
+    p
+      font-size 1.3rem
+      color #333 
       /*超过两行省略号*/
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
+      overflow hidden
+      text-overflow ellipsis
+      display -webkit-box
+      -webkit-line-clamp 2
       /*超过两行省略号*/
-      -webkit-box-orient: vertical;
+      -webkit-box-orient vertical
       /*超过两行省略号*/
-    }
-  }
-  .item_info {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    padding: 0 1rem;
-    margin-bottom: .6rem;
-    .now_price {
-      color: #00ae87;
-      font-size: 2rem;
-      font-weight: bold;
-      span {
-        font-size: 1.2rem;
-      }
-    }
-    .hot_num {
-      font-size: 1rem;
-      color: #333;
-    }
-  }
-}
+  .item_info
+    display flex
+    justify-content space-between
+    align-items flex-end
+    padding 0 1rem
+    margin-bottom .6rem
+    .now_price
+      color #00ae87
+      font-size 2rem
+      font-weight bold
+      span  
+        font-size 1.2rem
+    .hot_num
+      font-size 1rem
+      color #333
 </style>
