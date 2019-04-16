@@ -61,9 +61,9 @@ export default class guessProduct extends Vue {
       padding 0 0.6rem
   .item_title
     width 100%
-      height 2.8rem
-      margin-top 1rem
-      padding 0 1rem
+    height 2.8rem
+    margin-top 1rem
+    padding 0 1rem
     p
       font-size 1.3rem
       color #333 

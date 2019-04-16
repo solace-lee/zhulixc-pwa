@@ -100,10 +100,10 @@ export default class foot extends Vue {
     position fixed
     bottom 0
     font-size 1.2rem
-    background-color #eee
+    background-color #fff
     .icon
-    font-size 1.8rem
-    margin-bottom 0.6rem
+      font-size 1.8rem
+      margin-bottom 0.6rem
     .cube-tab_active
       color #00ae87
 </style>

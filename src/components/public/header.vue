@@ -176,8 +176,9 @@ export default class headers extends Vue {
         flex none
         width 3rem
       input
-        height 100%
+        height 3.4rem
         background #fff
+        line-height 3.4rem
       .gosearchplaceholder
         color #ccc
         font-size 1.2rem
