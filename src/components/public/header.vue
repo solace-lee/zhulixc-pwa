@@ -2,7 +2,6 @@
   <div class="header" ref="header">
     <!-- 搜索型样式 -->
     <div class="header_search" v-if="isSearch">
-      <div class="search_area">
         <!-- 定位图标 -->
         <svg class="icon" aria-hidden="true" v-if="hasGetLocation">
           <use xlink:href="#icon-icon_GPS"></use>
@@ -22,31 +21,41 @@
           <!-- <cube-input v-model="value" disabled placeholder="更多好货助力"></cube-input> -->
         </div>
         <!-- 消息图标 -->
-        <svg class="icon" aria-hidden="true" @click="goMsg">
+        <svg class="icon" aria-hidden="true" v-if="msgBtn" @click="goMsg">
           <use xlink:href="#icon-icon_dmail"></use>
         </svg>
-      </div>
     </div>
 
     <!-- 标题型样式 -->
     <div class="header_title" v-if="!isSearch">
-      <!-- 返回图标 -->
-      <svg class="icon" aria-hidden="true" @click="goBack" v-if="hasBack">
-        <use xlink:href="#icon-icon_left"></use>
-      </svg>
+
+      <div class="left_area">
+        <!-- 返回图标 -->
+        <svg class="icon" aria-hidden="true" @click="goBack" v-if="hasBack">
+          <use xlink:href="#icon-icon_left"></use>
+        </svg>
+        <!-- 地点显示 -->
+        <show-address v-if="hasGetLocation"></show-address>
+      </div>
+
       <!-- 标题 -->
-      <div class="title_area">{{title}}</div>
-      <div class="right">
+      <div class="title_area" v-if="showTitle">{{title}}</div>
+
+      <div class="right_area">
         <!-- 购物车图标 -->
         <svg class="icon" aria-hidden="true" @click="goCar" v-if="goCarBtn">
           <use xlink:href="#icon-icon_collect"></use>
         </svg>
+        <!-- 搜索图标 -->
+        <svg class="icon" aria-hidden="true" @click="goSearch" v-if="searchBtn">
+          <use xlink:href="#icon-icon_search"></use>
+        </svg>
         <!-- 管理按钮 -->
-        <div class="manage" v-if="!manage" @click="goEdit">管理</div>
+        <div class="manage" v-if="manage" @click="goEdit">管理</div>
         <!-- 完成按钮 -->
-        <div class="manage" v-if="complete"  @click="goEdit">完成</div>
+        <div class="manage" v-if="complete" @click="goEdit">完成</div>
         <!-- 消息图标 -->
-        <svg class="icon" aria-hidden="true" @click="goMsg">
+        <svg class="icon" aria-hidden="true" v-if="msgBtn" @click="goMsg">
           <use xlink:href="#icon-icon_dmail"></use>
         </svg>
       </div>
@@ -70,10 +79,14 @@ export default class headers extends Vue {
   @Prop({ default: '' }) private backUrl!: string // 返回地址
 
   private isSearch: boolean = false // 控制显示搜索1
-  private hasBack: boolean = true // 控制显示返回按钮12
-  private goCarBtn: boolean = true // 控制显示购物车按钮2
+  private hasBack: boolean = false // 控制显示返回按钮12
+  private goCarBtn: boolean = false // 控制显示购物车按钮2
   private complete: boolean = false // 控制显示完成按钮2
-  private hasGetLocation: boolean = true // 控制显示定位按钮1
+  // private manage: boolean = false // 控制管理按钮2
+  private hasGetLocation: boolean = false // 控制显示定位按钮1
+  private searchBtn: boolean = false // 控制搜索图标2
+  private showTitle: boolean = false // 控制标题显示2
+  private msgBtn: boolean = false // 控制消息按钮显示2
 
   mounted () {
     this.changeBgColor() // 根据传入值修改背景颜色
@@ -88,11 +101,16 @@ export default class headers extends Vue {
         break
       case 'isSearch': // 首页类型
         this.isSearch = true
-        this.hasBack = false
+        this.hasGetLocation = true
+        this.msgBtn = true
         break
       case 'BackSearch': // 带搜索带返回按钮类型
-        this.isSearch = true
-        this.hasGetLocation = false
+        this.isSearch = false
+        this.hasGetLocation = true
+        this.hasBack = true
+        this.searchBtn = true
+        this.showTitle = true
+        this.msgBtn = true
         break
 
       default:
@@ -150,39 +168,38 @@ export default class headers extends Vue {
 .header_search
   width 100%
   height 100%
-  .search_area
-    width 100%
-    height 100%
+  width 100%
+  height 100%
+  display flex
+  align-items center
+  color #fff
+  .icon
+    flex 1
+    font-size 1.8rem
+  .search_box
+    flex 6
+    width auto
+    margin 0 0.6rem
+    height 3.4rem
+    overflow hidden
+    border-radius 1.7rem
+    overflow hidden
+    background #fff
     display flex
     align-items center
-    color #fff
     .icon
-      flex 1
-      font-size 1.8rem
-    .search_box
-      flex 6
-      width auto
-      margin 0 0.6rem
+      color #ccc
+      font-size 1.6rem
+      flex none
+      width 3rem
+    input
       height 3.4rem
-      overflow hidden
-      border-radius 1.7rem
-      overflow hidden
       background #fff
-      display flex
-      align-items center
-      .icon
-        color #ccc
-        font-size 1.6rem
-        flex none
-        width 3rem
-      input
-        height 3.4rem
-        background #fff
-        line-height 3.4rem
-      .gosearchplaceholder
-        color #ccc
-        font-size 1.2rem
-        line-height 3.4rem
+      line-height 3.4rem
+    .gosearchplaceholder
+      color #ccc
+      font-size 1.2rem
+      line-height 3.4rem
 
 
 // 标题型样式
@@ -194,9 +211,12 @@ export default class headers extends Vue {
   justify-content space-between
   color #fff
   position relative
+  .left_area
+    display flex
+    align-items center
   .icon
     font-size 1.6rem
-    margin-left 0.8rem
+    margin 0 0.8rem
     z-index 10
   .title_area
     font-size 1.8rem
@@ -205,7 +225,7 @@ export default class headers extends Vue {
     width 100%
     line-height 4.8rem
     text-align center
-  .right
+  .right_area
     display flex
     align-items center
     .icon

@@ -1,5 +1,5 @@
 <template>
-  <div class="show_address">
+  <div class="show_address" @click="goChoose">
     <div class="city_name">{{cityName}}</div>
     <div class="line" v-show="cityName&&districtName"></div>
     <div class="district_name">{{districtName}}</div>
@@ -43,6 +43,11 @@ export default class showAddress extends Vue {
       this.Toast('定位超时请稍后再试', 'error')
     }
   }
+
+  // 去手动区域选择页
+  private goChoose () {
+    console.log('去手动区域选择页')
+  }
 }
 </script>
 <style lang="stylus" scoped>
@@ -50,6 +55,7 @@ export default class showAddress extends Vue {
   display flex
   align-items center
   font-size 1.2rem
+  z-index 10
   .line
     border-left 1px solid
     margin 0 .4rem
