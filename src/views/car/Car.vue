@@ -80,19 +80,17 @@ export default class car extends Vue {
 }
 </script>
 <style lang="stylus" scoped>
-.car {
-  width: 100%;
-  height: 100%;
-  margin-top: 4.8rem;
-  padding-top:4rem;
+.car
+  width 100%
+  height 100%
+  margin-top 4.8rem
+  padding-top 4rem
   // 标题型样式
-  .header_title {
-    width: 100%;
-    height: 13.4rem;
-    background-color: #00ae87;
-    position: absolute;
-    top:0rem;
-    z-index: -1;
-  }
-}
+  .header_title
+    width 100%
+    height 13.4rem
+    background-color #00ae87
+    position absolute
+    top 0rem
+    z-index -1
 </style>
