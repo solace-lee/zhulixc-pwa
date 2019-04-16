@@ -1,4 +1,4 @@
-<!-- 注册 -->
+<!-- 登录，注册，找回密码表单 -->
 <template>
   <div class="forms">
       <div class="data">
@@ -18,6 +18,7 @@
             :placeholder="item.name"
             :type="item.type"
             :clearable="clearable"
+            autocomplete="true"
           ></cube-input>
           <cube-input
             v-if="item.name==='请输入密码' || item.name==='确认密码'"
@@ -49,44 +50,19 @@
             :type="item.type"
             :clearable="clearable"
           ></cube-input>
-          <!-- <input
-            v-if="item.name==='请输入密码' || item.name==='确认密码'"
-            :type="item.type"
-            v-model="ReginForm.userPwd"
-            :placeholder="item.name"
-          >
-          <input
-            v-if="item.name==='新密码'"
-            :type="item.type"
-            v-model="ReginForm.userPwd1"
-            :placeholder="item.name"
-          >
-          <input
-            v-if="item.name==='请输入短信验证码'"
-            class="auth_input"
-            :type="item.type"
-            v-model="ReginForm.code"
-            :placeholder="item.name"
-          >
-          <input
-            v-if="item.name==='请输入推荐码(选填)'"
-            :type="item.type"
-            v-model="ReginForm.referralCode"
-            :placeholder="item.name"
-          > -->
-          <span v-if="item.name==='请输入短信验证码' ">
-            <span class="time" v-show="sendAuthCode" @click="getAuthCode">获取验证码</span>
-            <span class="time" v-show="!sendAuthCode">
+          <div v-if="item.name==='请输入短信验证码' " class="time">
+            <span  v-show="sendAuthCode" @click="getAuthCode">获取验证码</span>
+            <span  v-show="!sendAuthCode">
               <span>剩余{{auth_time}}</span> 秒
             </span>
-          </span>
+          </div>
         </div>
-        <div class="city"  v-if="name == 'newUser'">
+        <div class="city"  v-if="name == 'register'">
           <div class="c_text">
             <span>区域信息</span>
           </div>
           <div>
-            <select name="选择省份" id="Province" v-model="ReginForm.provinceId" @change="getCity">
+            <select class="select" name="选择省份" id="Province" v-model="ReginForm.provinceId" @change="getCity">
               <option :value="-1">省份</option>
               <option
                 v-for="(item,index) in provinceList"
@@ -97,7 +73,7 @@
 
             <span class="c_span"></span>
 
-            <select name="选择城市" id="City" v-model="ReginForm.cityId" @change="getDistrict">
+            <select class="select" name="选择城市" id="City" v-model="ReginForm.cityId" @change="getDistrict">
               <option :value="-1">城市</option>
               <option
                 v-for="(item,index) in cityList"
@@ -108,7 +84,7 @@
 
             <span class="c_span"></span>
 
-            <select name="选择地区" id="District" v-model="ReginForm.districtId">
+            <select class="select" name="选择地区" id="District" v-model="ReginForm.districtId">
               <option :value="-1">地区</option>
               <option
                 v-for="(item,index) in districtLite"
@@ -119,9 +95,9 @@
           </div>
         </div>
         <cube-button class="btn" @click="submit" v-if="name == 'login'" >登录</cube-button>
-        <cube-button class="btn" @click="submit" :disabled="!checkBox" v-if="name == 'newUser'">立即注册</cube-button>
+        <cube-button class="btn" @click="submit" v-if="name == 'register'">立即注册</cube-button>
         <cube-button class="btn" @click="submit" v-if="name == 'passWord'">找回密码</cube-button>
-        <div class="nu_agreement"  v-if="name == 'newUser'"> 
+        <div class="nu_agreement"  v-if="name == 'register'"> 
           <cube-checkbox v-model="checkBox" shape="square" class="nu_agreement_checkBox" label=' '></cube-checkbox>
            <div class="nu_a_text">
               <span>已阅读并同意一下协议</span>
@@ -156,7 +132,10 @@ export default class forms extends Vue {
     visible: true,
     blurHidden: true
   }
-  private eye: boolean = true
+  private eye: object = {
+    open: false,
+    reverse: false
+  }
   created () {
     this.getDate()
   }
@@ -182,7 +161,7 @@ export default class forms extends Vue {
       },
       ]
         break
-      case 'newUser':
+      case 'register':
       this.ReginForm = {
         userPhone: "",
         userPwd: "",
@@ -298,12 +277,12 @@ export default class forms extends Vue {
 
   private submit() {
     if (this.ReginForm.userPhone == "") {
-        this.Toast("请输入手机号", 'text', 1000, true)
-        return
-      } else if (this.ReginForm.userPwd < 6 || this.ReginForm.userPwd.length > 16) {
-        this.Toast("请填写6-16位密码", 'text', 1000, true)
-        return
-      }
+      this.Toast("请输入手机号", 'text', 1000, true)
+      return
+    } else if (this.ReginForm.userPwd < 6 || this.ReginForm.userPwd.length > 16) {
+      this.Toast("请填写6-16位密码", 'text', 1000, true)
+      return
+    }
     if(this.name == 'login') {
       let phont = utils.encrypt(this.ReginForm.userPhone)
       let psw = utils.encrypt(this.ReginForm.userPwd)
@@ -333,169 +312,142 @@ export default class forms extends Vue {
         }
       })
     }
-    
+    if (this.name == 'register') {
+      if (this.ReginForm.code == "" ) {
+        this.Toast("请输出验证码", 'text', 1000, true);
+        return;
+      }
+      let obj = {
+        userPhone : utils.encrypt(this.ReginForm.userPhone),
+        userPwd : utils.encrypt(this.ReginForm.userPwd),
+        referralCode : this.ReginForm.referralCode,
+        code : this.ReginForm.code,
+        provinceId : this.ReginForm.provinceId,
+        cityId : this.ReginForm.cityId,
+        districtId : this.ReginForm.districtId,
+      }
+      console.log(obj)
+    }
   }
 }
 </script>
 <style lang="stylus" scoped>
-.forms {
-  width: 100%;
-  height: 100%;
-  input {
-    width: 100%;
-  }
-  .data {
-    width: 100%;
-    padding: 0rem 3.6rem;
-    .li {
-      width: 100%;
-      margin-top: 1rem;
-      padding-left: 1rem;
-      line-height: 3.5rem;
-      border-bottom: solid 1px #fff;
-      font-size: 1.6rem;
-      color: #fff;
-      margin-bottom: 3rem;
-      display: flex;
-      align-items: center;
-      .icon {
-        vertical-align: middle;
-        font-size: 2rem;
-        margin-right: 1rem;
-      }
-      .cube-input::after{
-          border:none;
-        }
-      .cube-input{
+.forms 
+  width: 100%
+  height: 100%
+  input 
+    width: 100%
+  .data 
+    width: 100%
+    padding: 0rem 3.6rem
+    .li 
+      width: 100%
+      margin-top: 1rem
+      padding-left: 1rem
+      line-height: 3.5rem
+      border-bottom: solid 1px #fff
+      font-size: 1.6rem
+      color: #fff
+      margin-bottom: 3rem
+      display: flex
+      align-items: center
+      .icon 
+        vertical-align: middle
+        font-size: 2rem
+        margin-right: 1rem
+      .cube-input::after
+        border:none
+      .cube-input
         width :100%
-        background: none;
-        font-size: 1.6rem;
-        >.cube-input-field {
-          color: #fff;
-        }
-      }
-      .cube-inpu_active{
-        border:none;
-      }
-      // input {
-      //   width: 80%;
-      //   height: 95%;
-      //   vertical-align: middle;
-      //   border: none;
-      //   font-size: 1.6rem;
-      //   color: #fff;
-      //   // opacity: 0.5;
-      //   background: none;
-      //   border:none;
-      //   outline: none; // 去除选中状态边框
-      //   /* width: 4rem; */
-      // }
-      .getCode {
-        width: 6%;
-        height: 2rem;
-        display: inline-block;
-        // background-image: url(../../../img/index/newuser/drawable-xhdpi/推荐码未点击.png);
-        background-size: 100% 100%;
-      }
-      .auth_input {
-        width: 50%;
-        border-right: 1px solid #ccc;
-        border-radius: 0px;
-        vertical-align: middle;
-      }
-      .time {
-        height: 100%;
-        vertical-align: middle;
-        padding-left: 0.8rem;
-        color: #00ae87;
-        font-size: 1.6rem;
-        }
-      }
-      // .active {
-      //   border: solid 1px #0bb794;
-      //   color: #0bb794;
-      //   .getCode {
-      //     width: 6%;
-      //     height: 2rem;
-      //     display: inline-block;
-      //     // background-image: url(../../../img/index/newuser/drawable-xhdpi/推荐码点击.png);
-      //     background-size: 100% 100%;
-      //   }
-      // }
-      select {
-        width: 27%;
-        height: 2.2rem;
-        line-height: 2.2rem;
-        background: none;
-        color: #999999;
-        font-size: 1.3rem;
-        text-align: center;
-      }
-
-      .city {
-        font-size: 1.6rem;
-        margin-bottom: 1.5rem;
-        .c_text {
-          color: #00ae87;
-          margin-bottom: 0.4rem;
-        }
-        .c_span {
-          display: inline-block;
-          width: 1.2rem;
-          height: 0.1rem;
-          background-color: #999;
-          vertical-align: middle;
-        }
-      }
-    }
-
-    .autoLogin {
-      display: flex;
-      justify-content: space-between;
-      color: #c3c3c3;
-      font-size: 1.2rem;
-      font-weight: normal;
-      font-family: SourceHanSansCN-Regular;
-      margin-top: 12px;
-      button {
-        background: #fff;
-      }
-    }
-    .btn {
-      width: 100%;
-      text-align: center;
-      background-color: #0bb794;
-      color: #fff;
-      font-size: 1.5rem;
-      border-radius: 5px;
-      margin-top:2.5rem;
-    }
-    .operation {
-      position: absolute;
-      right: 47px;
-      top: 281px;
-      /*font-size: 6.8rem;*/
-      background-color: transparent;
-      color: #c3c3c3;
-      font-size: 1.2rem;
-    }
-    .nu_agreement{
-      width: 100%;
-      margin-top:1rem;
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      .nu_agreement_checkBox {
-        padding:0;
-        font-size:1.4rem; 
-      }
-      .nu_a_text {
-        color: #999;
-        font-size: 1.3rem;
-        span{
-          display:inline-block;
-        }
-      }
-    }
-  }
+        background: none
+        font-size: 1.6rem
+        >.cube-input-field 
+          color: #fff
+        
+      
+      .cube-inpu_active
+        border:none
+      
+      .getCode 
+        width: 6%
+        height: 2rem
+        display: inline-block
+        // background-image: url(../../../img/index/register/drawable-xhdpi/推荐码未点击.png)
+        background-size: 100% 100%
+      
+      .auth_input 
+        width: 50%
+        border-right: 1px solid #ccc
+        border-radius: 0px
+        vertical-align: middle
+      .time
+        width 70%
+        text-align:center
+        vertical-align: middle
+        color: #00ae87
+    .select 
+      width: 30%
+      height: 2.2rem
+      line-height: 2.2rem
+      background: none
+      color: #fff
+      font-size: 1.3rem
+      text-align: center
+    .city 
+      font-size: 1.6rem
+      margin-bottom: 1.5rem
+      .c_text 
+        color: #00ae87
+        margin-bottom: 0.4rem
+      .c_span 
+        display: inline-block
+        width: 1.2rem
+        height: 0.1rem
+        background-color: #999
+        vertical-align: middle
+    .autoLogin 
+      display: flex
+      justify-content: space-between
+      color: #c3c3c3
+      font-size: 1.2rem
+      font-weight: normal
+      font-family: SourceHanSansCN-Regular
+      margin-top: 12px
+      button 
+        background: #fff
+      
+    
+    .btn 
+      width: 100%
+      text-align: center
+      background-color: #0bb794
+      color: #fff
+      font-size: 1.5rem
+      border-radius: 5px
+      margin-top:2.5rem
+    
+    .operation 
+      position: absolute
+      right: 47px
+      top: 281px
+      /*font-size: 6.8rem*/
+      background-color: transparent
+      color: #c3c3c3
+      font-size: 1.2rem
+    
+    .nu_agreement
+      width: 100%
+      margin-top:1rem
+      display: flex
+      justify-content: flex-start
+      align-items: center
+      .nu_agreement_checkBox 
+        padding:0
+        font-size:1.4rem 
+      
+      .nu_a_text 
+        color: #999
+        font-size: 1.3rem
+        span
+          display:inline-block
 </style>

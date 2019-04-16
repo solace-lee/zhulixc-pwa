@@ -14,8 +14,8 @@
     </div>
     <forms :name="name"></forms>
     <div class="login_foot">
-      <div @clikc="go('/newUser')">立即注册</div>
-      <div @clikc="go('/passWord')">忘记密码</div>
+      <div @click="go('/register?type=register')">立即注册</div>
+      <div @click="go('/register?type=passWord')">忘记密码</div>
     </div>
   </div>
 </template>
