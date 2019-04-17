@@ -1,6 +1,8 @@
 const configApi = {
   local: 'http://192.168.1.107:8888/admin',
-  home: 'http://192.168.1.107:9100'
+  // local: 'https://new.zhulixc.com/admin',
+  home: 'http://192.168.1.107:9100',
+  // home: 'https://new.zhulixc.com'
 }
 
 const gateway = {

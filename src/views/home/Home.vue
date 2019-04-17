@@ -84,7 +84,7 @@
         </div>
       </div>
       <div class="tone_area">
-        <div class="tone_product_b" v-for="(i, index) in toneProduct" :key="index" @click="goDetail(i.commodityId)" v-show="index == 0">
+        <div class="tone_product_b" v-for="(i, index) in toneProduct" :key="index" @click="goDetail(i.commodityId)" v-show="index != 0">
           <div class="b_img">
             <img loading="lazy" :src="i.titleImg" alt="">
           </div>
@@ -339,6 +339,7 @@ export default class Home extends Vue {
     height 100%
     display flex
     flex-wrap wrap
+    justify-content space-between
     .tone_product_a
       width 100%
       height 9.3rem
@@ -388,7 +389,8 @@ export default class Home extends Vue {
           height 100%
     .tone_product_b
       height 19.6rem
-      width 11rem
+      width 32%
+      overflow hidden
       margin-bottom 1rem
       border-radius 6px
       display flex
@@ -396,7 +398,7 @@ export default class Home extends Vue {
       justify-content space-between
       background #f2f2f2
       .b_img
-        width 11rem
+        width 100%
         height 10.4rem
         img
           height 100%
