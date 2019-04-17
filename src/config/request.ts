@@ -40,6 +40,19 @@ class GetRequest {
       callback(res)
     })
   }
+  // 获取省市区
+  // 获取省份
+  private getProvince () {
+    console.log(123)
+  }
+  // 获取城市
+  private getCity () {
+    console.log(123)
+  }
+  // 获取地区
+  private getDistrict () {
+    console.log(123)
+  }
 
   // 购物车列表
   getCar (callback: any) {
