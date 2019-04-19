@@ -36,9 +36,7 @@ import nothing from '@/components/car/nothing.vue'
 export default class car extends Vue {
   foot: String = 'car'
   headerList: object = {
-    isSearch: false,
     title: '购物车',
-    bgColor: '',
     status: 'isCar'
   }
   private list: Array<object> = []//数据列表
