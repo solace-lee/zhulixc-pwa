@@ -29,18 +29,21 @@ import forms from '@/components/me/forms/forms.vue'
 })
 export default class register extends Vue {
   // 变量
-  name ='register'
-  headerList: object = {
+  name: any ='register'
+  headerList: any = {
     isSearch: false,
-    title: '注册',
+    title: '',
     bgColor: '#00000000',
     status: 'isCar'
   }
   private changeNothing: boolean = false // 控制显示
-  created () {}
+  created () {
+    this.getData()
+  }
 
   private getData () {
     let router = this.$route.query.type
+    this.name = router
   }
 }
 </script>
