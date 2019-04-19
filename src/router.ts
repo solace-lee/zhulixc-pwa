@@ -22,6 +22,11 @@ export default new Router({
       component: () => import('./views/home/partB.vue')
     },
     {
+      path: '/partC', // partC
+      name: 'partC',
+      component: () => import('./views/home/partC.vue')
+    },
+    {
       path: '/classify', // 分类页
       name: 'classify',
       component: () => import('./views/classify/Classify.vue')
