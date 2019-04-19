@@ -28,6 +28,18 @@ class GetRequest {
     })
   }
 
+  // 一村一品数据（热销乡味）
+  getSpeciality (callback: any) {
+    const districtId = sessionStorage.getItem("districtId") || "0"
+    const config: object = {
+      districtId: districtId,
+      commodityArea: 2
+    }
+    http.post(gateway.SEARCH + apis.speciality, config).then(res => {
+      callback(res)
+    })
+  }
+
   // 生态市场数据
   getGreenlife (callback: any) {
     const config: object = {

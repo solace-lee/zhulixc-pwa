@@ -77,6 +77,7 @@ export default class headers extends Vue {
   @Prop({ default: '' }) private status!: string // 显示方式
   @Prop({ default: false }) private manage!: boolean // 显示管理
   @Prop({ default: '' }) private backUrl!: string // 返回地址
+  @Prop({ default: '#fff' }) private fontColor!: string // 返回地址
 
   private isSearch: boolean = false // 控制显示搜索1
   private hasBack: boolean = false // 控制显示返回按钮12
@@ -121,6 +122,7 @@ export default class headers extends Vue {
   private changeBgColor () {
     let el: any = this.$refs.header
     el.style.background = this.bgColor
+    el.style.color = this.fontColor
   }
 
   private goSearch () {
@@ -172,7 +174,7 @@ export default class headers extends Vue {
   height 100%
   display flex
   align-items center
-  color #fff
+  color inherit
   .icon
     flex 1
     font-size 1.8rem
@@ -209,7 +211,7 @@ export default class headers extends Vue {
   display flex
   align-items center
   justify-content space-between
-  color #fff
+  color inherit
   position relative
   .left_area
     display flex

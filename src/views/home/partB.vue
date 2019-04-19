@@ -1,7 +1,13 @@
 <template>
-  <div class="part_a">
+  <div class="part_b">
     <!-- 头部 -->
-    <headers :status="headerStatus" :backUrl="backUrl" :title="title"></headers>
+    <headers
+      :status="headerStatus"
+      :backUrl="backUrl"
+      :title="title"
+      :bgColor="bgColor"
+      :fontColor="fontColor"
+      ></headers>
 
     <!-- 广告轮播图 -->
     <swipe :swipeList="swipeList"></swipe>
@@ -9,23 +15,16 @@
     <!-- 标题 -->
     <div class="part_title white_title">
       <div class="title_area">
-        <div class="title_img"></div>
-        <div class="title_txt">绿色生活</div>
-        <div class="title_txt_en">GREEN</div>
+        <div class="title_txt">热销乡味</div>
+        <div class="title_txt_en">尝遍故乡的鲜</div>
       </div>
     </div>
 
-    <!-- 绿色生活 -->
-    <!-- 大标题展示区 -->
-    <div class="all_content" v-for="(i, count) in greenlife" :key="count">
-      <div class="banner_title">
-        <img :src="i.classifyImgUrl">
-      </div>
-      <!-- 产品展示区 -->
-      <div class="product_container">
-        <!-- i.commodityList -->
-        <div class="sale_product_area" v-for="(j, index) in i.commodityList" :key="index">
-          <new-product :newProduct="j"></new-product>
+    <!-- 热销乡味 -->
+    <div class="guess_product">
+      <div class="product_area">
+        <div class="guess_product_area" v-for="(i, index) in specialityProduct" :key="index">
+          <guess-product :guessProduct="i"></guess-product>
         </div>
       </div>
     </div>
@@ -37,23 +36,22 @@
 import { Component, Vue } from 'vue-property-decorator'
 import headers from '@/components/public/header.vue'
 import swipe from '@/components/home/swipe.vue'
-import newProduct from '@/components/home/newProduct.vue'
 import guessProduct from '@/components/home/guessProduct.vue'
 
 @Component({
   components: {
     headers,
     swipe,
-    newProduct, // 今日特价
-    guessProduct, // 猜你喜欢
+    guessProduct, // 猜你喜欢样式（热销乡味）
   }
 })
-export default class partA extends Vue {
+export default class partB extends Vue {
   headerStatus: string = 'BackSearch' // header的显示方式
   title: string = '一村一品'
+  bgColor: string = '#fff'
+  fontColor: string = '#333'
   swipeList: Array<Object> = [] // 轮播数据
-  newProduct: Array<Object> = [] // 新品推荐数据
-  greenlife: Array<Object> = [] // 绿色生活数据
+  specialityProduct: Array<Object> = [] // 热销乡味数据
   backUrl: string = '/' // 返回路径
 
   created () {
@@ -72,9 +70,9 @@ export default class partA extends Vue {
     }, code)
 
     // 获取猜你喜欢数据
-    this.getRequest.getGreenlife ((res: any) => {
+    this.getRequest.getSpeciality ((res: any) => {
       if (res.data.status === 200) {
-        this.greenlife = res.data.data
+        this.specialityProduct = res.data.data.commodityList
       }
     })
   }
@@ -88,8 +86,8 @@ export default class partA extends Vue {
 }
 </script>
 <style lang="stylus" scoped>
-.part_a
-  width 100VW
+.part_b
+  width 100%
   overflow hidden
 
 
@@ -97,7 +95,7 @@ export default class partA extends Vue {
 .swipe
   margin-top 4.8rem
   width 100%
-  height 44.8vw
+  height 31.2vw
 
 // 标题
 .part_title
@@ -110,48 +108,34 @@ export default class partA extends Vue {
     height 100%
     display flex
     align-items center
-    .title_img
-      height 2rem
-      width 0.6rem
-      background #00ae87
-      border-radius 0.3rem
     .title_txt
       font-size 1.5rem
       line-height 4.5rem
       color #333
       padding-left 1rem
     .title_txt_en
-      font-size 1.5rem
-      font-weight bold
+      font-size 1rem
       color #ccc
-      padding-left 0.7rem
+      padding-left 0.4rem
+      border-left 1px solid #ccc /*no*/
+      margin-left 0.4rem
 .white_title
   background #fff
 
-// 绿色生活
-// 大标题展示区样式集中
-.all_content
-  width 100%
+// 猜你喜欢
+.guess_product
   height auto
-  .banner_title
-    width 100%
-    height 22.6vw
-    overflow hidden
-    position relative
-    justify-content center
-    img
-      width 100%
-      height 100%
-  .product_container
-    width 100%
-    padding 1.5rem 0
-    background #f2f2f2
+  width 100%
+  padding 0 1.5rem 1.5rem 1.5rem
+  .product_area
     display flex
-    justify-content space-around
-    align-items center
-    overflow-x scroll
-    .sale_product_area
-      height 15rem
-      width 11.5rem
+    justify-content space-between
+    flex-wrap wrap
+    width 100%
+    .guess_product_area
+      width 49%
+      height 23.7rem
+      margin-bottom 1rem
+      border-radius 6px
       overflow hidden
 </style>

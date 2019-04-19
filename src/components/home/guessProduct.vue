@@ -2,7 +2,7 @@
   <div class="item" @click="goDetail(guessProduct.id)">
     <div class="item_img">
       <img :src="guessProduct.imgUrl" alt="">
-      <div class="brand_name">{{guessProduct.brandName}}</div>
+      <div class="brand_name" v-if="guessProduct.brandName">{{guessProduct.brandName}}</div>
     </div>
     <div class="item_title">
       <p>{{guessProduct.name}}</p>
@@ -61,11 +61,12 @@ export default class guessProduct extends Vue {
       padding 0 0.6rem
   .item_title
     width 100%
-    height 2.8rem
+    height 3.2rem
     margin-top 1rem
     padding 0 1rem
     p
       font-size 1.3rem
+      line-height 1.6rem
       color #333 
       /*超过两行省略号*/
       overflow hidden
