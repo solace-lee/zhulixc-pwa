@@ -7,7 +7,9 @@ const apis = {
   speciality: 'commodity/onetambononeproduct', // 一村一品（热销乡味）
   member: 'commodity/findmembersarea', // 会员商品
   codeRegistered: 'sms/sendCodeRegistered', // 注册-获取验证码
-  register: 'register' // 注册-提交
+  register: 'register', // 注册-提交
+  article: '/api/getArticle/', // 协议
+  retrieve: 'sms/retrieve', // 找回密码--获取验证码
 }
 
 export {

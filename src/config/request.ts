@@ -91,20 +91,27 @@ class GetRequest {
       callback(res)
     })
   }
-
-  // 注册
   // 手机验证码
-  getCode (tel: any, callback: any) {
-    http.get(gateway.USER + apis.codeRegistered, { params: { phone: tel } }).then(res => {
+  getCode (tel: any, url: any, callback: any) {
+    http.get(gateway.USER + url, { params: { phone: tel } }).then(res => {
       callback(res)
     })
   }
-  // 提交
+  // 注册-获取协议
+  checkAgreement (id: string, callback: any) {
+    http.get(configApi.local + apis.article+id).then(res => {
+      callback(res)
+    })
+  }
+  // 注册-提交
   getRegister (form: any, callback: any) {
     http.post(gateway.USER + apis.register, form).then(res => {
       callback(res)
     })
   }
+
+  // 找回密码
+  // 手机验证码
 }
 
 export {

@@ -5,14 +5,14 @@
       <img src="../../../assets/index/loginBg.png" alt="">
     </div>
     <!-- 头部 -->
-    <headers :title="headerList.title" :status="headerList.status" :bgColor="headerList.bgColor" :manage="!changeNothing" ></headers>
+    <headers :status="headerList.status" :bgColor="headerList.bgColor" ></headers>
     <!-- 头像 -->
     <div class="avater">
       <div style="color:red;">
         <!-- <img src="../../../img/index/register/logo.png" alt> -->
       </div>
     </div>
-    <forms :name="name"></forms>
+    <forms :name="name" @ @submitData='submitRegister'></forms>
   </div>
 </template>
 
@@ -20,6 +20,7 @@
 import { Component, Vue, Prop } from 'vue-property-decorator'
 import headers from '@/components/public/header.vue'
 import forms from '@/components/me/forms/forms.vue'
+import utils from '@/config/utils.ts'
 
 @Component({
   components: {
@@ -31,19 +32,38 @@ export default class register extends Vue {
   // 变量
   name: any ='register'
   headerList: any = {
-    isSearch: false,
-    title: '',
     bgColor: '#00000000',
-    status: 'isCar'
+    status: 'noTitle'
   }
-  private changeNothing: boolean = false // 控制显示
   created () {
     this.getData()
   }
-
+  // 方法
   private getData () {
     let router = this.$route.query.type
     this.name = router
+  }
+  private submitRegister (data: any) {
+    let phont = utils.encrypt(data.userPhone)
+    let psw = utils.encrypt(data.userPwd)
+    let form: any = {}
+    if (this.name === 'passWord') {
+      form.userPhone= phont
+      form.code= data.code
+      form.userPwd= psw
+    } else {
+      form.userPhone = phont
+      form.userPwd = psw
+      form.referralCode = data.referralCode
+      form.code = data.code
+      form.provinceId = data.provinceId
+      form.cityId = data.cityId
+      form.districtId = data.districtId
+      this.getRequest.getRegister(form, (res: any) => {
+        
+      })
+    }
+    console.log(form)
   }
 }
 </script>

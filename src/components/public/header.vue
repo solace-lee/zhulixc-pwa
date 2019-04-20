@@ -51,9 +51,9 @@
           <use xlink:href="#icon-icon_search"></use>
         </svg>
         <!-- 管理按钮 -->
-        <div class="manage" v-if="manage" @click="goEdit">管理</div>
+        <div class="manage" v-if="complete" @click="goEdit">管理</div>
         <!-- 完成按钮 -->
-        <div class="manage" v-if="complete" @click="goEdit">完成</div>
+        <div class="manage" v-if="manage" @click="goEdit">完成</div>
         <!-- 消息图标 -->
         <svg class="icon" aria-hidden="true" v-if="msgBtn" @click="goMsg">
           <use xlink:href="#icon-icon_dmail"></use>
@@ -99,6 +99,8 @@ export default class headers extends Vue {
     switch (this.status) {
       case 'isCar': // 购物车类型
         this.goCarBtn = false
+        this.complete = true
+        this.hasBack = true
         break
       case 'isSearch': // 首页类型
         this.isSearch = true
@@ -113,7 +115,10 @@ export default class headers extends Vue {
         this.showTitle = true
         this.msgBtn = true
         break
-
+       case 'noTitle': // 带搜索带返回按钮类型
+        this.isSearch = false
+        this.hasBack = true
+        break
       default:
         break
     }

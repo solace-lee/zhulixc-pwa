@@ -2,7 +2,7 @@
 <template>
   <div class="car">
     <div>
-      <headers :title="headerList.title" :status="headerList.status" :manage="!changeNothing"></headers>
+      <headers :title="headerList.title" :status="headerList.status"></headers>
     </div>
     <div class="header_title" v-if="changeNothing"></div>
 
@@ -36,15 +36,12 @@ import nothing from '@/components/car/nothing.vue'
 export default class car extends Vue {
   foot: String = 'car'
   headerList: object = {
-    isSearch: false,
     title: '购物车',
-    bgColor: '',
     status: 'isCar'
   }
   private list: Array<object> = []//数据列表
   private changeNothing: boolean = false//控制显示
   created () {
-    window.localStorage.setItem('token', 'YWE2M2YwZDktZGIxOC00YjY3LTgwYWQtYzFmMDE4NzkzMmE5')
     this.getdata()
   }
   private getdata () {
@@ -65,17 +62,16 @@ export default class car extends Vue {
             })
           })
           this.list = res.data.data.items
-          this.changeNothing = false
+          this.changeNothing = true
         } else {
           this.list = []
-          this.changeNothing = true
+          this.changeNothing = false
         }
       } else {
         this.list = []
         this.changeNothing = true
       }
     })
-    // console.log('car')
   }
 }
 </script>
@@ -84,7 +80,7 @@ export default class car extends Vue {
   width 100%
   height 100%
   margin-top 4.8rem
-  padding-top 4rem
+  padding 4rem 0rem
   // 标题型样式
   .header_title
     width 100%
