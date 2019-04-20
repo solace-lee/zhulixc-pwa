@@ -1,4 +1,5 @@
 const apis = {
+  // HOME
   ads: 'ads/findAdsList', // 首页广告列表
   car: 'inside/cart/findCartByuserId', // 购物车
   login: 'login', // 登录
@@ -6,6 +7,12 @@ const apis = {
   greenlife: 'commodity/findByClassifyCode', // 绿色生活数据（生态市场）
   speciality: 'commodity/onetambononeproduct', // 一村一品（热销乡味）
   member: 'commodity/findmembersarea', // 会员商品
+
+  // classify
+  classifyFirstList: 'commodityClassify/oneClassifyLevel', // 一级分类
+  classifySecondList: 'commodityClassify/findByPreClassifyId', // 二级分类
+
+  // register
   codeRegistered: 'sms/sendCodeRegistered', // 注册-获取验证码
   register: 'register', // 注册-提交
   article: '/api/getArticle/', // 协议
