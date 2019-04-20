@@ -7,15 +7,16 @@ import router from './router'
 import store from './store'
 import fastClick from 'fastclick'
 import { Toast } from '@/config/Toast'
+import { Dialog } from '@/config/Dialog' // 弹出层
 import { GetRequest } from '@/config/request.ts'
 import 'normalize.css'
 import './registerServiceWorker'
 
 Vue.config.productionTip = false
-
 Vue.use(Cube)
 Vue.use(AMap)
 Vue.prototype.Toast = Toast
+// Vue.prototype.Dialog = Dialog
 Vue.prototype.getRequest = new GetRequest()
 fastClick.attach(document.body)
 AMap.initAMapApiLoader({

@@ -3,144 +3,167 @@
     <!-- 头部 -->
     <headers :status="headerStatus"></headers>
 
-    <!-- 轮播图 -->
-    <swipe :swipeList="swipeList"></swipe>
+    <div class="scorll_area">
 
-    <!-- 聚合区 -->
-    <div class="special_area">
-      <!-- partA -->
-      <div class="special" @click="goPartArea(1)">
-        <div class="special_img">
-          <img loading="lazy" :src="partA.titleImg" alt="">
-        </div>
-        <div class="special_title">{{partA.title}}</div>
-      </div>
-      <!-- partB -->
-      <div class="special" @click="goPartArea(2)">
-        <div class="special_img">
-          <img loading="lazy" :src="partB.titleImg" alt="">
-        </div>
-        <div class="special_title">{{partB.title}}</div>
-      </div>
-      <!-- partC -->
-      <div class="special" @click="goPartArea(3)">
-        <div class="special_img">
-          <img loading="lazy" :src="partC.titleImg" alt="">
-        </div>
-        <div class="special_title">{{partC.title}}</div>
-      </div>
-      <!-- partD -->
-      <div class="special" @click="goPartArea(4)">
-        <div class="special_img">
-          <img loading="lazy" :src="partD.titleImg" alt="">
-        </div>
-        <div class="special_title">{{partD.title}}</div>
-      </div>
-    </div>
+      <!-- 上拉加载更多，下拉刷新 -->
+      <cube-scroll
+        ref="scroll1"
+        :data="guessProduct"
+        :options="options"
+        @pulling-down="onPullingDown"
+        @pulling-up="onPullingUp">
 
-    <!-- 标题 -->
-    <div class="part_title">
-      <div class="title_area">
-        <div class="title_img">
-          <img src="" alt="">
+      <!-- 轮播图 -->
+      <swipe :swipeList="swipeList"></swipe>
+
+      <!-- 聚合区 -->
+      <div class="special_area">
+        <!-- partA -->
+        <div class="special" @click="goPartArea(1)">
+          <div class="special_img">
+            <img loading="lazy" :src="partA.titleImg" alt="">
+          </div>
+          <div class="special_title">{{partA.title}}</div>
         </div>
-        <div class="title_txt">新品推荐</div>
-      </div>
-    </div>
-
-    <!-- 新品推荐 -->
-    <div class="new_product">
-      <div class="product_area">
-        <div class="new_product_area" v-for="(i, index) in newProduct" :key="index">
-          <new-product :newProduct="i"></new-product>
+        <!-- partB -->
+        <div class="special" @click="goPartArea(2)">
+          <div class="special_img">
+            <img loading="lazy" :src="partB.titleImg" alt="">
+          </div>
+          <div class="special_title">{{partB.title}}</div>
+        </div>
+        <!-- partC -->
+        <div class="special" @click="goPartArea(3)">
+          <div class="special_img">
+            <img loading="lazy" :src="partC.titleImg" alt="">
+          </div>
+          <div class="special_title">{{partC.title}}</div>
+        </div>
+        <!-- partD -->
+        <div class="special" @click="goPartArea(4)">
+          <div class="special_img">
+            <img loading="lazy" :src="partD.titleImg" alt="">
+          </div>
+          <div class="special_title">{{partD.title}}</div>
         </div>
       </div>
-    </div>
 
-    <!-- 标题 -->
-    <div class="part_title white_title">
-      <div class="title_area">
-        <div class="title_img"></div>
-        <div class="title_txt">品质推荐</div>
+      <!-- 标题 -->
+      <div class="part_title">
+        <div class="title_area">
+          <div class="title_img">
+            <img src="" alt="">
+          </div>
+          <div class="title_txt">新品推荐</div>
+        </div>
       </div>
-    </div>
 
-    <!-- 品质推荐 -->
-    <div class="tone_product">
-      <div class="tone_area">
-        <div class="tone_product_a" v-for="(i, index) in toneProduct" :key="index" @click="goDetail(i.commodityId)" v-show="index === 0">
-          <div class="a_left">
-            <div class="a_titel">{{i.name}}</div>
-            <div class="a_name">{{i.title}}</div>
-            <div class="a_info">
-              <div class="a_now_price"><span>￥</span>{{i.discountPrice}}</div>
-              <s class="a_old_price">￥{{i.originalPrice}}</s>
-              <div class="a_buy_now">立即购买</div>
+      <!-- 新品推荐 -->
+      <div class="new_product">
+        <cube-scroll
+          ref="scroll"
+          :data="newProduct"
+          :options="options2"
+          nest-mode="free"
+          direction="horizontal"
+          class="horizontal-scroll-list-wrap"
+          >
+          <div class="product_area">
+            <div class="new_product_area" v-for="(i, index) in newProduct" :key="index">
+              <new-product :newProduct="i"></new-product>
+            </div>
+            <div class="new_product_area" v-for="(i, index) in newProduct" :key="index">
+              <new-product :newProduct="i"></new-product>
             </div>
           </div>
-          <div class="a_right">
+        </cube-scroll>
+      </div>
+
+      <!-- 标题 -->
+      <div class="part_title white_title">
+        <div class="title_area">
+          <div class="title_img"></div>
+          <div class="title_txt">品质推荐</div>
+        </div>
+      </div>
+
+      <!-- 品质推荐 -->
+      <div class="tone_product">
+        <div class="tone_area">
+          <div class="tone_product_a" v-for="(i, index) in toneProduct" :key="index" @click="goDetail(i.commodityId)" v-show="index === 0">
+            <div class="a_left">
+              <div class="a_titel">{{i.name}}</div>
+              <div class="a_name">{{i.title}}</div>
+              <div class="a_info">
+                <div class="a_now_price"><span>￥</span>{{i.discountPrice}}</div>
+                <s class="a_old_price">￥{{i.originalPrice}}</s>
+                <div class="a_buy_now">立即购买</div>
+              </div>
+            </div>
+            <div class="a_right">
+              <img loading="lazy" :src="i.titleImg" alt="">
+            </div>
+          </div>
+        </div>
+        <div class="tone_area">
+          <div class="tone_product_b" v-for="(i, index) in toneProduct" :key="index" @click="goDetail(i.commodityId)" v-show="index != 0">
+            <div class="b_img">
+              <img loading="lazy" :src="i.titleImg" alt="">
+            </div>
+            <div class="b_name">{{i.name}}</div>
+            <div class="b_info">
+              <div class="b_now_price">￥{{i.discountPrice}}</div>
+              <s class="b_old_price">￥{{i.originalPrice}}</s>
+            </div>
+            <div class="b_buy_now">
+              <span>立即购买</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 标题 -->
+      <div class="part_title">
+        <div class="title_area">
+          <div class="title_img"></div>
+          <div class="title_txt">品牌推荐</div>
+        </div>
+      </div>
+
+      <!-- 品牌推荐 -->
+      <div class="brand_product">
+        <div class="brand_area">
+          <div class="brand_top" v-for="(i,index) in brandProduct" :key="index" v-show="index < 2" @click="goDetail(i.commodityId)">
+            <img loading="lazy" :src="i.titleImg" alt="">
+          </div>
+        </div>
+        <div class="brand_area">
+          <div class="brand_bottom" v-for="(i, index) in brandProduct" :key="index" v-show="index > 1" @click="goDetail(i.commodityId)">
             <img loading="lazy" :src="i.titleImg" alt="">
           </div>
         </div>
       </div>
-      <div class="tone_area">
-        <div class="tone_product_b" v-for="(i, index) in toneProduct" :key="index" @click="goDetail(i.commodityId)" v-show="index == 0">
-          <div class="b_img">
-            <img loading="lazy" :src="i.titleImg" alt="">
+
+      <!-- 标题 -->
+      <div class="part_title white_title">
+        <div class="title_area">
+          <div class="title_img"></div>
+          <div class="title_txt">猜你喜欢</div>
+        </div>
+      </div>
+
+      <!-- 猜你喜欢 -->
+      <div class="guess_product">
+        <div class="product_area">
+          <div class="guess_product_area" v-for="(i, index) in guessProduct" :key="index">
+            <guess-product :guessProduct="i"></guess-product>
           </div>
-          <div class="b_name">{{i.name}}</div>
-          <div class="b_info">
-            <div class="b_now_price">￥{{i.discountPrice}}</div>
-            <s class="b_old_price">￥{{i.originalPrice}}</s>
-          </div>
-          <div class="b_buy_now">
-            <span>立即购买</span>
-          </div>
         </div>
       </div>
-    </div>
 
-    <!-- 标题 -->
-    <div class="part_title">
-      <div class="title_area">
-        <div class="title_img"></div>
-        <div class="title_txt">品牌推荐</div>
-      </div>
-    </div>
+      </cube-scroll>
 
-    <!-- 品牌推荐 -->
-    <div class="brand_product">
-      <div class="brand_area">
-        <div class="brand_top" v-for="(i,index) in brandProduct" :key="index" v-show="index < 2" @click="goDetail(i.commodityId)">
-          <img loading="lazy" :src="i.titleImg" alt="">
-        </div>
-      </div>
-      <div class="brand_area">
-        <div class="brand_bottom" v-for="(i, index) in brandProduct" :key="index" v-show="index > 1" @click="goDetail(i.commodityId)">
-          <img loading="lazy" :src="i.titleImg" alt="">
-        </div>
-      </div>
     </div>
-
-    <!-- 标题 -->
-    <div class="part_title white_title">
-      <div class="title_area">
-        <div class="title_img"></div>
-        <div class="title_txt">猜你喜欢</div>
-      </div>
-    </div>
-
-    <!-- 猜你喜欢 -->
-    <div class="guess_product">
-      <div class="product_area">
-        <div class="guess_product_area" v-for="(i, index) in guessProduct" :key="index">
-          <guess-product :guessProduct="i"></guess-product>
-        </div>
-      </div>
-    </div>
-
-    <!-- 分割线 -->
-    <div style="height:5rem;"></div>
 
     <!-- 脚部 -->
     <foot :foot="foot"></foot>
@@ -177,8 +200,64 @@ export default class Home extends Vue {
   brandProduct: Array<Object> = [] // 品牌推荐数据
   guessProduct: Array<Object> = [] // 猜你喜欢数据
 
+  get options ():any {
+    return {
+      pullDownRefresh: this.pullDownRefreshObj,
+      pullUpLoad: this.pullUpLoadObj,
+      scrollbar: false,
+      // eventPassthrough: 'vertical',
+    }
+  }
+
+  get options2 ():any {
+    return {
+      pullDownRefresh: this.pullDownRefreshObj,
+      pullUpLoad: this.pullUpLoadObj,
+      scrollbar: true,
+      eventPassthrough: 'vertical',
+    }
+  }
+
   created () {
     this.getdata()
+  }
+
+  private pullDownRefreshObj () {
+    console.log('下拉刷新')
+  }
+
+  private pullUpLoadObj () {
+    console.log('上拉加载更多')
+  }
+
+  private onPullingDown () {
+    console.log('下拉刷新1')
+    this.getdata()
+    // 模拟更新数据
+    // setTimeout(() => {
+    //   if (Math.random() > 0.5) {
+    //     // 如果有新数据
+    //     this.items.unshift(_foods[1])
+    //   } else {
+    //     // 如果没有新数据
+    //     this.$refs.scroll.forceUpdate()
+    //   }
+    // }, 1000)
+  }
+
+  private onPullingUp () {
+    console.log('上拉加载更多1')
+    // 模拟更新数据
+    // setTimeout(() => {
+    //   if (Math.random() > 0.5) {
+    //     // 如果有新数据
+    //     let newPage = _foods.slice(0, 5)
+    //     this.items = this.items.concat(newPage)
+    //   } else {
+    //     // 如果没有新数据
+    //     this.$refs.scroll.forceUpdate()
+    //   }
+    // }, 1000)
   }
 
   private getdata () {
@@ -256,12 +335,18 @@ export default class Home extends Vue {
 <style lang="stylus" scoped>
 .home
   // background #eee
-  width 100VW
-  overflow hidden
+  width 100%
+  height 100vh
+
+.scorll_area
+  width 100%
+  height 100vh
+  padding-top 4.8rem
+  padding-bottom 5rem
 
 // 轮播图
 .swipe
-  margin-top 4.8rem
+  // margin-top 4.8rem
   width 100%
   height 50vw
 
@@ -313,18 +398,16 @@ export default class Home extends Vue {
 .white_title
   background #fff
 
-
 // 新品推荐
 .new_product
   height 17.5rem
   width 100%
   background #f2f2f2
   overflow hidden
-  .product_area 
-    // height 16rem
+  .product_area
     display flex
     overflow-x scroll
-    .new_product_area 
+    .new_product_area
       width 12rem
       height 16rem
       margin-left 1.5rem
@@ -339,6 +422,7 @@ export default class Home extends Vue {
     height 100%
     display flex
     flex-wrap wrap
+    justify-content space-between
     .tone_product_a
       width 100%
       height 9.3rem
@@ -388,7 +472,8 @@ export default class Home extends Vue {
           height 100%
     .tone_product_b
       height 19.6rem
-      width 11rem
+      width 32%
+      overflow hidden
       margin-bottom 1rem
       border-radius 6px
       display flex
@@ -396,7 +481,7 @@ export default class Home extends Vue {
       justify-content space-between
       background #f2f2f2
       .b_img
-        width 11rem
+        width 100%
         height 10.4rem
         img
           height 100%
@@ -480,4 +565,7 @@ export default class Home extends Vue {
       border-radius 6px
       overflow hidden
 
+.foot
+  z-index 15
+  position fixed
 </style>

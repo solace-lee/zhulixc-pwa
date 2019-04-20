@@ -1,7 +1,7 @@
 <template>
   <div class="part_a">
     <!-- 头部 -->
-    <headers :status="headerStatus" :backUrl="backUrl"></headers>
+    <headers :status="headerStatus" :title="title" :backUrl="backUrl"></headers>
 
     <!-- 广告轮播图 -->
     <swipe :swipeList="swipeList"></swipe>
@@ -87,18 +87,17 @@ import { Component, Vue } from 'vue-property-decorator'
 import headers from '@/components/public/header.vue'
 import swipe from '@/components/home/swipe.vue'
 import newProduct from '@/components/home/newProduct.vue'
-import guessProduct from '@/components/home/guessProduct.vue'
 
 @Component({
   components: {
     headers,
     swipe,
-    newProduct, // 今日特价
-    guessProduct, // 猜你喜欢
+    newProduct // 今日特价
   }
 })
 export default class partA extends Vue {
   headerStatus: string = 'BackSearch' // header的显示方式
+  title: string = '生态市场'
   swipeList: Array<Object> = [] // 轮播数据
   newProduct: Array<Object> = [] // 新品推荐数据
   greenlife: Array<Object> = [] // 绿色生活数据

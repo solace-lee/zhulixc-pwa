@@ -28,6 +28,30 @@ class GetRequest {
     })
   }
 
+  // 一村一品数据（热销乡味）
+  getSpeciality (callback: any) {
+    const districtId = sessionStorage.getItem("districtId") || "0"
+    const config: object = {
+      districtId: districtId,
+      commodityArea: 2
+    }
+    http.post(gateway.SEARCH + apis.speciality, config).then(res => {
+      callback(res)
+    })
+  }
+
+  // 会员商品数据
+  getMember (callback: any) {
+    const config: object = {
+      params: {
+        commodityArea: 3
+      }
+    }
+    http.get(gateway.SEARCH + apis.member, config).then(res => {
+      callback(res)
+    })
+  }
+
   // 生态市场数据
   getGreenlife (callback: any) {
     const config: object = {
@@ -39,6 +63,19 @@ class GetRequest {
     http.get(gateway.SEARCH + apis.greenlife, config).then(res => {
       callback(res)
     })
+  }
+  // 获取省市区
+  // 获取省份
+  private getProvince () {
+    console.log(123)
+  }
+  // 获取城市
+  private getCity () {
+    console.log(123)
+  }
+  // 获取地区
+  private getDistrict () {
+    console.log(123)
   }
 
   // 购物车列表
@@ -54,15 +91,19 @@ class GetRequest {
       callback(res)
     })
   }
-
-  // 注册
   // 手机验证码
-  getCode (tel: any, callback: any) {
-    http.get(gateway.USER + apis.codeRegistered, { params: { phone: tel } }).then(res => {
+  getCode (tel: any, url: any, callback: any) {
+    http.get(gateway.USER + url, { params: { phone: tel } }).then(res => {
       callback(res)
     })
   }
-  // 提交
+  // 注册-获取协议
+  checkAgreement (id: string, callback: any) {
+    http.get(configApi.local + apis.article+id).then(res => {
+      callback(res)
+    })
+  }
+  // 注册-提交
   getRegister (form: any, callback: any) {
     http.post(gateway.USER + apis.register, form).then(res => {
       callback(res)

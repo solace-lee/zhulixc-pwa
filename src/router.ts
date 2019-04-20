@@ -17,6 +17,16 @@ export default new Router({
       component: () => import('./views/home/partA.vue')
     },
     {
+      path: '/partB', // partB
+      name: 'partB',
+      component: () => import('./views/home/partB.vue')
+    },
+    {
+      path: '/partC', // partC
+      name: 'partC',
+      component: () => import('./views/home/partC.vue')
+    },
+    {
       path: '/partD', // partD
       name: 'partD',
       component: () => import('./views/home/partD.vue')

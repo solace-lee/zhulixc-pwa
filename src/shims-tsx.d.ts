@@ -29,6 +29,7 @@ declare global {
 declare module 'vue/types/vue' {
   interface Vue {
     Toast: any
+    Dialog: any
     getRequest: any
   }
 }
