@@ -27,6 +27,11 @@ export default new Router({
       component: () => import('./views/home/partC.vue')
     },
     {
+      path: '/partD', // partD
+      name: 'partD',
+      component: () => import('./views/home/partD.vue')
+    },
+    {
       path: '/classify', // 分类页
       name: 'classify',
       component: () => import('./views/classify/Classify.vue')
@@ -48,7 +53,7 @@ export default new Router({
       component: () => import('./views/me/register/register.vue')
     },
     {
-      path: '/login', // 注册
+      path: '/login', // 登录
       name: 'login',
       component: () => import('./views/me/login/login.vue')
     }

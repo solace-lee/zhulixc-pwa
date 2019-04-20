@@ -15,6 +15,9 @@ const apis = {
   // register
   codeRegistered: 'sms/sendCodeRegistered', // 注册-获取验证码
   register: 'register', // 注册-提交
+  findIntegralShopping: 'commodity/findIntegralShopping', // 获取积分商品
+  integralRecommend: 'inside/integral/integralRecommend', // 获取积分详情
+  findAdsList: 'ads/findAdsList', // 获取积分广告
   article: '/api/getArticle/', // 协议
   retrieve: 'sms/retrieve', // 找回密码--获取验证码
 }
