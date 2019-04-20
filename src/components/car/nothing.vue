@@ -6,8 +6,8 @@
       <use xlink:href="#icon-icon_delete"></use>
     </svg>
     <p class="noting-text">购物车是空的~</p>
-    <div class="nothing-toshop">
-      <router-link :to="{ name: '首页', params: {} }" class="nothing-toshop2" ><strong>再去逛逛</strong></router-link>
+    <div class="nothing-toshop" >
+      <strong class="nothing-toshop2" @click="goHome()">再去逛逛</strong>
     </div>
     <div class="lovely">
       <span></span>
@@ -49,6 +49,12 @@ export default class nothing extends Vue {
       }
     })
   }
+  private goHome () {
+    this.$router.push({
+      path: '/'
+    })
+  }
+
 }
 </script>
 <style lang="stylus" scoped>
@@ -69,6 +75,7 @@ export default class nothing extends Vue {
     width 100%
     margin-bottom 5rem
     .nothing-toshop2
+      width 50%
       font-size 1.2rem
       background-color #00ae87
       padding 0.6rem 3rem
@@ -81,6 +88,7 @@ export default class nothing extends Vue {
     display flex
     justify-content center
     align-items center
+    margin-bottom 1rem
     p
       font-size 1.8rem
       color #00ae87

@@ -101,6 +101,7 @@ export default class headers extends Vue {
         this.goCarBtn = false
         this.complete = true
         this.hasBack = true
+        this.showTitle = true
         break
       case 'isSearch': // 首页类型
         this.isSearch = true
