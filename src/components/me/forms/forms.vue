@@ -373,7 +373,7 @@ export default class forms extends Vue {
         >.cube-input-field
           color #fff
       .cube-inpu_active
-        border none
+        border-color none
       .getCode
         width 6%
         height 2rem
