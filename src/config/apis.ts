@@ -5,7 +5,10 @@ const apis = {
   favorite: 'commodity/indexlike', // 猜你喜欢
   greenlife: 'commodity/findByClassifyCode', // 绿色生活数据（生态市场）
   codeRegistered: 'sms/sendCodeRegistered', // 注册-获取验证码
-  register: 'register' // 注册-提交
+  register: 'register', // 注册-提交
+  findIntegralShopping: 'commodity/findIntegralShopping', // 获取积分商品
+  integralRecommend: 'inside/integral/integralRecommend', // 获取积分详情
+  findAdsList: 'ads/findAdsList' // 获取积分广告
 }
 
 export {
