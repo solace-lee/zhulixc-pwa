@@ -136,15 +136,17 @@ export default class partC extends Vue {
         this.memberInfo = res.data.data.f1[0]
         // 广告数据1
         this.ad1 = res.data.data.f2[0]
+        // 精品热卖
         this.hotSale = res.data.data.f3
+        // 广告数据2
         this.ad2 = res.data.data.f4[0]
       } else {
         this.Toast('数据获取失败请稍后再试', 'error')
       }
     }, code)
 
-    // 获取猜你喜欢数据
-    this.getRequest.getSpeciality ((res: any) => {
+    // 获取会员商品数据
+    this.getRequest.getMember ((res: any) => {
       if (res.data.status === 200) {
         this.specialityProduct = res.data.data.commodityList
       }

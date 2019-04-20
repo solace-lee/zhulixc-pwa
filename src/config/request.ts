@@ -40,6 +40,18 @@ class GetRequest {
     })
   }
 
+  // 会员商品数据
+  getMember (callback: any) {
+    const config: object = {
+      params: {
+        commodityArea: 3
+      }
+    }
+    http.get(gateway.SEARCH + apis.member, config).then(res => {
+      callback(res)
+    })
+  }
+
   // 生态市场数据
   getGreenlife (callback: any) {
     const config: object = {

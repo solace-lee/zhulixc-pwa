@@ -23,7 +23,7 @@
     <!-- 热销乡味 -->
     <div class="guess_product">
       <div class="product_area">
-        <div class="guess_product_area" v-for="(i, index) in specialityProduct" :key="index">
+        <div class="guess_product_area" v-for="(i, index) in memberProduct" :key="index">
           <guess-product :guessProduct="i"></guess-product>
         </div>
       </div>
@@ -51,7 +51,7 @@ export default class partB extends Vue {
   bgColor: string = '#fff'
   fontColor: string = '#333'
   swipeList: Array<Object> = [] // 轮播数据
-  specialityProduct: Array<Object> = [] // 热销乡味数据
+  memberProduct: Array<Object> = [] // 热销乡味数据
   backUrl: string = '/' // 返回路径
 
   created () {
@@ -69,10 +69,10 @@ export default class partB extends Vue {
       }
     }, code)
 
-    // 获取猜你喜欢数据
+    // 获取会员商品数据
     this.getRequest.getSpeciality ((res: any) => {
       if (res.data.status === 200) {
-        this.specialityProduct = res.data.data.commodityList
+        this.memberProduct = res.data.data.commodityList
       }
     })
   }

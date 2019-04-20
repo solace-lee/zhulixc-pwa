@@ -48,6 +48,7 @@ export default class newProduct extends Vue {
       width 100%
   .name
     font-size 1.3rem
+    line-height 1.6rem
     padding 0 .6rem
     color #333
     /*超过两行省略号*/
