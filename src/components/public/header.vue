@@ -99,8 +99,9 @@ export default class headers extends Vue {
     switch (this.status) {
       case 'isCar': // 购物车类型
         this.goCarBtn = false
-        this.complete = true
         this.hasBack = true
+        this.showTitle = true
+        this.msgBtn = true
         break
       case 'isSearch': // 首页类型
         this.isSearch = true

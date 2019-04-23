@@ -5,7 +5,7 @@ import { apis } from '@/config/apis.ts'
 class GetRequest {
   // 首页广告数据
   getAds (callback: any, code?: string | number) {
-    const districtId = sessionStorage.getItem("districtId") || "0"
+    const districtId = sessionStorage.getItem('districtId') || '0'
     const config: object = {
       params: {
         districtId: districtId,
@@ -19,7 +19,7 @@ class GetRequest {
 
   // 猜你喜欢数据
   getFavorite (callback: any) {
-    const districtId = sessionStorage.getItem("districtId") || "0"
+    const districtId = sessionStorage.getItem('districtId') || '0'
     const config: object = {
       districtId: districtId
     }
@@ -125,8 +125,46 @@ class GetRequest {
     })
   }
 
-  // 找回密码
-  // 手机验证码
+  // 获取积分商品所有数据
+  findIntegralShopping (sort:string, callback: any) {
+    const province: string = sessionStorage.getItem('province') || ''
+    const city: string = sessionStorage.getItem('city') || ''
+    const district: string = sessionStorage.getItem('district') || ''
+    const obj: Object = {
+      params: {
+        provinceName: province,
+        cityName: city,
+        districtName: district,
+        commodityArea: 4,
+        sort: sort || ''
+      }
+    }
+    http.get(gateway.SEARCH + apis.findIntegralShopping, obj).then(res => {
+      callback(res)
+    })
+  }
+
+  // 获取积分详细
+  integralRecommend (callback: any) {
+    http.get(gateway.SEARCH + apis.integralRecommend).then(res => {
+      callback(res)
+    })
+  }
+
+  // 获取积分广告
+  getAdsList (callback: any) {
+    const districtId: string = sessionStorage.getItem('districtId') || ''
+    const code: string = sessionStorage.getItem('codeD') || ''
+    const obj: Object = {
+      params: {
+        districtId: districtId,
+        code: code
+      }
+    }
+    http.get(gateway.SEARCH + apis.findAdsList, obj).then(res => {
+      callback(res)
+    })
+  }
 }
 
 export {
