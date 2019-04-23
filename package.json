@@ -10,14 +10,14 @@
   "dependencies": {
     "axios": "^0.18.0",
     "crypto-js": "^3.1.9-1",
-    "cube-ui": "^1.12.15",
+    "cube-ui": "^1.12.16",
     "fastclick": "^1.0.6",
     "normalize.less": "^1.0.0",
     "register-service-worker": "^1.6.2",
     "vue": "^2.6.6",
     "vue-class-component": "^6.0.0",
     "vue-property-decorator": "^7.0.0",
-    "vue-router": "^3.0.5",
+    "vue-router": "^3.0.6",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
@@ -36,7 +36,7 @@
     "postcss-px2rem": "^0.3.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
-    "typescript": "^3.4.3",
+    "typescript": "^3.4.4",
     "vue-amap": "^0.5.9",
     "vue-cli-plugin-cube-ui": "^0.2.5",
     "vue-template-compiler": "^2.5.21"

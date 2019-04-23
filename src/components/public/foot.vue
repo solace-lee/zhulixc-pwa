@@ -93,7 +93,7 @@ export default class foot extends Vue {
 <style lang="stylus" scoped>
 .foot
   width 100%
-  height 100%
+  height 4.8rem
   .foot_bar
     width 100%
     height 4.8rem

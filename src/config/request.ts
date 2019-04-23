@@ -64,6 +64,21 @@ class GetRequest {
       callback(res)
     })
   }
+
+  // 获取一级分类
+  getClassifyFirstList (callback: any) {
+    http.post(gateway.SEARCH + apis.classifyFirstList).then(res => {
+      callback(res)
+    })
+  }
+
+  // 获取二级分类
+  getClassifySecondList (id: number, callback: any) {
+    http.get(gateway.SEARCH + apis.classifySecondList + '?prcClassifyId=' + id).then(res => {
+      callback(res)
+    })
+  }
+
   // 获取省市区
   // 获取省份
   private getProvince () {
