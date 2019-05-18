@@ -31,5 +31,6 @@ declare module 'vue/types/vue' {
     Toast: any
     Dialog: any
     getRequest: any
+    dialog: any
   }
 }

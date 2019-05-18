@@ -34,8 +34,8 @@ import utils from '@/config/utils.ts'
 })
 export default class login extends Vue {
   // 变量
-  name ='login'
-  headerList: object = {
+  name: string ='login'
+  headerList: any = {
     bgColor: '#00000000',
     status: 'noTitle'
   }

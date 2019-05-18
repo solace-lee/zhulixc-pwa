@@ -116,9 +116,14 @@ export default class headers extends Vue {
         this.showTitle = true
         this.msgBtn = true
         break
-       case 'noTitle': // 带搜索带返回按钮类型
+      case 'noTitle': // 带搜索带返回按钮类型
         this.isSearch = false
         this.hasBack = true
+        break
+      case 'onlyTtitle': // 仅带标题
+        this.isSearch = false
+        this.hasBack = true
+        this.showTitle = true
         break
       default:
         break

@@ -42,9 +42,24 @@ export default new Router({
       component: () => import('./views/car/Car.vue')
     },
     {
-      path: '/me', // 用户中心
+      path: '/me', // 用户页
       name: 'me',
       component: () => import('./views/me/Me.vue')
+    },
+    {
+      path: '/userCenter', // 用户中心
+      name: 'userCenter',
+      component: () => import('./views/me/userCenter/userCenter.vue')
+    },
+    {
+      path: '/orderCenter', // 订单中心
+      name: 'orderCenter',
+      component: () => import('./views/me/orderCenter/orderCenter.vue')
+    },
+    {
+      path: '/afterSalesCenter', // 用户中心
+      name: 'afterSalesCenter',
+      component: () => import('./views/me/afterSalesCenter/afterSalesCenter.vue')
     },
     // twh
     {

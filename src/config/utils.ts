@@ -15,7 +15,7 @@ export default {
   },
 
   //解密
-  decrypt (word:string, keyStr:string) {
+  decrypt (word:string, keyStr?:string) {
     keyStr = keyStr ? keyStr : 'ab*d5678abc-896.'
     let key = CryptoJS.enc.Utf8.parse(keyStr)
     let decrypt = CryptoJS.AES.decrypt(word, key, {mode:CryptoJS.mode.ECB,padding: CryptoJS.pad.Pkcs7})

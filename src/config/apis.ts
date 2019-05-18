@@ -8,6 +8,10 @@ const apis = {
   speciality: 'commodity/onetambononeproduct', // 一村一品（热销乡味）
   member: 'commodity/findmembersarea', // 会员商品
 
+  // location
+  getLocalName: '/api/getAddressDetail',
+  getLocalId: '/api/getAddress',
+
   // classify
   classifyFirstList: 'commodityClassify/oneClassifyLevel', // 一级分类
   classifySecondList: 'commodityClassify/findByPreClassifyId', // 二级分类
@@ -20,6 +24,12 @@ const apis = {
   findAdsList: 'ads/findAdsList', // 获取积分广告
   article: '/api/getArticle/', // 协议
   retrieve: 'sms/retrieve', // 找回密码--获取验证码
+
+  // user
+  userInfo: 'verifyUser', // 获取用户信息
+  orderValue: 'inside/showOrderAmount', // 获取订单条数
+  logOut: 'logout', // 退出登录
+  changeNickName: 'inside/updateUserData', // 修改用户昵称
 }
 
 export {

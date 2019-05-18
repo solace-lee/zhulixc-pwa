@@ -29,6 +29,7 @@ class GetLocation {
       })
     })
   }
+  
 }
 
 export { GetLocation }

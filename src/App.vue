@@ -25,7 +25,7 @@
         >i
           color:#00ae87
  .cube-input-field
-   color #fff
+  //  color #fff
 .icon
   width 1em
   height 1em

@@ -79,6 +79,34 @@ class GetRequest {
     })
   }
 
+  // 获取用户信息
+  getUserInfo (callback: any) {
+    http.get(gateway.AUTH + apis.userInfo).then(res => {
+      callback(res)
+    })
+  }
+
+  // 获取订单条数
+  getOrderValue (callback: any) {
+    http.get(gateway.USER + apis.orderValue).then(res => {
+      callback(res)
+    })
+  }
+
+  // 退出登录
+  logOut (callback: any) {
+    http.post(gateway.AUTH + apis.logOut).then(res => {
+      callback(res)
+    })
+  }
+
+  // 修改用户昵称
+  changeNickName (config: object, callback: any) {
+    http.post(gateway.USER + apis.changeNickName, config).then(res => {
+      callback(res)
+    })
+  }
+
   // 获取省市区
   // 获取省份
   private getProvince () {
